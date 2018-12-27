@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AffilitestdbModelStoreContainer" CdmEntityContainer="AffilitestdbEntities">
+    <EntitySetMapping Name="AffilitestAccounts">
+      <EntityTypeMapping TypeName="AffilitestdbModel.AffilitestAccount">
+        <MappingFragment StoreEntitySet="AffilitestAccounts">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="AffilitestAccountID" ColumnName="AffilitestAccountID" />
+          <ScalarProperty Name="CallsLeft" ColumnName="CallsLeft" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Histories">
+      <EntityTypeMapping TypeName="AffilitestdbModel.History">
+        <MappingFragment StoreEntitySet="Histories">
+          <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Click" ColumnName="Click" />
+          <ScalarProperty Name="GEO" ColumnName="GEO" />
+          <ScalarProperty Name="Device" ColumnName="Device" />
+          <ScalarProperty Name="DateDefault" ColumnName="DateDefault" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SequenceUrls">
+      <EntityTypeMapping TypeName="AffilitestdbModel.SequenceUrl">
+        <MappingFragment StoreEntitySet="SequenceUrls">
+          <ScalarProperty Name="SequenceID" ColumnName="SequenceID" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="Device" ColumnName="Device" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="URLSavings">
+      <EntityTypeMapping TypeName="AffilitestdbModel.URLSaving">
+        <MappingFragment StoreEntitySet="URLSavings">
+          <ScalarProperty Name="SavingID" ColumnName="SavingID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="GEO" ColumnName="GEO" />
+          <ScalarProperty Name="Device" ColumnName="Device" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="Click" ColumnName="Click" />
+          <ScalarProperty Name="TextSelected" ColumnName="TextSelected" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="AffilitestdbModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="NumberClick" ColumnName="NumberClick" />
+          <ScalarProperty Name="DayClick" ColumnName="DayClick" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="TotalOfClick" ColumnName="TotalOfClick" />
+          <ScalarProperty Name="CurrentOfClick" ColumnName="CurrentOfClick" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="NumberOfUrl" ColumnName="NumberOfUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

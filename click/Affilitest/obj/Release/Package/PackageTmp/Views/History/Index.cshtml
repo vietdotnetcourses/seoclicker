@@ -1,0 +1,180 @@
+﻿@model IEnumerable<Affilitest.Models.HistoryModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var roleUser = (bool)ViewBag.roleUser;
+    int page = ViewBag.page;
+    long totalCount = ViewBag.count;
+    double lastPage = Math.Ceiling(totalCount / 50d);
+}
+<link href="~/Content/modules/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+<style type="text/css">
+    .ui-datepicker-calendar {
+        display: none;
+    }
+
+    .ui-datepicker-buttonpane > .ui-datepicker-current[data-handler='today'] {
+        display: none;
+    }
+</style>
+<h3>Lịch sử</h3>
+@Html.Partial("_HeaderNav")
+<p>
+    @using (Html.BeginForm("Search", "History", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="SearchString" placeholder="Tìm kiếm UserName, Url, Ngày, Click, GEO">
+            </div>
+            <div class="col-md-3">
+                <select name="date">
+                    <option value="today">Hôm nay</option>
+                    <option value="lastweek">tuần trước</option>
+                    <option value="lastmonth">tháng trước</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input class="btn btn-primary" type="submit" value="Tìm Kiếm" />
+            </div>
+        </div>
+    }
+    <div class="row">
+        @using (Html.BeginForm("DeleteCustom", "Home", FormMethod.Post))
+        {
+            <div class="col-md-4"><input type="text" name="dateDelete" id="dateDelete" class="form-control" placeholder="Chọn tháng để xóa"/></div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-danger">Xóa</button>
+            </div>
+        }
+
+    </div>
+
+
+</p>
+<p>
+    @if (roleUser)
+    {
+        @Html.ActionLink("Tạo mới", "Create")
+    }
+
+</p>
+<div class="historyTableContainer">
+    <table class="table">
+        <tr>
+            <th>
+                Tên người dùng
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.URL)
+            </th>
+            <th>
+                Ngày
+            </th>
+            <th>
+                Tốc độ
+            </th>
+            <th>
+                Tổng số Click
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GEO)
+            </th>
+            <th>
+                Thiết bị
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.URL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Click)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalClick)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GEO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Device)
+                </td>
+                <td>
+                    @if (roleUser)
+                    {
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.HistoryID })         <span> |</span>
+                        @Html.ActionLink("Chi tiết", "Details", new { id = item.HistoryID }) <span> |</span>
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.HistoryID })
+                    }
+
+                </td>
+            </tr>
+        }
+
+    </table>
+    @if ((int)ViewBag.count > 0)
+    {
+        <div>
+            <ul class="pagination pull-right pagination_offer">
+                <li><a href="@Url.Action("Index", "History", new { page = 1, searchString = @ViewBag.searchString, date = @ViewBag.date })">&laquo;</a></li>
+                @if ((page - 2) > 0)
+                {
+                    <li><a href="@Url.Action("Index", "History", new { page = (page - 2), searchString = @ViewBag.searchString, date = @ViewBag.date })">@(page - 2)</a></li>}
+                @if ((page - 1) > 0)
+                {
+                    <li><a href="@Url.Action("Index", "History", new { page = (page - 1), searchString = @ViewBag.searchString, date = @ViewBag.date })">@(page - 1)</a></li>}
+
+
+                <li class="active"><a href="#">@page</a></li>
+
+                @if (page + 1 <= lastPage)
+                {
+                    <li><a href="@Url.Action("Index", "History", new { page = (page + 1), searchString = @ViewBag.searchString, date = @ViewBag.date })">@(page + 1) </a></li>}
+                @if (page + 2 <= lastPage)
+                {
+                    <li><a href="@Url.Action("Index", "History", new { page = (page + 2), searchString = @ViewBag.searchString, date = @ViewBag.date })">@(page + 2)</a></li>
+                }
+
+                <li><a href="@Url.Action("Index", "History", new { page = lastPage, searchString = @ViewBag.searchString, date = @ViewBag.date })">&raquo;</a></li>
+
+            </ul>
+        </div>
+    }
+</div>
+@section scripts{
+    
+<script src="~/Content/modules/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#dateDelete").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'dd/mm/yy',
+                showAnim: 'drop',
+                onClose: function (dateText, inst) {
+                    $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 01));
+                    //$("#DateSearchString").closest("form").submit();
+                }
+            });
+        });
+    </script>
+    
+    }

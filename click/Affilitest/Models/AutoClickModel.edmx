@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AffilitestdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AffilitestAccounts">
+          <Key>
+            <PropertyRef Name="AffilitestAccountID" />
+          </Key>
+          <Property Name="Email" Type="nvarchar" MaxLength="500" />
+          <Property Name="Password" Type="nvarchar" MaxLength="500" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="AffilitestAccountID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CallsLeft" Type="nvarchar" MaxLength="100" />
+          <Property Name="Number" Type="int" />
+        </EntityType>
+        <EntityType Name="Histories">
+          <Key>
+            <PropertyRef Name="HistoryID" />
+          </Key>
+          <Property Name="HistoryID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="URL" Type="ntext" />
+          <Property Name="Date" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Click" Type="nvarchar(max)" />
+          <Property Name="GEO" Type="ntext" />
+          <Property Name="Device" Type="ntext" />
+          <Property Name="DateDefault" Type="datetime" />
+          <Property Name="Speed" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Status" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="SequenceUrls">
+          <Key>
+            <PropertyRef Name="SequenceID" />
+          </Key>
+          <Property Name="SequenceID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="URL" Type="nvarchar" MaxLength="600" />
+          <Property Name="Device" Type="nvarchar" MaxLength="200" />
+          <Property Name="Country" Type="nvarchar" MaxLength="200" />
+          <Property Name="UserID" Type="uniqueidentifier" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="URLSavings">
+          <Key>
+            <PropertyRef Name="SavingID" />
+          </Key>
+          <Property Name="SavingID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="uniqueidentifier" />
+          <Property Name="URL" Type="nvarchar(max)" />
+          <Property Name="GEO" Type="nvarchar" MaxLength="50" />
+          <Property Name="Device" Type="nvarchar" MaxLength="50" />
+          <Property Name="Speed" Type="nvarchar" MaxLength="50" />
+          <Property Name="Click" Type="nvarchar" MaxLength="50" />
+          <Property Name="TextSelected" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="varchar" MaxLength="200" />
+          <Property Name="Password" Type="varchar" MaxLength="200" />
+          <Property Name="TotalOfClick" Type="bigint" />
+          <Property Name="CurrentOfClick" Type="bigint" />
+          <Property Name="Role" Type="bit" Nullable="false" />
+          <Property Name="NumberOfUrl" Type="int" />
+          <Property Name="DayClick" Type="int" Nullable="false" />
+          <Property Name="NumberClick" Type="bigint" Nullable="false" />
+          <Property Name="Token" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityContainer Name="AffilitestdbModelStoreContainer">
+          <EntitySet Name="AffilitestAccounts" EntityType="Self.AffilitestAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Histories" EntityType="Self.Histories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SequenceUrls" EntityType="Self.SequenceUrls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="URLSavings" EntityType="Self.URLSavings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AffilitestdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AffilitestAccount">
+          <Key>
+            <PropertyRef Name="AffilitestAccountID" />
+          </Key>
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="AffilitestAccountID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CallsLeft" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" />
+        </EntityType>
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="HistoryID" />
+          </Key>
+          <Property Name="HistoryID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Guid" Nullable="false" />
+          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Click" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GEO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Device" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateDefault" Type="DateTime" Precision="3" />
+          <Property Name="Speed" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SequenceUrl">
+          <Key>
+            <PropertyRef Name="SequenceID" />
+          </Key>
+          <Property Name="SequenceID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URL" Type="String" MaxLength="600" FixedLength="false" Unicode="true" />
+          <Property Name="Device" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Guid" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="URLSaving">
+          <Key>
+            <PropertyRef Name="SavingID" />
+          </Key>
+          <Property Name="SavingID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Guid" />
+          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GEO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Device" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Speed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Click" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TextSelected" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TotalOfClick" Type="Int64" />
+          <Property Name="CurrentOfClick" Type="Int64" />
+          <Property Name="Role" Type="Boolean" Nullable="false" />
+          <Property Name="NumberOfUrl" Type="Int32" />
+          <Property Name="DayClick" Type="Int32" Nullable="false" />
+          <Property Name="NumberClick" Type="Int64" Nullable="false" />
+          <Property Name="Token" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="AffilitestdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AffilitestAccounts" EntityType="Self.AffilitestAccount" />
+          <EntitySet Name="Histories" EntityType="Self.History" />
+          <EntitySet Name="SequenceUrls" EntityType="Self.SequenceUrl" />
+          <EntitySet Name="URLSavings" EntityType="Self.URLSaving" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AffilitestdbModelStoreContainer" CdmEntityContainer="AffilitestdbEntities">
+          <EntitySetMapping Name="AffilitestAccounts">
+            <EntityTypeMapping TypeName="AffilitestdbModel.AffilitestAccount">
+              <MappingFragment StoreEntitySet="AffilitestAccounts">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="AffilitestAccountID" ColumnName="AffilitestAccountID" />
+                <ScalarProperty Name="CallsLeft" ColumnName="CallsLeft" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Histories">
+            <EntityTypeMapping TypeName="AffilitestdbModel.History">
+              <MappingFragment StoreEntitySet="Histories">
+                <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Click" ColumnName="Click" />
+                <ScalarProperty Name="GEO" ColumnName="GEO" />
+                <ScalarProperty Name="Device" ColumnName="Device" />
+                <ScalarProperty Name="DateDefault" ColumnName="DateDefault" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SequenceUrls">
+            <EntityTypeMapping TypeName="AffilitestdbModel.SequenceUrl">
+              <MappingFragment StoreEntitySet="SequenceUrls">
+                <ScalarProperty Name="SequenceID" ColumnName="SequenceID" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Device" ColumnName="Device" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="URLSavings">
+            <EntityTypeMapping TypeName="AffilitestdbModel.URLSaving">
+              <MappingFragment StoreEntitySet="URLSavings">
+                <ScalarProperty Name="SavingID" ColumnName="SavingID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="GEO" ColumnName="GEO" />
+                <ScalarProperty Name="Device" ColumnName="Device" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Click" ColumnName="Click" />
+                <ScalarProperty Name="TextSelected" ColumnName="TextSelected" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="AffilitestdbModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="NumberClick" ColumnName="NumberClick" />
+                <ScalarProperty Name="DayClick" ColumnName="DayClick" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="TotalOfClick" ColumnName="TotalOfClick" />
+                <ScalarProperty Name="CurrentOfClick" ColumnName="CurrentOfClick" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="NumberOfUrl" ColumnName="NumberOfUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

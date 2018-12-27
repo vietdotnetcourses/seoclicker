@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AffilitestdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AffilitestAccount">
+    <Key>
+      <PropertyRef Name="AffilitestAccountID" />
+    </Key>
+    <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="AffilitestAccountID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CallsLeft" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Number" Type="Int32" />
+  </EntityType>
+  <EntityType Name="History">
+    <Key>
+      <PropertyRef Name="HistoryID" />
+    </Key>
+    <Property Name="HistoryID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Click" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GEO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Device" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateDefault" Type="DateTime" Precision="3" />
+    <Property Name="Speed" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SequenceUrl">
+    <Key>
+      <PropertyRef Name="SequenceID" />
+    </Key>
+    <Property Name="SequenceID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="URL" Type="String" MaxLength="600" FixedLength="false" Unicode="true" />
+    <Property Name="Device" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="Guid" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="URLSaving">
+    <Key>
+      <PropertyRef Name="SavingID" />
+    </Key>
+    <Property Name="SavingID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Guid" />
+    <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GEO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Device" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Speed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Click" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TextSelected" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="TotalOfClick" Type="Int64" />
+    <Property Name="CurrentOfClick" Type="Int64" />
+    <Property Name="Role" Type="Boolean" Nullable="false" />
+    <Property Name="NumberOfUrl" Type="Int32" />
+    <Property Name="DayClick" Type="Int32" Nullable="false" />
+    <Property Name="NumberClick" Type="Int64" Nullable="false" />
+    <Property Name="Token" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="AffilitestdbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AffilitestAccounts" EntityType="Self.AffilitestAccount" />
+    <EntitySet Name="Histories" EntityType="Self.History" />
+    <EntitySet Name="SequenceUrls" EntityType="Self.SequenceUrl" />
+    <EntitySet Name="URLSavings" EntityType="Self.URLSaving" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+  </EntityContainer>
+</Schema>

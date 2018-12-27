@@ -76,7 +76,7 @@ namespace SeoClicker.ViewModels
                 Device = dataItem.device,
                 UserName = ProxySettings.UserName,
                 Zone = ProxySettings.ProxyZone,
-                Credential = new NetworkCredential($"lum-customer-{ProxySettings.UserName}-zone-{ProxySettings.ProxyZone}-route_err-{ProxySettings.Route}-country-{geo}", ProxySettings.Password),
+                Credential = new NetworkCredential($"lum-customer-{ProxySettings.UserName}-zone-{ProxySettings.ProxyZone}-route_err-{proxyRoute}-country-{geo}", ProxySettings.Password),
                 Timeout = Timeout.Infinite
             };   
             RequestWorker = new RequestWorker(TaskSettings.NumberOfThreads, TaskSettings.TotalRequest, TaskSettings.LoadTime, clientSettings, DashBoardInfo);

@@ -108,7 +108,11 @@ namespace SeoClicker.Utils
                            // if ((int)webResponse.StatusCode >= 300 && (int)webResponse.StatusCode <= 399)
                            // {
                                 uriString = webResponse.Headers["Location"];
+                            if (!string.IsNullOrWhiteSpace(uriString))
+                            {
                                 DashBoardInfo.Logs.Add($"Sent request to {uriString} sucessfully.");
+                            }
+                                
                             // }
                             webResponse.Close();
                         }

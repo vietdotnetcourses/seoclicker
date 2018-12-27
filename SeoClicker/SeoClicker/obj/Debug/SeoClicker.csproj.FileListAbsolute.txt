@@ -187,3 +187,5 @@ D:\Projects\Freelancer\SeoClicker\Luminati_Git\seoclicker\SeoClicker\SeoClicker\
 D:\Projects\Freelancer\SeoClicker\Luminati_Git\seoclicker\SeoClicker\SeoClicker\obj\Debug\SeoClicker.csproj.CopyComplete
 D:\Projects\Freelancer\SeoClicker\Luminati_Git\seoclicker\SeoClicker\SeoClicker\obj\Debug\SeoClicker.exe
 D:\Projects\Freelancer\SeoClicker\Luminati_Git\seoclicker\SeoClicker\SeoClicker\obj\Debug\SeoClicker.pdb
+D:\IT\Freelancer\seoclicker\SeoClicker\SeoClicker\bin\Debug\WpfAnimatedGif.dll
+D:\IT\Freelancer\seoclicker\SeoClicker\SeoClicker\bin\Debug\WpfAnimatedGif.xml

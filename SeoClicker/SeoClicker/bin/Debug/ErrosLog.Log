@@ -1,0 +1,356 @@
+﻿+-------------------------------------------------------------------+
+Application:       SeoClicker
+Path:              D:\IT\Freelancer\SeoClicker181224\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe
+Version:           1.0.0.0
+Date:              24/12/2018 19:38:41
+Computer name:     DESKTOP-QQ05HTU
+User name:         ntyen
+OSVersion:         6.2.9200.0
+OSPlatform:        X64
+OSFullName:        Microsoft Windows 10 Pro
+Culture:           en-US
+Resolution:        {Width=1440, Height=900}
+System up time:    1.22:08:27.8280000
+App up time:       00:00:37.3330508
+Total memory:      8053Mb
+Available memory:  3917Mb
+Drive D:\
+Volume label: 
+File system: NTFS
+Available space to current user: 41803 MB
+Total available space: 41803 MB
+Total size of drive: 98539 MB 
+Url: D:\IT\Freelancer\SeoClicker181224\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe -> SeoClicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Caller: SeoClicker.Utils.RequestWorker -> Run
+Exception classes: 
+   System.Net.WebException
+Exception messages: 
+   The remote server returned an error: (407) Proxy Authentication Required.
+Stack Traces:
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at SeoClicker.Utils.RequestWorker.Run(Int32 index) in D:\IT\Freelancer\SeoClicker181224\SeoClicker\SeoClicker\Utils\RequestWorker.cs:line 99
++-------------------------------------------------------------------+
+Application:       SeoClicker
+Path:              D:\IT\Freelancer\SeoClicker181224\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe
+Version:           1.0.0.0
+Date:              24/12/2018 19:54:51
+Computer name:     DESKTOP-QQ05HTU
+User name:         ntyen
+OSVersion:         6.2.9200.0
+OSPlatform:        X64
+OSFullName:        Microsoft Windows 10 Pro
+Culture:           en-US
+Resolution:        {Width=1440, Height=900}
+System up time:    1.22:24:41.6880000
+App up time:       00:00:49.1270608
+Total memory:      8053Mb
+Available memory:  3993Mb
+Drive D:\
+Volume label: 
+File system: NTFS
+Available space to current user: 41803 MB
+Total available space: 41803 MB
+Total size of drive: 98539 MB 
+Url: D:\IT\Freelancer\SeoClicker181224\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe -> SeoClicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Caller: SeoClicker.Utils.RequestWorker -> Run
+Exception classes: 
+   System.Net.WebException
+Exception messages: 
+   The remote server returned an error: (407) Proxy Authentication Required.
+Stack Traces:
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at SeoClicker.Utils.RequestWorker.Run(Int32 index) in D:\IT\Freelancer\SeoClicker181224\SeoClicker\SeoClicker\Utils\RequestWorker.cs:line 100
++-------------------------------------------------------------------+
+Application:       SeoClicker
+Path:              D:\IT\Freelancer\SeoClicker181224\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe
+Version:           1.0.0.0
+Date:              24/12/2018 19:54:51
+Computer name:     DESKTOP-QQ05HTU
+User name:         ntyen
+OSVersion:         6.2.9200.0
+OSPlatform:        X64
+OSFullName:        Microsoft Windows 10 Pro
+Culture:           en-US
+Resolution:        {Width=1440, Height=900}
+System up time:    1.22:24:41.7030000
+App up time:       00:00:49.1640574
+Total memory:      8053Mb
+Available memory:  3992Mb
+Drive D:\
+Volume label: 
+File system: NTFS
+Available space to current user: 41803 MB
+Total available space: 41803 MB
+Total size of drive: 98539 MB 
+Url: D:\IT\Freelancer\SeoClicker181224\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe -> SeoClicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Caller: SeoClicker.Utils.RequestWorker -> Run
+Exception classes: 
+   System.Net.WebException
+Exception messages: 
+   The remote server returned an error: (407) Proxy Authentication Required.
+Stack Traces:
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at SeoClicker.Utils.RequestWorker.Run(Int32 index) in D:\IT\Freelancer\SeoClicker181224\SeoClicker\SeoClicker\Utils\RequestWorker.cs:line 100
++-------------------------------------------------------------------+
+Application:       SeoClicker
+Path:              D:\IT\Freelancer\SeoClicker181224\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe
+Version:           1.0.0.0
+Date:              24/12/2018 23:01:19
+Computer name:     DESKTOP-QQ05HTU
+User name:         ntyen
+OSVersion:         6.2.9200.0
+OSPlatform:        X64
+OSFullName:        Microsoft Windows 10 Pro
+Culture:           en-US
+Resolution:        {Width=1440, Height=900}
+System up time:    2.01:31:03.5310000
+App up time:       00:03:07.7648855
+Total memory:      8053Mb
+Available memory:  3353Mb
+Drive D:\
+Volume label: 
+File system: NTFS
+Available space to current user: 41800 MB
+Total available space: 41800 MB
+Total size of drive: 98539 MB 
+Url: D:\IT\Freelancer\SeoClicker181224\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe -> SeoClicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Caller: SeoClicker.Utils.RequestWorker -> Run
+Exception classes: 
+   System.Net.WebException
+Exception messages: 
+   The proxy name could not be resolved: 'session-2078891366.zproxy.lum-superproxy.io'
+Stack Traces:
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at SeoClicker.Utils.RequestWorker.Run() in D:\IT\Freelancer\SeoClicker181224\SeoClicker\SeoClicker\Utils\RequestWorker.cs:line 101
++-------------------------------------------------------------------+
+Application:       SeoClicker
+Path:              D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe
+Version:           1.0.0.0
+Date:              25/12/2018 09:39:53
+Computer name:     EPVNWRKYENG
+User name:         yeng
+OSVersion:         6.2.9200.0
+OSPlatform:        X64
+OSFullName:        Microsoft Windows 10 Pro
+Culture:           en-US
+Resolution:        {Width=2560, Height=1440}
+System up time:    4.23:32:21.1560000
+App up time:       00:01:33.2601687
+Total memory:      15783Mb
+Available memory:  7025Mb
+Drive D:\
+Volume label: New Volume
+File system: NTFS
+Available space to current user: 943936 MB
+Total available space: 943936 MB
+Total size of drive: 953867 MB 
+Url: D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe -> SeoClicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Caller: SeoClicker.Utils.RequestWorker -> Run
+Exception classes: 
+   System.Net.WebException
+Exception messages: 
+   The remote server returned an error: (502) Bad Gateway.
+Stack Traces:
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at SeoClicker.Utils.RequestWorker.Run() in D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\Utils\RequestWorker.cs:line 102
++-------------------------------------------------------------------+
+Application:       SeoClicker
+Path:              D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe
+Version:           1.0.0.0
+Date:              26/12/2018 10:40:36
+Computer name:     EPVNWRKYENG
+User name:         yeng
+OSVersion:         6.2.9200.0
+OSPlatform:        X64
+OSFullName:        Microsoft Windows 10 Pro
+Culture:           en-US
+Resolution:        {Width=2560, Height=1440}
+System up time:    6.00:33:05.1560000
+App up time:       00:01:22.7015703
+Total memory:      15783Mb
+Available memory:  2972Mb
+Drive D:\
+Volume label: New Volume
+File system: NTFS
+Available space to current user: 943927 MB
+Total available space: 943927 MB
+Total size of drive: 953867 MB 
+Url: D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe -> SeoClicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Caller: SeoClicker.Utils.RequestWorker -> Run
+Exception classes: 
+   System.IO.IOException
+   System.Net.WebException
+
+Exception messages: 
+   Received an unexpected EOF or 0 bytes from the transport stream.
+   An exception occurred during a WebClient request.
+
+Stack Traces:
+   at System.Net.ConnectStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   at System.Net.WebClient.DownloadBitsState.RetrieveBytes(Int32& bytesRetrieved)
+   at System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream, CompletionDelegate completionDelegate, AsyncOperation asyncOp)
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+--- Next Call Stack:
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at SeoClicker.Utils.RequestWorker.Run() in D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\Utils\RequestWorker.cs:line 104
+
++-------------------------------------------------------------------+
+Application:       SeoClicker
+Path:              D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe
+Version:           1.0.0.0
+Date:              26/12/2018 10:57:38
+Computer name:     EPVNWRKYENG
+User name:         yeng
+OSVersion:         6.2.9200.0
+OSPlatform:        X64
+OSFullName:        Microsoft Windows 10 Pro
+Culture:           en-US
+Resolution:        {Width=2560, Height=1440}
+System up time:    6.00:50:06.0940000
+App up time:       00:05:25.2472200
+Total memory:      15783Mb
+Available memory:  3693Mb
+Drive D:\
+Volume label: New Volume
+File system: NTFS
+Available space to current user: 943927 MB
+Total available space: 943927 MB
+Total size of drive: 953867 MB 
+Url: D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe -> SeoClicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Caller: SeoClicker.Utils.ClickerClient -> GetWebResponse
+Exception classes: 
+   System.Net.WebException
+Exception messages: 
+   The operation has timed out
+Stack Traces:
+   at System.Net.HttpWebRequest.GetResponse()
+   at System.Net.WebClient.GetWebResponse(WebRequest request)
+   at SeoClicker.Utils.ClickerClient.GetWebResponse(WebRequest request) in D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\Utils\ClickerClient.cs:line 118
++-------------------------------------------------------------------+
+Application:       SeoClicker
+Path:              D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe
+Version:           1.0.0.0
+Date:              26/12/2018 10:57:38
+Computer name:     EPVNWRKYENG
+User name:         yeng
+OSVersion:         6.2.9200.0
+OSPlatform:        X64
+OSFullName:        Microsoft Windows 10 Pro
+Culture:           en-US
+Resolution:        {Width=2560, Height=1440}
+System up time:    6.00:50:06.0940000
+App up time:       00:05:25.2562198
+Total memory:      15783Mb
+Available memory:  3693Mb
+Drive D:\
+Volume label: New Volume
+File system: NTFS
+Available space to current user: 943927 MB
+Total available space: 943927 MB
+Total size of drive: 953867 MB 
+Url: D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe -> SeoClicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Caller: SeoClicker.Utils.ClickerClient -> GetWebResponse
+Exception classes: 
+   System.Net.WebException
+Exception messages: 
+   The operation has timed out
+Stack Traces:
+   at System.Net.HttpWebRequest.GetResponse()
+   at System.Net.WebClient.GetWebResponse(WebRequest request)
+   at SeoClicker.Utils.ClickerClient.GetWebResponse(WebRequest request) in D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\Utils\ClickerClient.cs:line 118
++-------------------------------------------------------------------+
+Application:       SeoClicker
+Path:              D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe
+Version:           1.0.0.0
+Date:              26/12/2018 10:57:40
+Computer name:     EPVNWRKYENG
+User name:         yeng
+OSVersion:         6.2.9200.0
+OSPlatform:        X64
+OSFullName:        Microsoft Windows 10 Pro
+Culture:           en-US
+Resolution:        {Width=2560, Height=1440}
+System up time:    6.00:50:06.1880000
+App up time:       00:05:25.3744842
+Total memory:      15783Mb
+Available memory:  3690Mb
+Drive D:\
+Volume label: New Volume
+File system: NTFS
+Available space to current user: 943927 MB
+Total available space: 943927 MB
+Total size of drive: 953867 MB 
+Url: D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe -> SeoClicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Caller: SeoClicker.Utils.RequestWorker -> Run
+Exception classes: 
+   System.NullReferenceException
+   System.Net.WebException
+
+Exception messages: 
+   Object reference not set to an instance of an object.
+   An exception occurred during a WebClient request.
+
+Stack Traces:
+   at System.Net.WebClient.DownloadBitsState.SetResponse(WebResponse response)
+   at System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream, CompletionDelegate completionDelegate, AsyncOperation asyncOp)
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+--- Next Call Stack:
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at SeoClicker.Utils.RequestWorker.Run() in D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\Utils\RequestWorker.cs:line 104
+
++-------------------------------------------------------------------+
+Application:       SeoClicker
+Path:              D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe
+Version:           1.0.0.0
+Date:              26/12/2018 10:57:40
+Computer name:     EPVNWRKYENG
+User name:         yeng
+OSVersion:         6.2.9200.0
+OSPlatform:        X64
+OSFullName:        Microsoft Windows 10 Pro
+Culture:           en-US
+Resolution:        {Width=2560, Height=1440}
+System up time:    6.00:50:06.1880000
+App up time:       00:05:25.3784884
+Total memory:      15783Mb
+Available memory:  3690Mb
+Drive D:\
+Volume label: New Volume
+File system: NTFS
+Available space to current user: 943927 MB
+Total available space: 943927 MB
+Total size of drive: 953867 MB 
+Url: D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe -> SeoClicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Caller: SeoClicker.Utils.RequestWorker -> Run
+Exception classes: 
+   System.NullReferenceException
+   System.Net.WebException
+
+Exception messages: 
+   Object reference not set to an instance of an object.
+   An exception occurred during a WebClient request.
+
+Stack Traces:
+   at System.Net.WebClient.DownloadBitsState.SetResponse(WebResponse response)
+   at System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream, CompletionDelegate completionDelegate, AsyncOperation asyncOp)
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+--- Next Call Stack:
+   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   at System.Net.WebClient.DownloadString(Uri address)
+   at System.Net.WebClient.DownloadString(String address)
+   at SeoClicker.Utils.RequestWorker.Run() in D:\Projects\Freelancer\SeoClicker181225\SeoClicker\SeoClicker\Utils\RequestWorker.cs:line 104
+

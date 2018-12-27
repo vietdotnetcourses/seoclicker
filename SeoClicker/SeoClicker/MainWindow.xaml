@@ -1,0 +1,324 @@
+﻿<Window x:Class="SeoClicker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SeoClicker"
+        xmlns:c="clr-namespace:SeoClicker.Converters"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        WindowStartupLocation="CenterScreen"
+        xmlns:vm="clr-namespace:SeoClicker.ViewModels"
+        mc:Ignorable="d"
+        Title="Seo Clicker" MaxHeight="545" MaxWidth="550" MinWidth="505" MinHeight="545">
+    <Window.Resources>
+        <vm:MainWindowViewModel x:Key="VmMainWindowViewModel" />
+        <Style x:Key="lvh" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        </Style>
+        <c:FileToImageIconConverter x:Key="CFileToImageIconConverter" />
+    </Window.Resources>
+    <Grid DataContext="{Binding Source={StaticResource VmMainWindowViewModel}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TabControl HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Width="535">
+            <TabItem Header="DashBoard">
+                <StackPanel Grid.Row="0" >
+                    <GroupBox Margin="5" Header="Info" Height="240">
+                        <ListView IsSynchronizedWithCurrentItem="True" Grid.Row="1"  
+                          ItemsSource="{Binding DashBoardInfo.ThreadInfos}"
+                         
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ScrollViewer.CanContentScroll="True"
+                          VirtualizingStackPanel.IsVirtualizing="True"
+                          VirtualizingStackPanel.VirtualizationMode="Recycling"
+                          MinHeight="100">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel
+                                IsVirtualizing="True"
+                                VirtualizationMode="Recycling" />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="40" Header="Thread" HeaderContainerStyle="{StaticResource lvh}">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" Margin="3">
+                                                    <TextBlock Margin="1" Text="{Binding Id, Mode=TwoWay}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="270" Header="Url" HeaderContainerStyle="{StaticResource lvh}">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" Margin="3">
+                                                    <TextBlock Margin="1" Text="{Binding Url, Mode=TwoWay}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="60" Header="Geo" HeaderContainerStyle="{StaticResource lvh}">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" Margin="3">
+                                                    <TextBlock Margin="1" Text="{Binding Geo, Mode=TwoWay}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="150" Header="Status" HeaderContainerStyle="{StaticResource lvh}">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Margin="3" HorizontalAlignment="Left"
+                                                 Text="{Binding Info, Mode=TwoWay}" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+
+                        </ListView>
+                    </GroupBox>
+                    <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal" Grid.Row="1"  Margin="5,0,0,0">
+                        <TextBlock Text="{Binding DashBoardInfo.ResultMessage}"/>
+                    </StackPanel>
+                    <GroupBox Margin="5" Header="Log" Height="160">
+                        <ListBox Margin="10" ItemsSource="{Binding DashBoardInfo.Logs}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </GroupBox>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Settings">
+                <StackPanel IsEnabled="{Binding DashBoardInfo.IsEnabled}">
+                    <GroupBox Margin="5" Header="Proxy">
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <!--Column 1 & 2-->
+                            <TextBlock Margin="3" Text="Zone" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Grid.Column="1" Grid.Row="0"
+                         Text="{Binding ProxySettings.ProxyZone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                         NotifyOnValidationError=True, ValidatesOnDataErrors=True,
+                         ValidatesOnExceptions=True}"
+                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="User name" />
+                            <TextBox Grid.Column="1" Grid.Row="1"
+                         Text="{Binding ProxySettings.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                         NotifyOnValidationError=True, ValidatesOnDataErrors=True,
+                         ValidatesOnExceptions=True}"
+                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Password" Margin="3" />
+                            <TextBox Grid.Column="1" Grid.Row="2"
+                         Text="{Binding ProxySettings.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                         NotifyOnValidationError=True, ValidatesOnDataErrors=True,
+                         ValidatesOnExceptions=True}"
+                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3" />
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Margin="3" Text="Port" />
+                            <TextBox Grid.Column="1" Grid.Row="3" IsEnabled="False"
+                         Text="{Binding ProxySettings.Port, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                         NotifyOnValidationError=True, ValidatesOnDataErrors=True,
+                         ValidatesOnExceptions=True}"
+                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3" 
+                        />
+                            <!--End-->
+
+                            <!--Column 3 & 4-->
+                            <TextBlock Margin="3" Text="Route" Grid.Row="0" Grid.Column="2"/>
+                            <ComboBox Grid.Column="3" Grid.Row="0" SelectedIndex="0"
+                         ItemsSource="{Binding ProxySettings.Route}"
+                         DisplayMemberPath="Text"
+                         Margin="2.8,3,0,0" Width="120" HorizontalAlignment="Left" TabIndex="3" Height="26" VerticalAlignment="Top">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+
+
+
+
+                            <TextBlock Grid.Row="1" Grid.Column="2" Margin="3" Text="Super Proxy" />
+                            <ComboBox Grid.Column="3" Grid.Row="1" SelectedIndex="0"
+                         ItemsSource="{Binding ProxySettings.SuperProxy}"
+                          DisplayMemberPath="Text"
+                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+
+                            <TextBlock Grid.Row="2" Grid.Column="2" Margin="3" Text="DNS" />
+                            <ComboBox Grid.Column="3" Grid.Row="2" SelectedIndex="0"
+                         ItemsSource="{Binding ProxySettings.DNSResolution}"
+                          DisplayMemberPath="Text"
+                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+
+
+
+                            <!--<TextBlock Grid.Row="3" Grid.Column="2" Margin="3" Text="User-Agent" />
+                            <ComboBox Grid.Column="3" Grid.Row="3" SelectedIndex="1"
+                         ItemsSource="{Binding ProxySettings.UserAgent}"
+                          DisplayMemberPath="Text"
+                         Margin="3" Width="100" HorizontalAlignment="Left" TabIndex="3">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>-->
+
+                            <!--End-->
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Margin="5" Header="Task" >
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Total Request" />
+                            <TextBox Grid.Column="1" Grid.Row="0"
+                         Text="{Binding TaskSettings.TotalRequest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                         NotifyOnValidationError=True, ValidatesOnDataErrors=True,
+                         ValidatesOnExceptions=True}"
+                         Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />
+
+
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Thread count" />
+                            <TextBox Grid.Column="1" Grid.Row="1"
+                         Text="{Binding TaskSettings.NumberOfThreads, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                         NotifyOnValidationError=True, ValidatesOnDataErrors=True,
+                         ValidatesOnExceptions=True}"
+                         Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Load Time" />
+                            <TextBox Grid.Column="1" Grid.Row="2"
+                         Text="{Binding TaskSettings.LoadTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                         NotifyOnValidationError=True, ValidatesOnDataErrors=True,
+                         ValidatesOnExceptions=True}"
+                         Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Margin="5" Header="Data Server" >
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Margin="3" Text="Get Url" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Grid.Column="1" Grid.Row="0"
+                         Text="{Binding DataServerSettings.GetDataApiLink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                         NotifyOnValidationError=True, ValidatesOnDataErrors=True,
+                         ValidatesOnExceptions=True}"
+                         Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Report Url" />
+                            <TextBox Grid.Column="1" Grid.Row="1"
+                         Text="{Binding DataServerSettings.ReportApiLink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                         NotifyOnValidationError=True, ValidatesOnDataErrors=True,
+                         ValidatesOnExceptions=True}"
+                         Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />
+                        </Grid>
+                    </GroupBox>
+
+                </StackPanel>
+
+
+            </TabItem>
+
+        </TabControl>
+
+        <GridSplitter
+            Grid.Row="0" Grid.ColumnSpan="2"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"
+            ShowsPreview="true"
+            ResizeDirection="Rows"
+            Panel.ZIndex="1"
+            Height="3" />
+
+        <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal" Grid.Row="1"  Margin="5,0,0,0">
+            <Button Width="30" Height="30" IsEnabled="{Binding DashBoardInfo.IsEnabled}"
+                    Command="{Binding DoStart}"
+                    ToolTip="Start">
+                <Rectangle Width="10" Height="10">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_play}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button Width="30" Height="30"
+                    Command="{Binding DoStop}"
+                    ToolTip="Stop">
+                <Rectangle Width="15" Height="15">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_stop}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button Width="30" Height="30" IsEnabled="{Binding DashBoardInfo.IsEnabled}"
+                    Command="{Binding DoSaveSettings}"
+                    ToolTip="Save settings">
+                <Rectangle Width="10" Height="10">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_disk}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button Width="30" Height="30" IsEnabled="{Binding DashBoardInfo.IsEnabled}"
+                    Command="{Binding DoClearLogs}"
+                    ToolTip="Clear logs">
+                <Rectangle Width="10" Height="10">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_page_minus}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Image gif:ImageBehavior.AnimatedSource="{Binding SpinnerImagePath}" Width="30" Height="30" Margin="50,0,0,0" Visibility="{Binding DashBoardInfo.SpinnerVisibility}"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,100 @@
+{
+  "DataServerSettings": {
+    "GetDataApiLink": "geturl",
+    "ReportApiLink": "reporturl"
+  },
+  "ProxySettings": {
+    "ProxyZone": "fitechtimes",
+    "Port": 22225,
+    "UserName": "thidoan",
+    "Password": "vk26uf62xdg2",
+    "UserAgent": [
+      {
+        "Text": "No User-Agent",
+        "Value": "",
+        "IsSelected": false
+      },
+      {
+        "Text": "Chrome User-Agent",
+        "Value": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36",
+        "IsSelected": true
+      },
+      {
+        "Text": "Firefox User-Agent",
+        "Value": "Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0",
+        "IsSelected": false
+      },
+      {
+        "Text": "IE User-Agent",
+        "Value": "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko",
+        "IsSelected": false
+      }
+    ],
+    "Route": [
+      {
+        "Text": "pass_dyn",
+        "Value": "pass_dyn",
+        "IsSelected": true
+      },
+      {
+        "Text": "block",
+        "Value": "block",
+        "IsSelected": false
+      },
+      {
+        "Text": null,
+        "Value": null,
+        "IsSelected": false
+      }
+    ],
+    "SuperProxy": [
+      {
+        "Text": "Fastest super proxy",
+        "Value": ".zproxy.lum-superproxy.io",
+        "IsSelected": true
+      },
+      {
+        "Text": "AU super proxy",
+        "Value": "-servercountry-AU.zproxy.lum-superproxy.io",
+        "IsSelected": false
+      },
+      {
+        "Text": "CN super proxy",
+        "Value": "-servercountry-CN.zproxy.lum-superproxy.io",
+        "IsSelected": false
+      },
+      {
+        "Text": "GB super proxy",
+        "Value": "-servercountry-GB.zproxy.lum-superproxy.io",
+        "IsSelected": false
+      },
+      {
+        "Text": "IN super proxy",
+        "Value": "-servercountry-IN.zproxy.lum-superproxy.io",
+        "IsSelected": false
+      }
+    ],
+    "DNSResolution": [
+      {
+        "Text": "Fastest DNS resolution",
+        "Value": "-session-",
+        "IsSelected": true
+      },
+      {
+        "Text": "DNS resolution at Super Proxy",
+        "Value": "-dns-local-session-",
+        "IsSelected": false
+      },
+      {
+        "Text": "DNS resolution at Proxy Peer",
+        "Value": "-dns-remote-session-",
+        "IsSelected": false
+      }
+    ]
+  },
+  "TaskSettings": {
+    "TotalRequest": 50,
+    "LoadTime": 5,
+    "NumberOfThreads": 5
+  }
+}

@@ -36,6 +36,9 @@
   <PropertyGroup>
     <ApplicationIcon>seoClicker.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -78,7 +81,6 @@
     <Compile Include="Helpers\SettingsHelper.cs" />
     <Compile Include="Models\ClickerThread.cs" />
     <Compile Include="Models\ClientSettings.cs" />
-    <Compile Include="Models\DashBoardInfo.cs" />
     <Compile Include="Models\DataServerSettings.cs" />
     <Compile Include="Models\ProxySettings.cs" />
     <Compile Include="Models\SelectionItem.cs" />
@@ -86,21 +88,11 @@
     <Compile Include="Models\TargetUrl.cs" />
     <Compile Include="Models\TaskSettings.cs" />
     <Compile Include="Utils\AsyncObservableCollection.cs" />
-    <Compile Include="Utils\ClickerClient.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Utils\CustomHttpWebRequest.cs" />
     <Compile Include="Utils\DelegateCommand.cs" />
     <Compile Include="Utils\Designer.cs" />
-    <Compile Include="Utils\DispatcherHelper.cs" />
-    <Compile Include="Utils\ExceptionLogger.cs" />
-    <Compile Include="Utils\Memory.cs" />
-    <Compile Include="Utils\MinimizeToTray.cs" />
-    <Compile Include="Utils\ProcessUtils.cs" />
     <Compile Include="Utils\RequestWorker.cs" />
     <Compile Include="Utils\RunOnWindowsStartup.cs" />
     <Compile Include="Utils\SafeClipboard.cs" />
-    <Compile Include="Utils\SimpleTaskScheduler.cs" />
     <Compile Include="Helpers\UserAgentHelper.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">
@@ -202,6 +194,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -230,8 +223,6 @@
   <ItemGroup>
     <Resource Include="bin\Debug\Images\seoClicker.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Debug\Result\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

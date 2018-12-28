@@ -12,7 +12,7 @@ namespace SeoClicker.Models
         int _totalRequest;
         int _loadTime;
         int _numberOfThreads;
-
+        bool _clearResultFiles;
         public int TotalRequest
         {
             get
@@ -50,7 +50,19 @@ namespace SeoClicker.Models
                 notifyPropertyChanged("NumberOfThreads");
             }
         }
-      
+
+        public bool ClearResultFiles
+        {
+            get
+            {
+                return _clearResultFiles;
+            }
+            set
+            {
+                _clearResultFiles = value;
+                notifyPropertyChanged("ClearResultFiles");
+            }
+        }
         private void notifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)

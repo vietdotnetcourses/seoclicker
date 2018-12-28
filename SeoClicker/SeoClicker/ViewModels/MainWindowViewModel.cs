@@ -16,8 +16,7 @@ namespace SeoClicker.ViewModels
 {
     public class MainWindowViewModel
     {
-        readonly List<SimpleTaskScheduler> _taskSchedulers = new List<SimpleTaskScheduler>();
-        private RequestWorker RequestWorker;
+        public RequestWorker RequestWorker { get; set; }
         public MainWindowViewModel()
         {
             setupData();
@@ -32,8 +31,8 @@ namespace SeoClicker.ViewModels
         public DelegateCommand<string> DoSaveSettings { get; set; }
         public ProxySettings ProxySettings { get; set; }
         public DataServerSettings DataServerSettings { get; set; }
-        public TaskSettings TaskSettings { get; set; }    
-        public DashBoardInfo DashBoardInfo { get; set; }
+        public TaskSettings TaskSettings { get; set; }
+        //  public DashBoardInfo DashBoardInfo { get; set; }
         bool canDoStart(string data)
         {
             return false;
@@ -54,14 +53,30 @@ namespace SeoClicker.ViewModels
 
         void doStart(string data)
         {
-            DashBoardInfo.SpinnerVisibility = "Visible";
-            DashBoardInfo.ResultMessage = "";
-            DashBoardInfo.ThreadInfos = new AsyncObservableCollection<ClickerThreadInfo>();
-            DashBoardInfo.Logs = new AsyncObservableCollection<string>();           
-            var proxyRoute = ProxySettings.Route.FirstOrDefault(x => x.IsSelected)?.Value ?? "pass_dyn";          
-            var superProxy = ProxySettings.SuperProxy.FirstOrDefault(x => x.IsSelected)?.Value ?? ".zproxy.lum-superproxy.io";
+
+            var proxyRoute = ProxySettings.Route.FirstOrDefault(x => x.IsSelected)?.Value ?? "pass_dyn";
+            var superProxy = ProxySettings.SuperProxy.FirstOrDefault(x => x.IsSelected)?.Value ?? "zproxy.lum-superproxy.io";
             var dnsResolution = ProxySettings.DNSResolution.FirstOrDefault(x => x.IsSelected)?.Value ?? "-session-";
             var dataItem = DataHelper.LoadData();
+
+            //Clear files .txt inside ~/Results folder
+            if (TaskSettings.ClearResultFiles)
+            {
+                DataHelper.DeleteResultsFolder();
+            }
+
+            RequestWorker.SpinnerVisibility = "Visible";
+            RequestWorker.ResultMessage = "";
+            RequestWorker.ThreadInfos.Clear();
+            RequestWorker.Logs.Clear();
+            RequestWorker.IsEnabled = false;
+
+
+            // foreach (var item in dataItems)
+            // {
+
+          //  var item = dataItems.First();
+            
             var targetUri = dataItem.url;
             var geo = !string.IsNullOrWhiteSpace(dataItem.geo) ? dataItem.geo : "us";
             var clientSettings = new ClientSettings
@@ -77,17 +92,22 @@ namespace SeoClicker.ViewModels
                 UserName = ProxySettings.UserName,
                 Zone = ProxySettings.ProxyZone,
                 Credential = new NetworkCredential($"lum-customer-{ProxySettings.UserName}-zone-{ProxySettings.ProxyZone}-route_err-{proxyRoute}-country-{geo}", ProxySettings.Password),
-                Timeout = Timeout.Infinite
-            };   
-            RequestWorker = new RequestWorker(TaskSettings.NumberOfThreads, TaskSettings.TotalRequest, TaskSettings.LoadTime, clientSettings, DashBoardInfo);
+                Timeout = Timeout.Infinite,
+                NumberOfThread = TaskSettings.NumberOfThreads,
+                RequestNumber = dataItem.clickCount,
+                IpChangeRequestNumber = 1
+            };
+            RequestWorker.ClientSettings = clientSettings;
+            RequestWorker.ConfigureTask();
             RequestWorker.DoWork();
-            DashBoardInfo.IsEnabled = false;
+            // }
+
+
         }
         void doStop(string data)
         {
             RequestWorker.Stop();
-            DashBoardInfo.IsEnabled = true;
-            DashBoardInfo.SpinnerVisibility = "Hidden";
+
         }
 
         void doSaveSettings(string data)
@@ -103,7 +123,7 @@ namespace SeoClicker.ViewModels
 
         void doClearLogs(string data)
         {
-            DashBoardInfo.Logs.Clear();
+            RequestWorker.Logs.Clear();
         }
 
         private void initTaskScheduler()
@@ -113,21 +133,18 @@ namespace SeoClicker.ViewModels
 
         private void exit()
         {
-            foreach(var scheduler in _taskSchedulers)
-            {
-                scheduler.Stop();
-            }
-           
+            RequestWorker.Stop();
+
         }
 
- 
+
         private void manageAppExit()
         {
             Application.Current.Exit += currentExit;
             Application.Current.SessionEnding += currentSessionEnding;
         }
 
-    
+
         private void setupCommands()
         {
             DoStart = new DelegateCommand<string>(doStart, data => true);
@@ -142,14 +159,8 @@ namespace SeoClicker.ViewModels
             ProxySettings = settings.ProxySettings;
             DataServerSettings = settings.DataServerSettings;
             TaskSettings = settings.TaskSettings;
-            DashBoardInfo = new DashBoardInfo
-            {
-                ThreadInfos = new AsyncObservableCollection<ClickerThreadInfo>(),
-                Logs = new AsyncObservableCollection<string>(),
-                ResultMessage = "",
-                SpinnerVisibility = "Hidden",
-                IsEnabled = true
-            };
+
+            RequestWorker = new RequestWorker();
             SpinnerImagePath = DataHelper.GetSpinnerImagePath();
 
         }

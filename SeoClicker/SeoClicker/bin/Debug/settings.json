@@ -50,7 +50,7 @@
     "SuperProxy": [
       {
         "Text": "Fastest super proxy",
-        "Value": ".zproxy.lum-superproxy.io",
+        "Value": "zproxy.lum-superproxy.io",
         "IsSelected": true
       },
       {
@@ -93,8 +93,9 @@
     ]
   },
   "TaskSettings": {
-    "TotalRequest": 50,
+    "TotalRequest": 500,
     "LoadTime": 5,
-    "NumberOfThreads": 5
+    "NumberOfThreads": 10,
+    "ClearResultFiles":  true
   }
 }

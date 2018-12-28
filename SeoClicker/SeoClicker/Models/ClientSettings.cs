@@ -20,11 +20,11 @@ namespace SeoClicker.Models
         public string SuperProxy { get; set; }
         public string DNSResolution { get; set; }
         public string TargetUrl { get; set; }
-        public string Method { get; set; }
         public int Timeout { get; set; }
-        public IWebProxy Proxy { get; set; }
-        public string UserAgent { get; set; }
         public NetworkCredential Credential { get; set; }
+        public int NumberOfThread { get; set; }
+        public int RequestNumber { get; set; }
+        public int IpChangeRequestNumber { get; set; }
 
     }
 }

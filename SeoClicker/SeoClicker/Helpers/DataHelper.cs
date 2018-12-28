@@ -38,14 +38,21 @@ namespace SeoClicker.Helpers
             return SpinnerImagePath;
         }
 
-        public static void saveresult(string data, string fileName)
+        public static void SaveResult(string data, string fileName)
         {
             var path = Path.Combine(Application.StartupPath, $"Results\\{fileName}.txt");
-            //if (!File.Exists(path))
-            //{
-            //    File.Create(path);
-            //}
             File.AppendAllLines(path, new List<string> { data});
+        }
+      
+        public static void DeleteResultsFolder()
+        {
+            var path = Path.Combine(Application.StartupPath, $"Results");
+            DirectoryInfo di = new DirectoryInfo(path);
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+
         }
     }
 

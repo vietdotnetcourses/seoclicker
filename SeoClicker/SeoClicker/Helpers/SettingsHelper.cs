@@ -12,6 +12,7 @@ namespace SeoClicker.Helpers
         {
             get { return Path.Combine(Application.StartupPath, "settings.json"); }
         }
+
         public static void SaveSettings(Settings data)
         {
             File.WriteAllText(SettingsPath, JsonConvert.SerializeObject(data, new JsonSerializerSettings { Formatting = Formatting.Indented }));

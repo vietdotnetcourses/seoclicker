@@ -11,5 +11,6 @@ namespace SeoClicker.Models
         public string url { get; set; }
         public string geo { get; set; }
         public string device { get; set; }
+        public int clickCount { get; set; }
     }
 }

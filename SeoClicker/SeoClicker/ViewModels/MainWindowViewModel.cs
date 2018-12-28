@@ -1,12 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Data;
+﻿using System.Windows;
 using SeoClicker.Utils;
 using SeoClicker.Models;
-using System.Collections.Generic;
 using SeoClicker.Helpers;
 using System.Linq;
 using System.Net;

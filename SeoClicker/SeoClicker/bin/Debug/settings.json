@@ -1,35 +1,15 @@
 {
   "DataServerSettings": {
-    "GetDataApiLink": "geturl",
-    "ReportApiLink": "reporturl"
+    "GetDataApiLink": "http://localhost:16423/Api/GetDataForTool",
+    "ReportApiLink": "reporturl",
+    "UrlCount": 200
   },
   "ProxySettings": {
     "ProxyZone": "fitechtimes",
     "Port": 22225,
     "UserName": "thidoan",
     "Password": "vk26uf62xdg2",
-    "UserAgent": [
-      {
-        "Text": "No User-Agent",
-        "Value": "",
-        "IsSelected": false
-      },
-      {
-        "Text": "Chrome User-Agent",
-        "Value": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36",
-        "IsSelected": true
-      },
-      {
-        "Text": "Firefox User-Agent",
-        "Value": "Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0",
-        "IsSelected": false
-      },
-      {
-        "Text": "IE User-Agent",
-        "Value": "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko",
-        "IsSelected": false
-      }
-    ],
+    "UserAgent": null,
     "Route": [
       {
         "Text": "pass_dyn",
@@ -50,52 +30,62 @@
     "SuperProxy": [
       {
         "Text": "Fastest super proxy",
-        "Value": "zproxy.lum-superproxy.io",
+        "Value": "",
         "IsSelected": true
       },
       {
         "Text": "AU super proxy",
-        "Value": "-servercountry-AU.zproxy.lum-superproxy.io",
+        "Value": "-servercountry-AU",
         "IsSelected": false
       },
       {
         "Text": "CN super proxy",
-        "Value": "-servercountry-CN.zproxy.lum-superproxy.io",
+        "Value": "-servercountry-CN",
         "IsSelected": false
       },
       {
         "Text": "GB super proxy",
-        "Value": "-servercountry-GB.zproxy.lum-superproxy.io",
+        "Value": "-servercountry-GB",
         "IsSelected": false
       },
       {
         "Text": "IN super proxy",
-        "Value": "-servercountry-IN.zproxy.lum-superproxy.io",
+        "Value": "-servercountry-IN",
+        "IsSelected": false
+      },
+      {
+        "Text": "NL super proxy",
+        "Value": "-servercountry-NL",
+        "IsSelected": false
+      },
+      {
+        "Text": "US super proxy",
+        "Value": "-servercountry-US",
         "IsSelected": false
       }
     ],
     "DNSResolution": [
       {
         "Text": "Fastest DNS resolution",
-        "Value": "-session-",
+        "Value": "",
         "IsSelected": true
       },
       {
         "Text": "DNS resolution at Super Proxy",
-        "Value": "-dns-local-session-",
+        "Value": "-dns-local",
         "IsSelected": false
       },
       {
         "Text": "DNS resolution at Proxy Peer",
-        "Value": "-dns-remote-session-",
+        "Value": "-dns-remote",
         "IsSelected": false
       }
     ]
   },
   "TaskSettings": {
-    "TotalRequest": 500,
+    "TotalRequest": 1,
     "LoadTime": 5,
-    "NumberOfThreads": 10,
-    "ClearResultFiles":  true
+    "NumberOfThreads": 100,
+    "ClearResultFiles": true
   }
 }

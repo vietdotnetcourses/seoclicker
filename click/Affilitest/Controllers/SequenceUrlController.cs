@@ -142,7 +142,8 @@ namespace Affilitest.Controllers
             DataResult dtr = new DataResult();
             dtr.Status = Status.Success;
             var listAccount = GetAffilitestAccount();
-            var recordsNeeding = 500; var records = db.SequenceUrls.OrderByDescending(s => s.Date).Take(recordsNeeding).ToList();
+            var recordsNeeding = 500;
+            var records = db.SequenceUrls.OrderByDescending(s => s.Date).Take(recordsNeeding).ToList();
             ProxyRequestPostData(records, listAccount);
             return Json(dtr);
 

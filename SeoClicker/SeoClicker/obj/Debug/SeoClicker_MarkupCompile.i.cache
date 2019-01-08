@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\obj\Debug\
+D:\Projects\Freelancer\seoclicker190102\seoclicker\SeoClicker\SeoClicker\obj\Debug\
 SeoClicker
 none
 false
 DEBUG;TRACE
-D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\App.xaml
+D:\Projects\Freelancer\seoclicker190102\seoclicker\SeoClicker\SeoClicker\App.xaml
 181413742046
 
-35-1765103621
-181155262444
+41-605301670
+18978244528
 MainWindow.xaml;Styles\Common.xaml;Themes\BaseLight.xaml;Themes\Blue.xaml;Themes\Button.xaml;Themes\CheckBox.xaml;Themes\Colors.xaml;Themes\ContextMenu.xaml;Themes\Css.xaml;Themes\GroupBox.xaml;Themes\ICons.xaml;Themes\ListBox.xaml;Themes\ListView.xaml;Themes\RadioButton.xaml;Themes\Scrollbars.xaml;Themes\TabControl.xaml;Themes\TextBox.xaml;Themes\ToolTip.xaml;
 
-True
+False
 

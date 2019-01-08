@@ -30,11 +30,7 @@ namespace SeoClicker.Utils
                 {
                     foreach (var nh in eh.GetInvocationList().Cast<NotifyCollectionChangedEventHandler>())
                     {
-                        try {
-                            nh.Invoke(this, e);
-                        }
-                        catch { }
-                       
+                        nh.Invoke(this, e);
                     }
                 }
             }

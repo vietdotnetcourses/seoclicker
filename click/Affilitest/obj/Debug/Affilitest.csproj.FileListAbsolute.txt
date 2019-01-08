@@ -181,7 +181,6 @@ D:\Projects\Freelancer\SeoClicker\click\Affilitest\bin\System.Web.WebPages.xml
 D:\Projects\Freelancer\SeoClicker\click\Affilitest\bin\System.Web.WebPages.Deployment.xml
 D:\Projects\Freelancer\SeoClicker\click\Affilitest\bin\System.Web.WebPages.Razor.xml
 D:\Projects\Freelancer\SeoClicker\click\Affilitest\bin\Antlr3.Runtime.pdb
-D:\Projects\Freelancer\SeoClicker\click\Affilitest\obj\Debug\Affilitest.csprojAssemblyReference.cache
 D:\Projects\Freelancer\SeoClicker\click\Affilitest\obj\Debug\Affilitest.csproj.CoreCompileInputs.cache
 D:\Projects\Freelancer\SeoClicker\click\Affilitest\obj\Debug\Affilitest.csproj.CopyComplete
 D:\Projects\Freelancer\SeoClicker\click\Affilitest\obj\Debug\Affilitest.dll

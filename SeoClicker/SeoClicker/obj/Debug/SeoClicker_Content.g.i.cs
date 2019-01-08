@@ -8,13 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/user-agent/adnroid-8.txt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/user-agent/android-4.txt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/user-agent/android-5.txt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/user-agent/android-6.txt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/user-agent/android-7.txt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/user-agent/ios-10.txt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/user-agent/ios-11.txt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/user-agent/ios-12.txt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/results/1217279522.txt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/results/503037883.txt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/results/939744756.txt")]
 
 

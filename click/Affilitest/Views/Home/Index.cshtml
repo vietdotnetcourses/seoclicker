@@ -3,11 +3,11 @@
 <br />
 @{
     var numberOfUrl = ViewBag.numberOfUrl;
-        int im = 0;
+    int im = 0;
     Dictionary<string, string> iphones = new Dictionary<string, string>();
     iphones.Add("rdip1011", "random iphone 10-11");
     iphones.Add("rdip11", "random iphone 11");
-    iphones.Add("rdip10", "random iphone 10"); 
+    iphones.Add("rdip10", "random iphone 10");
     iphones.Add("rdip9", "random iphone 9");
     iphones.Add("rdiphone", "random iphone");
     iphones.Add("iphone-11.4", "iphone 11.4");
@@ -33,7 +33,7 @@
     iphones.Add("rdandroid78", "random android 7-8");
     iphones.Add("rdandroid7", "random android 7");
     iphones.Add("rdandroid6", "random android 6");
-    iphones.Add("rdandroid5", "random android 5"); 
+    iphones.Add("rdandroid5", "random android 5");
     iphones.Add("rdandroid4", "random android 4");
     iphones.Add("rdandroid", "random android");
     iphones.Add("android-8", "android 8");
@@ -64,23 +64,33 @@
             <input type="text" id="speedAll" class="form-control" placeholder="Tốc độ" />
         </div>
         <div class="col-md-2 padding5">
-            <select class="select2" id='deviceAll'>
-                <optgroup label="iphone">
-                    @foreach (var ip in iphones)
-                    {
-                       <option value="@ip.Key">@ip.Value</option> 
-                    }
-                </optgroup>
-                <optgroup label="android">
-                    @foreach (var ad in androids)
-                    {
-                        <option value="@ad.Key">@ad.Value</option>
-                    }
-                </optgroup>
-                <option value="ipad-11.1">iPad</option>
-                <option value="desktop-1.0">Desktop</option>
-                <option value="windowsPhone-8.0">Windows Phone</option>
-                @*<option value="blackberry">Blackberry</option>*@
+            <select class="select2" id='deviceAll' style="width: 200px">
+                @*<optgroup label="iphone">
+                        @foreach (var ip in iphones)
+                        {
+                            <option value="@ip.Key">@ip.Value</option>
+                        }
+                    </optgroup>
+                    <optgroup label="android">
+                        @foreach (var ad in androids)
+                        {
+                            <option value="@ad.Key">@ad.Value</option>
+                        }
+                    </optgroup>
+                    <option value="ipad-11.1">iPad</option>
+                    <option value="desktop-1.0">Desktop</option>
+                    <option value="windowsPhone-8.0">Windows Phone</option>
+                    @*<option value="blackberry">Blackberry</option>*@
+
+                <option value="android-4">Android 4</option>
+                <option value="android-5">Android 5</option>
+                <option value="android-6">Android 6</option>
+                <option value="android-7">Android 7</option>
+                <option value="android-8">Android 8</option>
+                <option value="ios-10">IOs 10</option>
+                <option value="ios-11">IOs 11</option>
+                <option value="ios-12">IOs 12</option>
+
             </select>
         </div>
         <div class="col-md-2 padding5">
@@ -308,22 +318,14 @@
                 </div>
                 <div class="col-md-2 padding5">
                     <select class="select2 device" id='@string.Format("device00{0}",im)'>
-                        <option value="@m.device" selected="selected">@m.textSelected</option>
-                        <optgroup label="iphone">
-                            @foreach (var ip in iphones)
-                            {
-                                <option value="@ip.Key">@ip.Value</option>
-                            }
-                        </optgroup>
-                        <optgroup label="android">
-                            @foreach (var ad in androids)
-                            {
-                                <option value="@ad.Key">@ad.Value</option>
-                            }
-                        </optgroup>
-                        <option value="ipad-11.1">iPad</option>
-                        <option value="desktop-1.0">Desktop</option>
-                        <option value="windowsPhone-8.0">Windows Phone</option>
+                        <option value="android-4">Android 4</option>
+                        <option value="android-5">Android 5</option>
+                        <option value="android-6">Android 6</option>
+                        <option value="android-7">Android 7</option>
+                        <option value="android-8">Android 8</option>
+                        <option value="ios-10">IOs 10</option>
+                        <option value="ios-11">IOs 11</option>
+                        <option value="ios-12">IOs 12</option>
                     </select>
                 </div>
                 <div class="col-md-2 padding5">
@@ -561,7 +563,7 @@
                 <div class="col-md-1 padding5">
                     <input type="text" id="@string.Format("speed00{0}", i)" class="form-control speed" placeholder="Tốc độ" />
                 </div>
-                <div class="col-md-2 padding5">
+                @*<div class="col-md-2 padding5">
                     <select class="select2 device" id='@string.Format("device00{0}",i)'>
                         <optgroup label="iphone">
                             @foreach (var ip in iphones)
@@ -579,7 +581,20 @@
                         <option value="desktop-1.0">Desktop</option>
                         <option value="windowsPhone-8.0">Windows Phone</option>
                     </select>
-                </div>
+                </div>*@
+                <div class="col-md-2 padding5">
+                        <select class="select2 device" id='@string.Format("device00{0}",i)'>
+                            <option value="android-4">Android 4</option>
+                            <option value="android-5">Android 5</option>
+                            <option value="android-6">Android 6</option>
+                            <option value="android-7">Android 7</option>
+                            <option value="android-8">Android 8</option>
+                            <option value="ios-10">IOs 10</option>
+                            <option value="ios-11">IOs 11</option>
+                            <option value="ios-12">IOs 12</option>
+                        </select>
+                    </div>
+
                 <div class="col-md-2 padding5">
                     <select class="select2 country" id="@string.Format("country00{0}",i)">
                         <option value="af">Afghanistan</option>
@@ -805,26 +820,19 @@
             <input type="text" id="speed00{{Index}}" class="form-control speed" placeholder="Tốc độ" />
         </div>
         <div class="col-md-2 padding5">
-            <select class="device" id='device00{{Index}}'>
-                <optgroup label="iphone">
-                    @foreach (var ip in iphones)
-                    {
-                        <option value="@ip.Key">@ip.Value</option>
-                    }
-                </optgroup>
-                <optgroup label="android">
-                    @foreach (var ad in androids)
-                    {
-                        <option value="@ad.Key">@ad.Value</option>
-                    }
-                </optgroup>
-                <option value="ipad-11.1">iPad</option>
-                <option value="desktop-1.0">Desktop</option>
-                <option value="windowsPhone-8.0">Windows Phone</option>
+            <select class="device" id='device00{{Index}}' style="width: 170px">
+                <option value="android-4">Android 4</option>
+                <option value="android-5">Android 5</option>
+                <option value="android-6">Android 6</option>
+                <option value="android-7">Android 7</option>
+                <option value="android-8">Android 8</option>
+                <option value="ios-10">IOs 10</option>
+                <option value="ios-11">IOs 11</option>
+                <option value="ios-12">IOs 12</option>
             </select>
         </div>
         <div class="col-md-2 padding5">
-            <select class="country" id="country00{{Index}}">
+            <select class="country" id="country00{{Index}}" style="width: 170px">
                 <option value="af">Afghanistan</option>
                 <option value="ax">Åland Islands</option>
                 <option value="al">Albania</option>
@@ -1060,7 +1068,7 @@
         var urlSaving = '@Url.Action("SaveUrl", "Home")';
         var urlChangePassword = '@Url.Action("ChangePassword", "Home")';
         var urlSaveHistory = '@Url.Action("SaveHistory", "Home")';
-        var urlGetCurrentClick = '@Url.Action("getCurrentClick", "Home")'; 
+        var urlGetCurrentClick = '@Url.Action("getCurrentClick", "Home")';
         var homeIndexMain = new HomeIndexMain();
         homeIndexMain.Initialize();
     </script>

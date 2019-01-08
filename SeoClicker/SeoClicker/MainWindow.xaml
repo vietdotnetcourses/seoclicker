@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         xmlns:vm="clr-namespace:SeoClicker.ViewModels"
         mc:Ignorable="d"
-        Title="Seo Clicker" MaxHeight="570" MaxWidth="550" MinWidth="505" MinHeight="570">
+        Title="Seo Clicker" MaxHeight="570" MaxWidth="580" MinWidth="580" MinHeight="570">
     <Window.Resources>
         <vm:MainWindowViewModel x:Key="VmMainWindowViewModel" />
         <Style x:Key="lvh" TargetType="{x:Type GridViewColumnHeader}">
@@ -22,10 +22,10 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TabControl HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Width="535">
+        <TabControl HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Width="565">
             <TabItem Header="DashBoard">
                 <StackPanel Grid.Row="0" >
-                    <GroupBox Margin="5" Header="Info" Height="250">
+                    <GroupBox Margin="5" Header="Info" Height="150">
                         <ListView IsSynchronizedWithCurrentItem="True" Grid.Row="1"  
                           ItemsSource="{Binding RequestWorker.ThreadInfos}"
                          
@@ -52,7 +52,7 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Width="330" Header="Url" HeaderContainerStyle="{StaticResource lvh}">
+                                    <GridViewColumn Width="370" Header="Url" HeaderContainerStyle="{StaticResource lvh}">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" Margin="3">
@@ -86,16 +86,12 @@
                     <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal" Grid.Row="1"  Margin="5,0,0,0">
                         <TextBlock Text="{Binding RequestWorker.ResultMessage}"/>
                     </StackPanel>
-                    <GroupBox Margin="5" Header="Log" Height="187">
-                        <ListBox Margin="10" ItemsSource="{Binding RequestWorker.Logs}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                    <GroupBox Margin="5" Header="Log" Height="287">
+
+                        <TextBox  Width="550" Height="250" Text="{Binding RequestWorker.Logs, Mode=OneWay}" 
+                                  TextWrapping="Wrap"  
+                                  HorizontalScrollBarVisibility="Visible" 
+                                  VerticalScrollBarVisibility="Visible"/>
                     </GroupBox>
                 </StackPanel>
             </TabItem>
@@ -252,16 +248,22 @@
                          ValidatesOnExceptions=True}"
                          Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />
 
-                            <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Report Url" />
+                            <!--<TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Report Url" />
                             <TextBox Grid.Column="1" Grid.Row="1"
                          Text="{Binding DataServerSettings.ReportApiLink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
                          NotifyOnValidationError=True, ValidatesOnDataErrors=True,
                          ValidatesOnExceptions=True}"
-                         Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />
+                         Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />-->
 
-                            <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Load Time" />
+                            <!--<TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Load Time" />
                             <TextBox Grid.Column="1" Grid.Row="2"
                          Text="{Binding TaskSettings.LoadTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                         NotifyOnValidationError=True, ValidatesOnDataErrors=True,
+                         ValidatesOnExceptions=True}"
+                         Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />-->
+                            <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Url Count" />
+                            <TextBox Grid.Column="1" Grid.Row="2"
+                         Text="{Binding DataServerSettings.UrlCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
                          NotifyOnValidationError=True, ValidatesOnDataErrors=True,
                          ValidatesOnExceptions=True}"
                          Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />
@@ -284,7 +286,7 @@
             Panel.ZIndex="1"
             Height="3" />
 
-        <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal" Grid.Row="1"  Margin="5,0,0,0">
+        <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal" Grid.Row="1"  Margin="5,0,0,0" Width="550" HorizontalAlignment="Left">
             <Button Width="30" Height="30" IsEnabled="{Binding RequestWorker.IsEnabled}"
                     Command="{Binding DoStart}"
                     ToolTip="Start">
@@ -321,7 +323,7 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-            <Image gif:ImageBehavior.AnimatedSource="{Binding SpinnerImagePath}" Width="30" Height="30" Margin="50,0,0,0" Visibility="{Binding RequestWorker.SpinnerVisibility}"/>
+            <Image gif:ImageBehavior.AnimatedSource="{Binding SpinnerImagePath}" Width="30" Height="30" Margin="400,0,0,0" HorizontalAlignment="Right" Visibility="{Binding RequestWorker.SpinnerVisibility}"/>
         </StackPanel>
     </Grid>
 </Window>

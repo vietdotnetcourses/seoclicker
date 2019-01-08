@@ -21,10 +21,13 @@ namespace SeoClicker.Models
         public string DNSResolution { get; set; }
         public string TargetUrl { get; set; }
         public int Timeout { get; set; }
-        public NetworkCredential Credential { get; set; }
         public int NumberOfThread { get; set; }
         public int RequestNumber { get; set; }
         public int IpChangeRequestNumber { get; set; }
+
+        public string ApiDataUri { get; set; }
+
+        public int Take { get; set; }
 
     }
 }

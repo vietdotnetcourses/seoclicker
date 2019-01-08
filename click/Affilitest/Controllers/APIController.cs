@@ -191,6 +191,44 @@ namespace Affilitest.Controllers
                 return false;
             }
         }
+
+        [HttpGet]
+        public JsonResult GetDataForTool(int take, string token)
+        {
+           
+            if (token== "O2ECaKWYM5Q1goceJDI9gNMQ2O8tKskZ")
+            {
+                var result = new List<SequenceUrl>();
+                using (var dbContenxt = new AffilitestdbEntities())
+                {
+                    result = dbContenxt.SequenceUrls.Take(take).ToList();
+
+
+
+                    foreach (var item in result)
+                    {
+                        dbContenxt.SequenceUrls.Remove(item);
+                    }
+
+                    try
+                    {
+                        dbContenxt.SaveChanges();
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(null);
+            }
+
+
+         
+        }
     }
 
     public class ModelAPIClick

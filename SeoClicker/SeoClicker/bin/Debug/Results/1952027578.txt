@@ -1,0 +1,6 @@
+Url: http://affiliates.aeon-ads.com/offer/go/184546/1 -- Load time : 780 miliseconds
+Url: http://affiliates.aeon-ads.com/offer/go/184545/1?aff_sub=15c68e4d9c28ac639f38954 -- Load time : 298 miliseconds
+Url: http://affiliates.aeon-ads.com/offer/go/184544/1?aff_sub=103a906b06f56e035d0b144 -- Load time : 133 miliseconds
+Url: http://affiliates.aeon-ads.com/offer/go/184514/1?aff_sub=16c3d6d36609f381a3c7bcd -- Load time : 832 miliseconds
+Url: https://track.iwoop.com/?aff_id=513935&offer_id=2975192&aff_sub=1bbb9376884419456966cf9 -- Load time : 620 miliseconds
+

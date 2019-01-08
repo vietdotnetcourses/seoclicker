@@ -3,6 +3,9 @@ using SeoClicker.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using System;
+using SeoClicker.Utils;
+using System.Net;
 
 namespace SeoClicker.Helpers
 {
@@ -41,9 +44,9 @@ namespace SeoClicker.Helpers
         public static void SaveResult(string data, string fileName)
         {
             var path = Path.Combine(Application.StartupPath, $"Results\\{fileName}.txt");
-            File.AppendAllLines(path, new List<string> { data});
+            File.AppendAllLines(path, new List<string> { data });
         }
-      
+
         public static void DeleteResultsFolder()
         {
             var path = Path.Combine(Application.StartupPath, $"Results");
@@ -52,6 +55,35 @@ namespace SeoClicker.Helpers
             {
                 file.Delete();
             }
+
+        }
+
+        public static List<SequenceUrl> FetchDataFromApi(string apiurl, int take)
+        {
+
+            var url = $"{apiurl}?take={take}&token=O2ECaKWYM5Q1goceJDI9gNMQ2O8tKskZ";
+            try
+            {
+                var request = (HttpWebRequest)WebRequest.Create(url);
+                var username = "admin";
+                var password = "Woohyuk91@@";
+                var encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
+                request.Headers.Add("Authorization", "Basic " + encoded);
+                request.Method = "GET";
+                request.ContentType = "application/x-www-form-urlencoded";
+
+                var response = (HttpWebResponse)request.GetResponse();
+
+                var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+                return JsonConvert.DeserializeObject<List<SequenceUrl>>(responseString);
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogger.LogExceptionToFile(ex);
+                return null;
+            }
+
 
         }
     }

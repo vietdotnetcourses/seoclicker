@@ -5,6 +5,7 @@ using SeoClicker.Helpers;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using System;
 
 namespace SeoClicker.ViewModels
 {
@@ -47,7 +48,8 @@ namespace SeoClicker.ViewModels
 
         void doStart(string data)
         {
-
+            if (Designer.IsInDesignModeStatic)
+                return;
             var proxyRoute = ProxySettings.Route.FirstOrDefault(x => x.IsSelected)?.Value ?? "pass_dyn";
             var superProxy = ProxySettings.SuperProxy.FirstOrDefault(x => x.IsSelected)?.Value ?? "zproxy.lum-superproxy.io";
             var dnsResolution = ProxySettings.DNSResolution.FirstOrDefault(x => x.IsSelected)?.Value ?? "-session-";
@@ -62,15 +64,15 @@ namespace SeoClicker.ViewModels
             RequestWorker.SpinnerVisibility = "Visible";
             RequestWorker.ResultMessage = "";
             RequestWorker.ThreadInfos.Clear();
-            RequestWorker.Logs.Clear();
+            RequestWorker.Logs = "";
             RequestWorker.IsEnabled = false;
 
 
             // foreach (var item in dataItems)
             // {
 
-          //  var item = dataItems.First();
-            
+            //  var item = dataItems.First();
+
             var targetUri = dataItem.url;
             var geo = !string.IsNullOrWhiteSpace(dataItem.geo) ? dataItem.geo : "us";
             var clientSettings = new ClientSettings
@@ -85,15 +87,23 @@ namespace SeoClicker.ViewModels
                 Device = dataItem.device,
                 UserName = ProxySettings.UserName,
                 Zone = ProxySettings.ProxyZone,
-                Credential = new NetworkCredential($"lum-customer-{ProxySettings.UserName}-zone-{ProxySettings.ProxyZone}-route_err-{proxyRoute}-country-{geo}", ProxySettings.Password),
                 Timeout = Timeout.Infinite,
                 NumberOfThread = TaskSettings.NumberOfThreads,
-                RequestNumber = dataItem.clickCount,
-                IpChangeRequestNumber = 1
+                RequestNumber = TaskSettings.TotalRequest,
+                IpChangeRequestNumber = 1,
+                ApiDataUri = DataServerSettings.GetDataApiLink,
+                Take = DataServerSettings.UrlCount
             };
-            RequestWorker.ClientSettings = clientSettings;
-            RequestWorker.ConfigureTask();
-            RequestWorker.DoWork();
+            try
+            {
+                RequestWorker.ClientSettings = clientSettings;
+                RequestWorker.ConfigureTask();
+                RequestWorker.DoWork();
+            }
+           catch(Exception ex)
+            {
+                ExceptionLogger.LogExceptionToFile(ex);
+            }
             // }
 
 
@@ -117,7 +127,7 @@ namespace SeoClicker.ViewModels
 
         void doClearLogs(string data)
         {
-            RequestWorker.Logs.Clear();
+            RequestWorker.Logs = "";
         }
 
         private void initTaskScheduler()

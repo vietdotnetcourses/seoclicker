@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode />
     <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -258,6 +259,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\affilitest.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\HistoryMain.js" />
     <Content Include="Scripts\HomeIndexMain.js" />

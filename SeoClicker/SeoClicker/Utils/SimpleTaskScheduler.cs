@@ -10,7 +10,7 @@ namespace SeoClicker.Utils
 
         public Action DoWork { set; get; }
 
-        public void Start(long startAfter = 1 * 60 * 1000, long interval = 15 * 1000)
+        public void Start(long startAfter =  1000, long interval = 5 * 1000)
         {
             _threadTimer = new ThreadTimer(doWork, null, Timeout.Infinite, 1000);
             _threadTimer.Change(startAfter, interval);

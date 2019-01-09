@@ -98,7 +98,7 @@ namespace SeoClicker.ViewModels
             {
                 RequestWorker.ClientSettings = clientSettings;
                 RequestWorker.ConfigureTask();
-                RequestWorker.DoWork();
+                RequestWorker.Start();
             }
            catch(Exception ex)
             {

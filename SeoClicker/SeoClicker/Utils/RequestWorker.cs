@@ -55,8 +55,9 @@ namespace SeoClicker.Utils
         }
         private void DoWork()
         {
-
-            if (successCount + failCount >= n_total_req)
+            var processedcount = Data.Where(x => x.IsProcessed).Count();
+            //if (successCount + failCount >= n_total_req)
+            if (Interlocked.Increment(ref at_req) > n_total_req)
             {
                 if (IsRunning)
                 {
@@ -182,6 +183,7 @@ namespace SeoClicker.Utils
                 lock (Data)
                 {
                     dataItem = Data[at_req];
+                    Data[at_req].IsProcessed = true;
                 }
 
                 var sessionId = rdm.Next().ToString();
@@ -301,12 +303,12 @@ namespace SeoClicker.Utils
                     {
                         uriString = "";
                     }
-                    Thread.Sleep(500);
+                  
                 }
-
+                successCount++;
 
                 DataHelper.SaveResult(resultStr, sessionId);
-                successCount++;
+                successCount = successCount >= n_total_req ? n_total_req : successCount;
                 ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
 
                 if (successCount + failCount >= n_total_req)
@@ -316,7 +318,7 @@ namespace SeoClicker.Utils
                     resetevent.WaitOne(Timeout.Infinite);
                 }
 
-
+                Thread.Sleep(500);
             }
 
 

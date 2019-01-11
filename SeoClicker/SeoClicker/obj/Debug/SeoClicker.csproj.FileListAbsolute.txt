@@ -229,13 +229,13 @@ D:\Projects\Freelancer\seoclicker190102\seoclicker\SeoClicker\SeoClicker\obj\Deb
 D:\Projects\Freelancer\seoclicker190102\seoclicker\SeoClicker\SeoClicker\obj\Debug\SeoClicker.csproj.CopyComplete
 D:\Projects\Freelancer\seoclicker190102\seoclicker\SeoClicker\SeoClicker\obj\Debug\SeoClicker.exe
 D:\Projects\Freelancer\seoclicker190102\seoclicker\SeoClicker\SeoClicker\obj\Debug\SeoClicker.pdb
+D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\bin\Debug\Newtonsoft.Json.xml
 D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe.config
 D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\bin\Debug\SeoClicker.exe
 D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\bin\Debug\SeoClicker.pdb
 D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\bin\Debug\Newtonsoft.Json.dll
 D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\bin\Debug\WpfAnimatedGif.dll
 D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\bin\Debug\Newtonsoft.Json.pdb
-D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\bin\Debug\Newtonsoft.Json.xml
 D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\bin\Debug\WpfAnimatedGif.xml
 D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\obj\Debug\Styles\Common.baml
 D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\obj\Debug\Themes\BaseLight.baml

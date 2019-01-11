@@ -11,7 +11,8 @@ namespace SeoClicker.ViewModels
 {
     public class MainWindowViewModel
     {
-        public RequestWorker RequestWorker { get; set; }
+        public RequestTaskRunner RequestWorker { get; set; }
+
         public MainWindowViewModel()
         {
             setupData();
@@ -149,7 +150,7 @@ namespace SeoClicker.ViewModels
             DataServerSettings = settings.DataServerSettings;
             TaskSettings = settings.TaskSettings;
 
-            RequestWorker = new RequestWorker();
+            RequestWorker = new RequestTaskRunner();
             SpinnerImagePath = DataHelper.GetSpinnerImagePath();
 
         }

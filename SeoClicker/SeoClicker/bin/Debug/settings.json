@@ -1,8 +1,8 @@
 {
   "DataServerSettings": {
-    "GetDataApiLink": "http://45.32.103.121/Api/GetDataForTool",
+    "GetDataApiLink": "http://localhost:16423/Api/GetDataForTool",
     "ReportApiLink": "reporturl",
-    "UrlCount": 10
+    "UrlCount": 200
   },
   "ProxySettings": {
     "ProxyZone": "fitechtimes",

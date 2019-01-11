@@ -4,15 +4,22 @@ using ThreadTimer = System.Threading.Timer;
 
 namespace SeoClicker.Utils
 {
-    public class SimpleTaskScheduler
+    public class MyTaskScheduler
     {
         private ThreadTimer _threadTimer; //keep it alive
         public Action DoWork { set; get; }
-
-        public void Start(long startAfter =  1000, long interval = 5 * 1000)
+        private long _startAfter = 0;
+        private long _interval = 0;
+        public int Id { get; set; }
+        public MyTaskScheduler(long startAfter, long interval)
+        {
+            _startAfter = startAfter;
+            _interval = interval;
+        }
+        public void Start()
         {
             _threadTimer = new ThreadTimer(doWork, null, Timeout.Infinite, 1000);
-            _threadTimer.Change(startAfter, interval);
+            _threadTimer.Change(_startAfter * 1000, _interval * 100);
         }
 
         public void Stop()

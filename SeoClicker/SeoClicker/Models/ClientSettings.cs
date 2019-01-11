@@ -28,6 +28,8 @@ namespace SeoClicker.Models
         public string ApiDataUri { get; set; }
 
         public int Take { get; set; }
+        public int LoadTime { get; set; }
+        public bool ClearResult { get; set; }
 
     }
 }

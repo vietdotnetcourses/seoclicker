@@ -255,15 +255,16 @@
                          ValidatesOnExceptions=True}"
                          Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />-->
 
-                            <!--<TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Load Time" />
-                            <TextBox Grid.Column="1" Grid.Row="2"
-                         Text="{Binding TaskSettings.LoadTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                            <!--<TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Url Count" />
+                            <TextBox Grid.Column="1" Grid.Row="1"
+                         Text="{Binding DataServerSettings.UrlCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
                          NotifyOnValidationError=True, ValidatesOnDataErrors=True,
                          ValidatesOnExceptions=True}"
                          Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />-->
-                            <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Url Count" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Load Time" />
                             <TextBox Grid.Column="1" Grid.Row="2"
-                         Text="{Binding DataServerSettings.UrlCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                         Text="{Binding TaskSettings.LoadTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
                          NotifyOnValidationError=True, ValidatesOnDataErrors=True,
                          ValidatesOnExceptions=True}"
                          Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />

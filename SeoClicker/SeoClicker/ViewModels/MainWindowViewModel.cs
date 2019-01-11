@@ -27,13 +27,10 @@ namespace SeoClicker.ViewModels
         public ProxySettings ProxySettings { get; set; }
         public DataServerSettings DataServerSettings { get; set; }
         public TaskSettings TaskSettings { get; set; }
-        //  public DashBoardInfo DashBoardInfo { get; set; }
         bool canDoStart(string data)
         {
             return false;
         }
-
-        // Private Methods (14)
         void currentExit(object sender, ExitEventArgs e)
         {
             exit();
@@ -55,23 +52,11 @@ namespace SeoClicker.ViewModels
             var dnsResolution = ProxySettings.DNSResolution.FirstOrDefault(x => x.IsSelected)?.Value ?? "-session-";
             var dataItem = DataHelper.LoadData();
 
-            //Clear files .txt inside ~/Results folder
-            if (TaskSettings.ClearResultFiles)
-            {
-                DataHelper.DeleteResultsFolder();
-            }
-
             RequestWorker.SpinnerVisibility = "Visible";
             RequestWorker.ResultMessage = "";
             RequestWorker.ThreadInfos.Clear();
             RequestWorker.Logs = "";
             RequestWorker.IsEnabled = false;
-
-
-            // foreach (var item in dataItems)
-            // {
-
-            //  var item = dataItems.First();
 
             var targetUri = dataItem.url;
             var geo = !string.IsNullOrWhiteSpace(dataItem.geo) ? dataItem.geo : "us";
@@ -92,7 +77,9 @@ namespace SeoClicker.ViewModels
                 RequestNumber = TaskSettings.TotalRequest,
                 IpChangeRequestNumber = 1,
                 ApiDataUri = DataServerSettings.GetDataApiLink,
-                Take = DataServerSettings.UrlCount
+                Take = DataServerSettings.UrlCount,
+                LoadTime = TaskSettings.LoadTime != 0 ? TaskSettings.LoadTime : 30,
+                ClearResult = TaskSettings.ClearResultFiles
             };
             try
             {
@@ -102,10 +89,8 @@ namespace SeoClicker.ViewModels
             }
            catch(Exception ex)
             {
-                ExceptionLogger.LogExceptionToFile(ex);
+                
             }
-            // }
-
 
         }
         void doStop(string data)

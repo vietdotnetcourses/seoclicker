@@ -80,7 +80,7 @@ namespace SeoClicker.Helpers
             }
             catch (Exception ex)
             {
-                ExceptionLogger.LogExceptionToFile(ex);
+                
                 return null;
             }
 

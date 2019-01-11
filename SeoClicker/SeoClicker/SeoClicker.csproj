@@ -90,13 +90,9 @@
     <Compile Include="Utils\DelegateCommand.cs" />
     <Compile Include="Utils\Designer.cs" />
     <Compile Include="Utils\DispatcherHelper.cs" />
-    <Compile Include="Utils\ExceptionLogger.cs" />
     <Compile Include="Utils\RequestWorker.cs" />
     <Compile Include="Utils\RunOnWindowsStartup.cs" />
     <Compile Include="Utils\SafeClipboard.cs" />
-    <Compile Include="Utils\SeoClickerClient.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Utils\SimpleTaskScheduler.cs" />
     <Compile Include="Helpers\UserAgentHelper.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

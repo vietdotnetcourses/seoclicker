@@ -23,23 +23,27 @@ namespace SeoClicker.Utils
         string _spinnerVisibility;
         bool _isEnabled;
 
-        private int n_parallel_exit_nodes = 5;
-        private int n_total_req = 1000;
+        private int n_parallel_exit_nodes = 0;
+        private int n_total_req = 0;
         private int switch_ip_every_n_req = 1;
         private int at_req = 0;
         private string targetUrl;
         private int successCount = 0;
         private int failCount = 0;
         private Random rdm = new Random();
+        private int _loadTime = 0;
+
         private System.Diagnostics.Stopwatch timer = new Stopwatch();
         public ClientSettings ClientSettings { get; set; }
         private List<Thread> ThreadList = new List<Thread>();
         private List<SequenceUrl> Data { get; set; }
         private bool IsRunning { get; set; }
         public static string super_proxy_ip;
+        private Dictionary<int, int> TimeLoadList { get; set; }
         private SimpleTaskScheduler taskScheduler { get; set; }
+        private List<ThreadWaiting> ThreadWaitingCheckList { get; set; }
 
-        private List<ManualResetEvent> _manualResetEvents { get; set; }
+        private static EventWaitHandle[] waitHandles;
 
         public RequestWorker()
         {
@@ -51,32 +55,62 @@ namespace SeoClicker.Utils
             IsRunning = false;
             Data = new List<SequenceUrl>();
             taskScheduler = new SimpleTaskScheduler();
-            _manualResetEvents = new List<ManualResetEvent>();
+            TimeLoadList = new Dictionary<int, int>();
+            ThreadWaitingCheckList = new List<ThreadWaiting>();
         }
+        [MTAThread]
         private void DoWork()
         {
-            var processedcount = Data.Where(x => x.IsProcessed).Count();
-            //if (successCount + failCount >= n_total_req)
-            if (Interlocked.Increment(ref at_req) > n_total_req)
+            //setup thread timer count
+
+            if ((successCount + failCount) >= n_total_req)
             {
+
                 if (IsRunning)
                 {
-                    Data = DataHelper.FetchDataFromApi(ClientSettings.ApiDataUri, ClientSettings.Take);
-                    if (Data != null && Data.Any())
+                    if (ThreadWaitingCheckList.All(x => x.IsWaiting))
                     {
+                        var take = n_total_req > n_parallel_exit_nodes ? n_total_req : n_parallel_exit_nodes;
+                        Data = DataHelper.FetchDataFromApi(ClientSettings.ApiDataUri, take);
 
-                        IsRunning = true;
-                        IsEnabled = false;
-                        Logs = "";
-                        at_req = 0;
-                        n_total_req = Data.Count();
-                        successCount = 0;
-                        failCount = 0;
+                        if (Data != null && Data.Any())
+                        {
+                            if (ClientSettings.ClearResult)
+                            {
+                                try
+                                {
+                                    DataHelper.DeleteResultsFolder();
+                                }
+                                catch { }
+                            }
+                           
+                            IsRunning = true;
+                            IsEnabled = false;
+                            Logs = "";
 
-                    }
-                    foreach (var resetevent in _manualResetEvents)
-                    {
-                        resetevent.Set();
+                            n_total_req = Data.Count();
+
+                            at_req = 0;
+                            successCount = 0;
+                            failCount = 0;
+
+
+                            for (var i = 0; i < Data.Count; i++)
+                            {
+                                waitHandles[i].Set();
+                                ThreadWaitingCheckList.FirstOrDefault(x => x.Order == i).IsWaiting = false;
+
+                            }
+
+
+
+
+                        }
+                        else
+                        {
+                            Logs += $"No data fechted from api!{Environment.NewLine}";
+                        }
+
                     }
                 }
 
@@ -84,25 +118,34 @@ namespace SeoClicker.Utils
             else
             {
                 if (IsRunning) return;
-
-
-                Data = DataHelper.FetchDataFromApi(ClientSettings.ApiDataUri, ClientSettings.Take);
+                // start first round
+                Data = DataHelper.FetchDataFromApi(ClientSettings.ApiDataUri, n_parallel_exit_nodes);
 
                 if (Data != null && Data.Any())
                 {
                     at_req = 0;
+                    // n_total_req = ClientSettings.Take <= Data.Count() ? ClientSettings.Take : Data.Count();
                     n_total_req = Data.Count();
                     successCount = 0;
                     failCount = 0;
                     IsRunning = true;
                     // start do the job
+                    waitHandles = new EventWaitHandle[n_parallel_exit_nodes];
                     ServicePointManager.DefaultConnectionLimit = int.MaxValue;
+
+
                     for (var i = 0; i < n_parallel_exit_nodes; i++)
                     {
+
+                        var thread = new Thread(new ThreadStart(() => Run(i)));
+                        var threadId = thread.ManagedThreadId;
                         var index = i;
-                        var thread = new Thread(new ThreadStart(Run));
-                        thread.Name = $"Thread {thread.ManagedThreadId}";
+                        waitHandles[index] = new AutoResetEvent(false);
+                        thread.Name = $"{index}";
+
+                        ThreadWaitingCheckList.Add(new ThreadWaiting { Id = threadId, IsWaiting = false, Order = index });
                         ThreadList.Add(thread);
+                        TimeLoadList.Add(threadId, 0);
                         DispatcherHelper.DispatchAction(() =>
                         {
                             ThreadInfos.Add(new ClickerThreadInfo
@@ -118,6 +161,9 @@ namespace SeoClicker.Utils
                     }
 
                 }
+
+
+
             }
         }
         public void Start()
@@ -132,16 +178,18 @@ namespace SeoClicker.Utils
                 }
                 catch (Exception ex)
                 {
-                    ExceptionLogger.LogExceptionToFile(ex);
+
                 }
             };
         }
         public void ConfigureTask()
         {
             n_parallel_exit_nodes = ClientSettings.NumberOfThread;
-            n_total_req = ClientSettings.Take;
             switch_ip_every_n_req = ClientSettings.IpChangeRequestNumber;
             targetUrl = ClientSettings.TargetUrl;
+            _loadTime = ClientSettings.LoadTime * 1000;
+            n_total_req = ClientSettings.Take;
+
         }
 
 
@@ -156,34 +204,28 @@ namespace SeoClicker.Utils
 
             }
             ThreadInfos.Clear();
-            _manualResetEvents.Clear();
             ThreadList.Clear();
+            IsRunning = false;
         }
-        public void Run()
+        public void Run(int i)
         {
-
+            if (i > n_total_req)
+            {
+                waitHandles[i].WaitOne();
+            }
             var threadID = Thread.CurrentThread.ManagedThreadId;
             var info = new ClickerThreadInfo();
             DispatcherHelper.DispatchAction(() =>
             {
                 info = ThreadInfos.FirstOrDefault(x => x.Id == threadID);
             });
-            if (info == null) return;
-
             while (Interlocked.Increment(ref at_req) <= n_total_req)
             {
-                if (!Data.Any()) return;
-                if (at_req >= n_total_req)
-                {
-                    Thread.Sleep(Timeout.Infinite);
-                    return;
-                }
-
                 var dataItem = new SequenceUrl();
                 lock (Data)
                 {
-                    dataItem = Data[at_req];
-                    Data[at_req].IsProcessed = true;
+                    dataItem = Data[at_req - 1];
+
                 }
 
                 var sessionId = rdm.Next().ToString();
@@ -199,17 +241,35 @@ namespace SeoClicker.Utils
                 while (!string.IsNullOrEmpty(uriString))
 
                 {
-                    if (uriString.StartsWith("https") || uriString.StartsWith("http"))
+                    if (uriString.StartsWith("https") || uriString.StartsWith("http") || uriString.StartsWith("/"))
                     {
+                        if (uriString.StartsWith("/"))
+                        {
+                            Uri myUri = new Uri(info.Url);
+                            var protocal = "";
+                            if (info.Url.StartsWith("https"))
+                            {
+                                protocal = "https";
+                            }
+                            else
+                            {
+                                protocal = "http";
+                            }
+                            var host = myUri.Host;
+
+                            uriString = $"{protocal}://{host}{uriString}";
+                        }
                         HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(uriString);
                         webRequest.Proxy = proxy;
                         webRequest.Proxy.Credentials = proxyCredential;
                         webRequest.AllowAutoRedirect = false;  // IMPORTANT
                         webRequest.Timeout = ClientSettings.Timeout;
-                        webRequest.KeepAlive = false;
+                        webRequest.KeepAlive = true;
                         webRequest.Method = "GET";
                         webRequest.ContentType = "text/html; charset=UTF8";
                         webRequest.UserAgent = UserAgentHelper.GetUserAgentByDevice(dataItem.Device);
+                        webRequest.Headers.Add("Accept-Language", $"{dataItem.Country}");
+
 
                         HttpWebResponse webResponse = null;
                         try
@@ -223,54 +283,84 @@ namespace SeoClicker.Utils
 
 
                                 timer.Stop();
-                                if (!string.IsNullOrEmpty(uriString))
+                                var loadtime = timer.Elapsed.Milliseconds;
+
+                                Logs += $"Sent request to {uriString} successfully.{Environment.NewLine}";
+                                resultStr += $"Url: {info.Url} -- Load time : {timer.Elapsed.Milliseconds} miliseconds{Environment.NewLine}";
+
+                                if (TimeLoadList.ContainsKey(info.Id))
                                 {
-                                    Logs += $"Sent request to {uriString} successfully.{Environment.NewLine}";
-                                    resultStr += $"Url: {uriString} -- Load time : {timer.Elapsed.Milliseconds} miliseconds{Environment.NewLine}";
-                                }
-
-                                uriString = webResponse.Headers["Location"];
-
-
-                                if (string.IsNullOrEmpty(uriString))
-                                {
-
-                                    if (webResponse.StatusCode == HttpStatusCode.OK)
+                                    TimeLoadList[info.Id] += loadtime;
+                                    if (TimeLoadList[info.Id] <= _loadTime)
                                     {
 
+                                        uriString = webResponse.Headers["Location"];
 
-                                        Stream receiveStream = webResponse.GetResponseStream();
-                                        StreamReader readStream = null;
-
-                                        if (webResponse.CharacterSet == null)
+                                        if (string.IsNullOrEmpty(uriString))
                                         {
-                                            readStream = new StreamReader(receiveStream);
+
+                                            if (webResponse.StatusCode == HttpStatusCode.OK)
+                                            {
+
+
+                                                Stream receiveStream = webResponse.GetResponseStream();
+                                                StreamReader readStream = null;
+
+                                                if (webResponse.CharacterSet == null)
+                                                {
+                                                    readStream = new StreamReader(receiveStream);
+                                                }
+                                                else
+                                                {
+                                                    readStream = new StreamReader(receiveStream, Encoding.GetEncoding(webResponse.CharacterSet));
+                                                }
+
+                                                string data = readStream.ReadToEnd();
+                                                var redirectUrl = GetRidirectUriFromContent(data);
+
+
+                                                if (!string.IsNullOrEmpty(redirectUrl))
+                                                {
+                                                    uriString = redirectUrl;
+                                                }
+                                                webResponse.Close();
+                                                readStream.Close();
+                                            }
+
+
                                         }
-                                        else
+                                        else if (webResponse.StatusCode == HttpStatusCode.Moved || webResponse.StatusCode == HttpStatusCode.MovedPermanently)
                                         {
-                                            readStream = new StreamReader(receiveStream, Encoding.GetEncoding(webResponse.CharacterSet));
+                                            uriString = "";
                                         }
-
-                                        string data = readStream.ReadToEnd();
-                                        var redirectUrl = GetRidirectUriFromContent(data);
-
-
-                                        if (!string.IsNullOrEmpty(redirectUrl))
-                                        {
-                                            uriString = redirectUrl;
-                                        }
-                                        webResponse.Close();
-                                        readStream.Close();
                                     }
-
-
+                                    else
+                                    {
+                                        uriString = "";
+                                    }
                                 }
-                                else if (webResponse.StatusCode == HttpStatusCode.Moved || webResponse.StatusCode == HttpStatusCode.MovedPermanently)
-                                {
-                                    uriString = "";
-                                }
-
                                 webResponse.Close();
+                            }
+
+                            if (string.IsNullOrWhiteSpace(uriString))
+                            {
+                                Interlocked.Increment(ref successCount);
+                                DataHelper.SaveResult(resultStr, sessionId);
+                                successCount = successCount >= n_total_req ? n_total_req : successCount;
+                                ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
+
+
+
+                                lock (ThreadWaitingCheckList)
+                                {
+                                    var item = ThreadWaitingCheckList.FirstOrDefault(x => x.Id == info.Id);
+                                    if (item != null)
+                                    {
+                                        item.IsWaiting = true;
+                                    }
+                                }
+                                waitHandles[i].WaitOne();
+
                             }
 
                         }
@@ -278,52 +368,59 @@ namespace SeoClicker.Utils
                         {
                             if (webResponse == null)
                             {
-                                uriString = "";
+                                Interlocked.Increment(ref successCount);
                             }
                             else
                             {
-                                failCount++;
-                                Logs += $"Sent request to {uriString} failed. reason: {ex.Message}{Environment.NewLine}";
-                                ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
-
+                                Interlocked.Increment(ref failCount);
                             }
+                         
 
-
-                            if (successCount + failCount >= n_total_req)
+                            uriString = "";
+                            Logs += $"Sent request to {uriString} failed. reason: {ex.Message}{Environment.NewLine}";
+                            ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
+                            lock (ThreadWaitingCheckList)
                             {
-                                var resetevent = new ManualResetEvent(true);
-                                resetevent.WaitOne(Timeout.Infinite);
-
+                                var item = ThreadWaitingCheckList.FirstOrDefault(x => x.Id == info.Id);
+                                if (item != null)
+                                {
+                                    item.IsWaiting = true;
+                                }
                             }
+                            waitHandles[i].WaitOne();
 
                         }
 
                     }
                     else
                     {
+                        Interlocked.Increment(ref successCount);
+                        ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
                         uriString = "";
+                        lock (ThreadWaitingCheckList)
+                        {
+                            var item = ThreadWaitingCheckList.FirstOrDefault(x => x.Id == info.Id);
+                            if (item != null)
+                            {
+                                item.IsWaiting = true;
+                            }
+                        }
+                        waitHandles[i].WaitOne();
                     }
-                  
-                }
-                successCount++;
 
-                DataHelper.SaveResult(resultStr, sessionId);
-                successCount = successCount >= n_total_req ? n_total_req : successCount;
-                ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
-
-                if (successCount + failCount >= n_total_req)
-                {
-
-                    var resetevent = new ManualResetEvent(true);
-                    resetevent.WaitOne(Timeout.Infinite);
                 }
 
-                Thread.Sleep(500);
+
+
             }
 
+            waitHandles[i].Reset();
 
         }
-
+        private int GetRunningThread()
+        {
+            return ThreadList.Where(x => x.ThreadState == System.Threading.ThreadState.Running).Count();
+        }
         #region observable part
 
         public ObservableCollection<ClickerThreadInfo> ThreadInfos
@@ -383,7 +480,7 @@ namespace SeoClicker.Utils
                 notifyPropertyChanged("IsEnabled");
             }
         }
-        #endregion
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void notifyPropertyChanged(string propertyName)
@@ -393,6 +490,7 @@ namespace SeoClicker.Utils
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+        #endregion
         public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
         {
             return true;
@@ -421,8 +519,44 @@ namespace SeoClicker.Utils
 
             }
 
+            //get redirect url from meta tag
+
+            var metaRegex = new Regex(@"<meta http-equiv='refresh'[\s\S]*?>");
+            var metaMatches = metaRegex.Matches(responseString);
+            if (metaMatches.Count > 0)
+            {
+                for (var j = 0; j < metaMatches.Count; j++)
+                {
+                    if (metaMatches[j].Value.Contains("https://"))
+                    {
+                        var httpsmetachildRegex = new Regex(@"https://[\s\S]*?>");
+                        var httpsMatches = httpsmetachildRegex.Matches(metaMatches[j].Value);
+                        if (httpsMatches.Count > 0)
+                        {
+                            result = httpsMatches[0].Value.Replace("'>", "").Replace("\">", "").Replace("\" >", "").Replace("'> ", "");
+                        }
+
+                    }
+                    if (metaMatches[j].Value.Contains("http://"))
+                    {
+                        var httpmetachildRegex = new Regex(@"http://[\s\S]*?>");
+                        var httpMatches = httpmetachildRegex.Matches(metaMatches[j].Value);
+                        if (httpMatches.Count > 0)
+                        {
+                            result = httpMatches[0].Value.Replace("'>", "").Replace("\">", "").Replace("\" >", "").Replace("'> ", "");
+                        }
+
+                    }
+                }
+            }
             return result;
         }
+    }
+    public class ThreadWaiting
+    {
+        public int Id { get; set; }
+        public bool IsWaiting { get; set; }
+        public int Order { get; set; }
     }
 
 }

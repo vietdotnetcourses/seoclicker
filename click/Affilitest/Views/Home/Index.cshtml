@@ -7,48 +7,48 @@
     Dictionary<string, string> iphones = new Dictionary<string, string>();
     iphones.Add("rdip1011", "random iphone 10-11");
     iphones.Add("rdip11", "random iphone 11");
-    iphones.Add("rdip10", "random iphone 10");
-    iphones.Add("rdip9", "random iphone 9");
-    iphones.Add("rdiphone", "random iphone");
+    //iphones.Add("rdip10", "random iphone 10");
+    //iphones.Add("rdip9", "random iphone 9");
+    //iphones.Add("rdiphone", "random iphone");
     iphones.Add("iphone-11.4", "iphone 11.4");
     iphones.Add("iphone-11.3", "iphone 11.3");
     iphones.Add("iphone-11.2.5", "iphone 11.2.5");
     iphones.Add("iphone-11.2.1", "iphone 11.2.1");
     iphones.Add("iphone-11.1", "iphone 11.1");
-    iphones.Add("iphone-10.3.2", "iphone 10.3.2");
-    iphones.Add("iphone-10.3.1", "iphone 10.3.1");
-    iphones.Add("iphone-10.3", "iphone 10.3");
-    iphones.Add("iphone-10.2.1", "iphone 10.2.1");
-    iphones.Add("iphone-10.2", "iphone 10.2");
-    iphones.Add("iphone-10", "iphone 10");
-    iphones.Add("iphone-9.3.1", "iphone 9.3.1");
-    iphones.Add("iphone-9.3", "iphone 9.3");
-    iphones.Add("iphone-9.2.1", "iphone 9.2.1");
-    iphones.Add("iphone-9", "iphone 9");
-    iphones.Add("iphone-8", "iphone 8");
-    iphones.Add("iphone-7", "iphone 7");
+    //iphones.Add("iphone-10.3.2", "iphone 10.3.2");
+    //iphones.Add("iphone-10.3.1", "iphone 10.3.1");
+    //iphones.Add("iphone-10.3", "iphone 10.3");
+    //iphones.Add("iphone-10.2.1", "iphone 10.2.1");
+    //iphones.Add("iphone-10.2", "iphone 10.2");
+    //iphones.Add("iphone-10", "iphone 10");
+    //iphones.Add("iphone-9.3.1", "iphone 9.3.1");
+    //iphones.Add("iphone-9.3", "iphone 9.3");
+    //iphones.Add("iphone-9.2.1", "iphone 9.2.1");
+    //iphones.Add("iphone-9", "iphone 9");
+    //iphones.Add("iphone-8", "iphone 8");
+    //iphones.Add("iphone-7", "iphone 7");
 
     Dictionary<string, string> androids = new Dictionary<string, string>();
-    iphones.Add("rdandroid5678", "random android 5-6-7-8");
+    //iphones.Add("rdandroid5678", "random android 5-6-7-8");
     iphones.Add("rdandroid78", "random android 7-8");
     iphones.Add("rdandroid7", "random android 7");
-    iphones.Add("rdandroid6", "random android 6");
-    iphones.Add("rdandroid5", "random android 5");
-    iphones.Add("rdandroid4", "random android 4");
-    iphones.Add("rdandroid", "random android");
+    //iphones.Add("rdandroid6", "random android 6");
+    //iphones.Add("rdandroid5", "random android 5");
+    //iphones.Add("rdandroid4", "random android 4");
+    //iphones.Add("rdandroid", "random android");
     iphones.Add("android-8", "android 8");
     iphones.Add("android-7.1.2", "android 7.1.2");
     iphones.Add("android-7.1.1", "android 7.1.1");
     iphones.Add("android-7.1", "android 7.1");
     iphones.Add("android-7", "android 7.0");
-    iphones.Add("android-6.0.1", "android 6.0.1");
-    iphones.Add("android-6", "android 6.0");
-    iphones.Add("android-5.1", "android 5.1");
-    iphones.Add("android-5", "android 5.0");
-    iphones.Add("android-4.4.4", "android 4.4.4");
-    iphones.Add("android-4.4.2", "android 4.4.2");
-    iphones.Add("android-4.4", "android 4.4");
-    iphones.Add("android-4.1", "android 4.1");
+    //iphones.Add("android-6.0.1", "android 6.0.1");
+    //iphones.Add("android-6", "android 6.0");
+    //iphones.Add("android-5.1", "android 5.1");
+    //iphones.Add("android-5", "android 5.0");
+    //iphones.Add("android-4.4.4", "android 4.4.4");
+    //iphones.Add("android-4.4.2", "android 4.4.2");
+    //iphones.Add("android-4.4", "android 4.4");
+    //iphones.Add("android-4.1", "android 4.1");
 
 }
 <input type="hidden" id="numberOfUrl" value="@numberOfUrl" />
@@ -82,12 +82,13 @@
                     <option value="windowsPhone-8.0">Windows Phone</option>
                     @*<option value="blackberry">Blackberry</option>*@
 
-                <option value="android-4">Android 4</option>
-                <option value="android-5">Android 5</option>
-                <option value="android-6">Android 6</option>
+                @*<option value="android-4">Android 4</option>
+                    <option value="android-5">Android 5</option>
+                    <option value="android-6">Android 6</option>*@
                 <option value="android-7">Android 7</option>
                 <option value="android-8">Android 8</option>
-                <option value="ios-10">IOs 10</option>
+                <option value="android-9">Android 9</option>
+                @*<option value="ios-10">IOs 10</option>*@
                 <option value="ios-11">IOs 11</option>
                 <option value="ios-12">IOs 12</option>
 
@@ -318,12 +319,13 @@
                 </div>
                 <div class="col-md-2 padding5">
                     <select class="select2 device" id='@string.Format("device00{0}",im)'>
-                        <option value="android-4">Android 4</option>
-                        <option value="android-5">Android 5</option>
-                        <option value="android-6">Android 6</option>
+                        @*<option value="android-4">Android 4</option>
+                            <option value="android-5">Android 5</option>
+                            <option value="android-6">Android 6</option>*@
                         <option value="android-7">Android 7</option>
                         <option value="android-8">Android 8</option>
-                        <option value="ios-10">IOs 10</option>
+                        <option value="android-9">Android 9</option>
+                        @*<option value="ios-10">IOs 10</option>*@
                         <option value="ios-11">IOs 11</option>
                         <option value="ios-12">IOs 12</option>
                     </select>
@@ -564,36 +566,36 @@
                     <input type="text" id="@string.Format("speed00{0}", i)" class="form-control speed" placeholder="Tốc độ" />
                 </div>
                 @*<div class="col-md-2 padding5">
-                    <select class="select2 device" id='@string.Format("device00{0}",i)'>
-                        <optgroup label="iphone">
-                            @foreach (var ip in iphones)
-                            {
-                                <option value="@ip.Key">@ip.Value</option>
-                            }
-                        </optgroup>
-                        <optgroup label="android">
-                            @foreach (var ad in androids)
-                            {
-                                <option value="@ad.Key">@ad.Value</option>
-                            }
-                        </optgroup>
-                        <option value="ipad-11.1">iPad</option>
-                        <option value="desktop-1.0">Desktop</option>
-                        <option value="windowsPhone-8.0">Windows Phone</option>
-                    </select>
-                </div>*@
-                <div class="col-md-2 padding5">
                         <select class="select2 device" id='@string.Format("device00{0}",i)'>
-                            <option value="android-4">Android 4</option>
-                            <option value="android-5">Android 5</option>
-                            <option value="android-6">Android 6</option>
-                            <option value="android-7">Android 7</option>
-                            <option value="android-8">Android 8</option>
-                            <option value="ios-10">IOs 10</option>
-                            <option value="ios-11">IOs 11</option>
-                            <option value="ios-12">IOs 12</option>
+                            <optgroup label="iphone">
+                                @foreach (var ip in iphones)
+                                {
+                                    <option value="@ip.Key">@ip.Value</option>
+                                }
+                            </optgroup>
+                            <optgroup label="android">
+                                @foreach (var ad in androids)
+                                {
+                                    <option value="@ad.Key">@ad.Value</option>
+                                }
+                            </optgroup>
+                            <option value="ipad-11.1">iPad</option>
+                            <option value="desktop-1.0">Desktop</option>
+                            <option value="windowsPhone-8.0">Windows Phone</option>
                         </select>
-                    </div>
+                    </div>*@
+                <div class="col-md-2 padding5">
+                    <select class="select2 device" id='@string.Format("device00{0}",i)'>
+                        <option value="android-4">Android 4</option>
+                        <option value="android-5">Android 5</option>
+                        <option value="android-6">Android 6</option>
+                        <option value="android-7">Android 7</option>
+                        <option value="android-8">Android 8</option>
+                        <option value="ios-10">IOs 10</option>
+                        <option value="ios-11">IOs 11</option>
+                        <option value="ios-12">IOs 12</option>
+                    </select>
+                </div>
 
                 <div class="col-md-2 padding5">
                     <select class="select2 country" id="@string.Format("country00{0}",i)">
@@ -821,11 +823,12 @@
         </div>
         <div class="col-md-2 padding5">
             <select class="device" id='device00{{Index}}' style="width: 170px">
-                <option value="android-4">Android 4</option>
-                <option value="android-5">Android 5</option>
-                <option value="android-6">Android 6</option>
+                @*<option value="android-4">Android 4</option>
+                    <option value="android-5">Android 5</option>
+                    <option value="android-6">Android 6</option>*@
                 <option value="android-7">Android 7</option>
                 <option value="android-8">Android 8</option>
+                <option value="android-9">Android 9</option>
                 <option value="ios-10">IOs 10</option>
                 <option value="ios-11">IOs 11</option>
                 <option value="ios-12">IOs 12</option>

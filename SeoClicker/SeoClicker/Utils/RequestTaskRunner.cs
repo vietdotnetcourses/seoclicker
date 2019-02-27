@@ -55,6 +55,8 @@ namespace SeoClicker.Utils
             TimeLoadList = new Dictionary<int, int>();
             DataFetcher = new MyTaskScheduler(0, 50);
             TaskList = new List<Task>();
+          
+ 
         }
         private void FetchData()
         {
@@ -74,6 +76,8 @@ namespace SeoClicker.Utils
             }
         }
 
+        private CancellationTokenSource CancellationTokenSource { get; set; }
+        private CancellationToken[] CancellationTokens { get; set; }
         public void Start()
         {
             IsEnabled = false;
@@ -83,8 +87,7 @@ namespace SeoClicker.Utils
                 FetchData();
             };
 
-
-
+          
 
             //// create multiple tasks to run paralelly
 
@@ -97,10 +100,10 @@ namespace SeoClicker.Utils
                     while (true)
                     {
                         
-                       await Run();
+                       Run();
                         
                     }
-                }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                }, CancellationTokens[i], TaskCreationOptions.LongRunning, TaskScheduler.Default);
                 ThreadInfos.Add(new ClickerThreadInfo { Geo = "", Info = "Started.", Id = task.Id, Order = i, Url = "" });
                 TaskList.Add(task);
 
@@ -113,8 +116,8 @@ namespace SeoClicker.Utils
             switch_ip_every_n_req = ClientSettings.IpChangeRequestNumber;
             targetUrl = ClientSettings.TargetUrl;
             _loadTime = ClientSettings.LoadTime * 1000;
-
-
+            CancellationTokens = new CancellationToken[n_parallel_exit_nodes];
+            CancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(CancellationTokens);
         }
 
 
@@ -127,8 +130,9 @@ namespace SeoClicker.Utils
             ThreadInfos.Clear();
 
             IsRunning = false;
+            CancellationTokenSource.Cancel();
         }
-        public async Task<bool> Run()
+        public bool Run()
         {
 
             bool check = false;
@@ -147,7 +151,7 @@ namespace SeoClicker.Utils
                     dataItem = Data.FirstOrDefault();
                 }
             }
-           
+
 
             if (!check & info == null)
             {
@@ -270,7 +274,7 @@ namespace SeoClicker.Utils
                             {
                                 Interlocked.Increment(ref successCount);
                                 DataHelper.SaveResult(resultStr, sessionId);
-                             
+
                                 ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
 
                             }

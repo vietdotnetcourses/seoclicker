@@ -229,6 +229,7 @@ namespace Affilitest.Controllers
 
          
         }
+
     }
 
     public class ModelAPIClick
@@ -238,4 +239,6 @@ namespace Affilitest.Controllers
         public string Geo { get; set; }
         public string Click { get; set; }
     }
+
+    
 }

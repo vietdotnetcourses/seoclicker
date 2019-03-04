@@ -1,0 +1,109 @@
+﻿@using Affilitest.Models
+@{
+    var currentClick = "";
+    var totalClick = "";
+        AffilitestdbEntities db = new AffilitestdbEntities();
+    User userModel = new User();
+    if (User.Identity.IsAuthenticated)
+    {
+        userModel = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).First();
+                        if(userModel.Role){
+            currentClick = db.Users.Sum(u => u.CurrentOfClick).ToString();
+            totalClick = db.Users.Sum(u => u.TotalOfClick).ToString();
+        }
+        else{
+            currentClick = userModel.CurrentOfClick.Value.ToString();
+            totalClick = userModel.TotalOfClick.Value.ToString();
+        }
+    }
+
+}
+<div class="row">
+    <div class="pull-left">
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            @if (userModel != null && userModel.Role)
+            {
+                @Html.ActionLink("Quản lý Users", "Index", "User")
+                @Html.ActionLink("Account Affilitest", "Index", "AffilitestAccount")
+            }
+            <a href="@Url.Action("Index","History")">Xem lịch sử</a>
+            @Html.ActionLink("Thoát", "Logout", "Home")
+        </div>
+    </div>
+    <div class="pull-right">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @*@Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })*@
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        @*<li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>*@
+                        <li><a href="javascript:void(0)"><span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span></a></li>
+                        <li>@Html.ActionLink("Trang Chủ", "Index", "Home")</li>
+                        @if (userModel != null && userModel.Role)
+                        {
+                            <li>@Html.ActionLink("Users", "Index", "User")</li>
+                            <li>@Html.ActionLink("Account", "Index", "AffilitestAccount")</li>
+                            <li>@Html.ActionLink("Urls", "Index", "SequenceUrl")</li>
+                        }
+                        <li><a href="@Url.Action("Index","History")">lịch sử</a></li>
+                        <li>@Html.ActionLink("Thoát", "Logout", "Home")</li>
+                        <li>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</li>
+                        <li><a href="javascript:void(0)">Acc: @User.Identity.Name</a></li>
+    <li class="pull-right"><a href="javascript:void(0)"><label for="totalClick">Tổng số: </label> <label id="">@totalClick</label></a></li>
+    <li class="pull-right"><a href="javascript:void(0)"><label for="totalClick">Click Đã Chạy: </label><label id="currentClick">@currentClick</label></a></li>
+                    </ul>
+                    <button class="btn btn-default btnRefreshClick">làm mới</button>
+                    <a href="javascript:void(0)" class=" btnChangePassword" data-toggle="modal" data-target="#changePasswordModal" data-backdrop="static">Đổi password</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!--changepassword  Modal -->
+<div class="modal fade" id="changePasswordModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Đổi Password</h4>
+            </div>
+            <div class="modal-body  form-horizontal">
+                <div class="control-group">
+                    <label for="current_password" class="control-label">Password hiện tại</label>
+                    <div class="controls">
+                        <input name="current_password" type="password" id="current_password" class="form-control">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="new_password" class="control-label">Password mới</label>
+                    <div class="controls">
+                        <input name="new_password" type="password" id="new_password" class="form-control">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="confirm_password" class="control-label">Nhập lại Password</label>
+                    <div class="controls">
+                        <input name="confirm_password" type="password" id="confirm_password" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSendChangePassword">OK</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

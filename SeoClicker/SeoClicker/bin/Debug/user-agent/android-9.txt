@@ -1,0 +1,5 @@
+Mozilla/5.0 (Linux; Android 9.0.0; Lenovo A6000 Build/HDLenovo A6000) AppleWebKit/537.36 (KHTML. like Gecko) Version/4.0 Chrome/39.0.0.0 Mobile Safari/537.36
+Mozilla/5.0 (Linux; Android 9.1; P66 Build/HDP66) AppleWebKit/537.36 (KHTML. like Gecko) Version/4.0 Chrome/39.0.0.0 Mobile Safari/537.36
+Mozilla/5.0 (Linux; U; Android 9.1.1; en-US; iris405 Build/LAVAIRIS405) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 UCBrowser/10.0.0.488 U3/0.8.0 Mobile Safari/533.1
+Mozilla/5.0 (Linux; Android 9.1.2; GT-S6293T Build/JZO54K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.82 Mobile Safari/537.36
+Mozilla/5.0 (Linux; Android 9.1.1; X1 Selfie Build/LMY47I) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Mobile Safari/537.36

@@ -55,8 +55,8 @@ namespace SeoClicker.Utils
             TimeLoadList = new Dictionary<int, int>();
             DataFetcher = new MyTaskScheduler(0, 50);
             TaskList = new List<Task>();
-          
- 
+
+
         }
         private void FetchData()
         {
@@ -67,10 +67,10 @@ namespace SeoClicker.Utils
                 {
                     Data.Enqueue(item);
                 }
-                foreach(var task in TaskList)
+                foreach (var task in TaskList)
                 {
                     //if(task.)
-                    
+
                 }
                 n_total_req = Data.Count;
             }
@@ -87,21 +87,19 @@ namespace SeoClicker.Utils
                 FetchData();
             };
 
-          
+
 
             //// create multiple tasks to run paralelly
 
             for (var i = 0; i < n_parallel_exit_nodes; i++)
             {
 
-                var task = Task.Factory.StartNew(async() =>
+                var task = Task.Factory.StartNew(async () =>
                 {
-                   
+
                     while (true)
                     {
-                        
-                       Run();
-                        
+                        Run();
                     }
                 }, CancellationTokens[i], TaskCreationOptions.LongRunning, TaskScheduler.Default);
                 ThreadInfos.Add(new ClickerThreadInfo { Geo = "", Info = "Started.", Id = task.Id, Order = i, Url = "" });
@@ -155,29 +153,37 @@ namespace SeoClicker.Utils
 
             if (!check & info == null)
             {
+                Thread.Sleep(3000);
                 return false;
             }
-            if (dataItem == null)
+            if (dataItem.SequenceID == Guid.Empty && dataItem.UserID == null)
             {
+                info.Info = "No data...";
+                info.Geo = "";
+                info.Url = "No data";
+                Thread.Sleep(3000);
                 return false;
             }
 
-
-
+            var preUri = "";
+            info.Id = Task.CurrentId.Value;
+            info.Info = "Running...";
+            info.Geo = dataItem.Country;
 
             if (!string.IsNullOrWhiteSpace(dataItem.URL) && !string.IsNullOrWhiteSpace(dataItem.Country) && !string.IsNullOrWhiteSpace(dataItem.Device))
             {
                 Data.Dequeue();
                 var sessionId = rdm.Next().ToString();
-                var proxy = new WebProxy($"session-{sessionId}.zproxy.lum-superproxy.io:{ClientSettings.Port}");
+                var proxy = new WebProxy($"session-{sessionId}.zproxy.lum-superproxy.io:22225");
+
                 var proxyCredential = new NetworkCredential($"lum-customer-{ClientSettings.UserName}-zone-{ClientSettings.Zone}-route_err-{ClientSettings.Route}-country-{dataItem.Country}-session-{sessionId}", ClientSettings.Password);
                 var uriString = dataItem.URL;
 
                 var resultStr = "";
-                info.Id = Task.CurrentId.Value;
-                info.Info = "Running...";
-                info.Geo = dataItem.Country;
+                
 
+                var userAgent = UserAgentHelper.GetUserAgentByDevice(dataItem.Device);
+                var resultList = new List<string>();
                 while (!string.IsNullOrEmpty(uriString))
 
                 {
@@ -185,9 +191,10 @@ namespace SeoClicker.Utils
                     {
                         if (uriString.StartsWith("/"))
                         {
-                            Uri myUri = new Uri(info.Url);
+
+                            Uri myUri = new Uri(preUri);
                             var protocal = "";
-                            if (info.Url.StartsWith("https"))
+                            if (preUri.StartsWith("https"))
                             {
                                 protocal = "https";
                             }
@@ -199,6 +206,8 @@ namespace SeoClicker.Utils
 
                             uriString = $"{protocal}://{host}{uriString}";
                         }
+                        preUri = uriString;
+                        resultList.Add(preUri);
                         HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(uriString);
                         webRequest.Proxy = proxy;
                         webRequest.Proxy.Credentials = proxyCredential;
@@ -207,9 +216,8 @@ namespace SeoClicker.Utils
                         webRequest.KeepAlive = true;
                         webRequest.Method = "GET";
                         webRequest.ContentType = "text/html; charset=UTF8";
-                        webRequest.UserAgent = UserAgentHelper.GetUserAgentByDevice(dataItem.Device);
-                        webRequest.Headers.Add("Accept-Language", $"{dataItem.Country}");
-
+                        webRequest.UserAgent = userAgent;
+                        webRequest.ConnectionGroupName = sessionId;
 
                         HttpWebResponse webResponse = null;
                         try
@@ -227,47 +235,57 @@ namespace SeoClicker.Utils
 
                                 Logs += $"Sent request to {uriString} successfully.{Environment.NewLine}";
                                 resultStr += $"Url: {info.Url} -- Load time : {timer.Elapsed.Milliseconds} miliseconds{Environment.NewLine}";
-                                uriString = webResponse.Headers["Location"];
 
-                                if (string.IsNullOrEmpty(uriString))
+                                var statusCode = (int)webResponse.StatusCode;
+                                if (statusCode > 300 && statusCode < 399)
                                 {
+                                    //redirecting
+                                    uriString = webResponse.Headers["Location"];
+                                }
+                                else if (!string.IsNullOrWhiteSpace(webResponse.Headers["Refresh"]))
+                                {
+                                    //redirecting
+                                    var refreshHeader = webResponse.Headers["Refresh"];
+                                    var startUrl = refreshHeader.IndexOf("http");
+                                    uriString = refreshHeader.Substring(startUrl, refreshHeader.Length - startUrl);
+                                }
 
-                                    if (webResponse.StatusCode == HttpStatusCode.OK)
+                                else
+                                {
+                                    Stream receiveStream = webResponse.GetResponseStream();
+                                    StreamReader readStream = null;
+
+                                    readStream = new StreamReader(receiveStream);
+
+                                    var redirectUrl = "";
+
+                                    string data = readStream.ReadToEnd();
+                                    if (!string.IsNullOrWhiteSpace(data))
                                     {
-
-
-                                        Stream receiveStream = webResponse.GetResponseStream();
-                                        StreamReader readStream = null;
-
-                                        if (webResponse.CharacterSet == null)
-                                        {
-                                            readStream = new StreamReader(receiveStream);
-                                        }
-                                        else
-                                        {
-                                            readStream = new StreamReader(receiveStream, Encoding.GetEncoding(webResponse.CharacterSet));
-                                        }
-
-                                        string data = readStream.ReadToEnd();
-                                        var redirectUrl = GetRidirectUriFromContent(data);
-
-
-                                        if (!string.IsNullOrEmpty(redirectUrl))
-                                        {
-                                            uriString = redirectUrl;
-                                        }
-                                        webResponse.Close();
-                                        readStream.Close();
+                                        redirectUrl = RedirectLinkExtractor.GetRidirectUriFromContent(data);
                                     }
 
+                                    if (!string.IsNullOrEmpty(redirectUrl))
+                                    {
+                                        uriString = redirectUrl;
+
+                                    }
+
+                                    if (uriString == preUri)
+                                    {
+                                        uriString = "";
+                                    }
+
+                                    readStream.Close();
 
                                 }
-                                else if (webResponse.StatusCode == HttpStatusCode.Moved || webResponse.StatusCode == HttpStatusCode.MovedPermanently)
+
+                                if (RedirectLinkExtractor.IsEndingDomain(uriString) || IsRepeatedDomain(uriString, resultList, preUri))
                                 {
+                                    Logs += $"Sent request to {uriString} successfully.{Environment.NewLine}";
+                                    resultStr += $"Url: {uriString} -- Load time : {timer.Elapsed.Milliseconds} miliseconds{Environment.NewLine}";
                                     uriString = "";
                                 }
-
-                                webResponse.Close();
                             }
 
                             if (string.IsNullOrWhiteSpace(uriString))
@@ -391,62 +409,37 @@ namespace SeoClicker.Utils
         {
             return true;
         }
-        private string GetRidirectUriFromContent(string responseString)
+
+        private bool IsRepeatedDomain(string url, List<string> resultList, string preUrl)
         {
-            var result = "";
-            var regex = new Regex(@"<script[^>]*>[\s\S]*?</script>");
-            var childRegex1 = new Regex(@"'(.*?)'");
-            var childRegex2 = new Regex(@"(.*?)");
-            var matches = regex.Matches(responseString);
-            for (var i = 0; i < matches.Count; i++)
+            if (url.StartsWith("/"))
             {
-                var childString = matches[i].Value;
-                if (childString.Contains("document.location.href") || childString.Contains("window.location.href") || childString.Contains("window.location"))
+                var preUri = new Uri(preUrl);
+                if (preUri != null)
                 {
-                    var childMatches = childRegex1.Matches(childString);
-                    for (var j = 0; j < childMatches.Count; j++)
+                    var protocal = "";
+                    if (preUrl.StartsWith("https"))
                     {
-                        if (childMatches[j].Value.Contains("http"))
-                        {
-                            result = childMatches[j].Value.Replace("'", "");
-                        }
+                        protocal = "https";
                     }
+                    else
+                    {
+                        protocal = "http";
+                    }
+                    url = $"{protocal}://{preUri.Host}{url}";
                 }
 
             }
+            var result = false;
 
-            //get redirect url from meta tag
-
-            var metaRegex = new Regex(@"<meta http-equiv='refresh'[\s\S]*?>");
-            var metaMatches = metaRegex.Matches(responseString);
-            if (metaMatches.Count > 0)
+            for (var i = 0; i < resultList.Count - 1; i++)
             {
-                for (var j = 0; j < metaMatches.Count; j++)
-                {
-                    if (metaMatches[j].Value.Contains("https://"))
-                    {
-                        var httpsmetachildRegex = new Regex(@"https://[\s\S]*?>");
-                        var httpsMatches = httpsmetachildRegex.Matches(metaMatches[j].Value);
-                        if (httpsMatches.Count > 0)
-                        {
-                            result = httpsMatches[0].Value.Replace("'>", "").Replace("\">", "").Replace("\" >", "").Replace("'> ", "");
-                        }
-
-                    }
-                    if (metaMatches[j].Value.Contains("http://"))
-                    {
-                        var httpmetachildRegex = new Regex(@"http://[\s\S]*?>");
-                        var httpMatches = httpmetachildRegex.Matches(metaMatches[j].Value);
-                        if (httpMatches.Count > 0)
-                        {
-                            result = httpMatches[0].Value.Replace("'>", "").Replace("\">", "").Replace("\" >", "").Replace("'> ", "");
-                        }
-
-                    }
-                }
+                if (resultList[i].Trim() == url.Trim()) return true;
             }
             return result;
+
         }
+
     }
 
 

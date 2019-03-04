@@ -1,0 +1,14 @@
+Url: https://track.iwoop.com/?aff_id=513935&offer_id=3053114 -- Load time : 118 miliseconds
+Url: https://typrg.com/dep.php?pid=7822&subid=2&cid=bad101f4918345de570678411d46785c -- Load time : 539 miliseconds
+Url: https://enjrg.com/dep.php?pid=7822&subid=2&cid=bad101f4918345de570678411d46785c -- Load time : 554 miliseconds
+Url: https://svkrg.com/fep.php?rd=iqwpqd.perfonsrv.com&ct=6&id=15516884858479399932082743&tid=7822&t=imp&end=1 -- Load time : 303 miliseconds
+Url: https://iqwpqd.perfonsrv.com/?&version=1&id=15516884858479399932082743&tid=7822&ct=6&t=imp&ftype=js&filter=1&nf=14&nf2=15&trs=15516884877086198&end=1&fwidth= -- Load time : 977 miliseconds
+Url: https://sax.peakonspot.com/dep.php?pid=7822&pt=wc&subid=2&ref=7822-1eb1dcd581033c9d5f19ba3c99a5bcb8.media-serving.com&rebid=1&ric=15516884858479399932082743&filters[]=362:3&f=64 -- Load time : 107 miliseconds
+Url: http://click.aztracking.net/tracking/redirect.php?bid_id=31597116972862330&ids=XMTYxMDN-MzYwOTgzfjEzNTYzODF-MTIzNn4zMTQwOTZ-MX4wfjB-MH5VU35hbmRyb2lkfi0xfnNhbXN1bmd-Ny4wfjMxNDA5Nn43ODIyLWY1MzNlMDhiYTk5MTA3YWNmYzhjMjI4NTE1ZmUyMWNhfnVzfjM1MDkwMH5DaHJvbWUgTW9iaWxlfjB-MH4wfjB-MH4wfjJ-ZW5-MH4xMDF-NzgyMi0xZWIxZGNkNTgxMDMzYzlkNWYxOWJhM2M5OWE1YmNiOC5wZWFrYWR4LmNvbX42flNNLUc5NTBGfjB-&bid_time=1551688494&chk=f9b80aea072dc3ae2713a704363fa2f2&ext=&_m=%07source_id%067822-f533e08ba99107acfc8c228515fe21ca -- Load time : 709 miliseconds
+Url: http://show.pops.host/r/068a92ff-e1bb-4a54-ae86-b9310e260ac5?siteid=7822-f533e08ba99107acfc8c228515fe21ca -- Load time : 115 miliseconds
+Url: https://syndication.exdynsrv.com/splash.php?idzone=3209739&sub=78368&type=8 -- Load time : 494 miliseconds
+Url: https://syndication.exdynsrv.com/splash.php?idzone=3209739&sub=78368&type=8&p=https%3A%2F%2Fadexchange-xxsdgfd123.com&tested=2 -- Load time : 990 miliseconds
+Url: https://track.afcpatrk.com/cc5d0d6d-337d-499d-a2f4-d4055bdde95f?campid=2845714&varid=27323278&source=adexchange-xxsdgfd123.com&siteid=763937&zoneid=3209739&catid=508&country=USA&format=&cost=1.5&tag=oodZNHVbHTLHNTa45c3UTy3WUXOnsononstdK51UtrpXTSzummdTQ6V0rqHVTSzWVyuqlusptndK6Z0rpXSuldM6V0rpnO4sq0n1l0z33rssznurm3p4z1zoo4002zdZbRXa7PbdWvWYOd4lKLtzxtNPRHqH9znSuD7A -- Load time : 205 miliseconds
+Url: https://ads.brazzersnetwork.com/?ad_id=801020&ata=mobilemdots&atc=EXO_BZ_801020&apb=w0F7NQR1R603I0QK1GSFV8HU -- Load time : 744 miliseconds
+Url: https://static-ma-ht.realitykingscontent.com/static1/runtime.f84ba965.js -- Load time : 477 miliseconds
+

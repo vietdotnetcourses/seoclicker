@@ -86,9 +86,6 @@ namespace Affilitest.Controllers
         }
 
 
-
-
-
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -218,44 +215,7 @@ namespace Affilitest.Controllers
             var userId = ConfigurationManager.AppSettings["offerTestUserid"];
             wr.ContentType = "application/json";
             wr.Headers["Authorization"] = authToken;
-            wr.Timeout = Timeout.Infinite;
-            // wr.Headers.Add("X-AUTH-TOKEN", authToken);
-
-
-            //if (wr.CookieContainer == null)
-            //{
-            //    wr.CookieContainer = new CookieContainer();
-            //}
-            //if (!string.IsNullOrEmpty(country))
-            //{
-            //    if (country.Equals("uk", StringComparison.OrdinalIgnoreCase))
-            //        country = "GB";
-
-            //    country = country.ToUpper();
-            //}
-            //string deviceTemp = "iphone";
-
-            //string version = "11.1";
-            //if (!string.IsNullOrEmpty(device) && device.IndexOf('-') > 0)
-            //{
-            //    deviceTemp = device.Split('-')[0];
-
-            //    version = device.Split('-')[1];
-            //}
-            //else if (!string.IsNullOrEmpty(device))
-            //{
-            //    if (device.Contains("android"))
-            //    {
-            //        deviceTemp = "android";
-            //        version = "8";
-            //    }
-            //    else
-            //    {
-            //        deviceTemp = "iphone";
-            //        version = "11.1";
-            //    }
-            //}
-
+            wr.Timeout = Timeout.Infinite;         
             var deviceArray = device.Split('-');
             if (string.IsNullOrWhiteSpace(deviceArray[0]))deviceArray[0] = "ios";
             if (string.IsNullOrWhiteSpace(deviceArray[1])) deviceArray[0] = "11";

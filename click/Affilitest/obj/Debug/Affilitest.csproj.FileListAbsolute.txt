@@ -185,3 +185,4 @@ D:\Projects\Freelancer\seoclicker\click\Affilitest\obj\Debug\Affilitest.csproj.C
 D:\Projects\Freelancer\seoclicker\click\Affilitest\obj\Debug\Affilitest.csproj.CopyComplete
 D:\Projects\Freelancer\seoclicker\click\Affilitest\obj\Debug\Affilitest.dll
 D:\Projects\Freelancer\seoclicker\click\Affilitest\obj\Debug\Affilitest.pdb
+D:\Projects\Freelancer\seoclicker\click\Affilitest\obj\Debug\Affilitest.csprojAssemblyReference.cache

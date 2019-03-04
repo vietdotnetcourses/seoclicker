@@ -90,6 +90,7 @@
     <Compile Include="Utils\DelegateCommand.cs" />
     <Compile Include="Utils\Designer.cs" />
     <Compile Include="Utils\DispatcherHelper.cs" />
+    <Compile Include="Utils\RedirectLinkExtractor.cs" />
     <Compile Include="Utils\RequestTaskRunner.cs" />
     <Compile Include="Utils\RequestWorker.cs" />
     <Compile Include="Utils\RunOnWindowsStartup.cs" />
@@ -215,9 +216,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="bin\Debug\user-agent\android-8.txt" />
-    <Resource Include="bin\Debug\user-agent\android-4.txt" />
-    <Resource Include="bin\Debug\user-agent\android-5.txt" />
-    <Resource Include="bin\Debug\user-agent\android-6.txt" />
     <Resource Include="bin\Debug\user-agent\android-7.txt" />
     <Resource Include="bin\Debug\user-agent\ios-10.txt" />
     <Resource Include="bin\Debug\user-agent\ios-11.txt" />

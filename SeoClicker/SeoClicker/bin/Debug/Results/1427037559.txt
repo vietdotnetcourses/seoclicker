@@ -1,6 +1,0 @@
-Url: https://track.iwoop.com/?aff_id=513935&offer_id=3053114 -- Load time : 317 miliseconds
-Url: http://apps.applift.com/aff_c?offer_id=69505&aff_id=28089&aff_click_id=4b14b0bce0c1124a49d9d766e77bb930&source=52_&ios_ifa= -- Load time : 898 miliseconds
-Url: http://mobilegames.com/index.html?affiliate_id=28089&offer_id=69505 -- Load time : 230 miliseconds
-Url: http://imb-offerwall-env.us-east-1.elasticbeanstalk.com -- Load time : 743 miliseconds
-Url: https://play.google.com/store/apps/category/GAME','_self -- Load time : 743 miliseconds
-

@@ -92,7 +92,6 @@
     <Compile Include="Utils\DispatcherHelper.cs" />
     <Compile Include="Utils\RedirectLinkExtractor.cs" />
     <Compile Include="Utils\RequestTaskRunner.cs" />
-    <Compile Include="Utils\RequestWorker.cs" />
     <Compile Include="Utils\RunOnWindowsStartup.cs" />
     <Compile Include="Utils\SafeClipboard.cs" />
     <Compile Include="Utils\MyTaskScheduler.cs" />

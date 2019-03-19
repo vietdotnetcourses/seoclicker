@@ -1,9 +1,0 @@
-Url: https://track.iwoop.com/?aff_id=513935&offer_id=3053114 -- Load time : 46 miliseconds
-Url: https://s1-014dd.kiwitrack.pro/?sl=23723&source=default&postbackid=eac770a4efc84845e5dfb6cd163ac3db -- Load time : 366 miliseconds
-Url: https://s2-f31cefb5-b815-49ec-bcca-ac50eda5ef20-1551685888-874134.qclick.pro/ -- Load time : 664 miliseconds
-Url: https://aliexpress.com/?source=wingo&amp;tid=2e3d9d9g1125a -- Load time : 708 miliseconds
-Url: https://www.aliexpress.com/?source=wingo&amp;tid=2e3d9d9g1125a -- Load time : 82 miliseconds
-Url: https://m.aliexpress.com/?tracelog=wwwhome2mobilesitehome&source=wingo&amp;tid=2e3d9d9g1125a -- Load time : 656 miliseconds
-Url: https://m.ru.aliexpress.com/?tracelog=wwwhome2mobilesitehome&source=wingo&amp;tid=2e3d9d9g1125a -- Load time : 363 miliseconds
-Url: https://m.ru.aliexpress.com -- Load time : 498 miliseconds
-

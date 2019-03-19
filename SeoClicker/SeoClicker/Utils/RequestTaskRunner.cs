@@ -67,11 +67,7 @@ namespace SeoClicker.Utils
                 {
                     Data.Enqueue(item);
                 }
-                foreach (var task in TaskList)
-                {
-                    //if(task.)
-
-                }
+                DataHelper.DeleteResultsFolder();
                 n_total_req = Data.Count;
             }
         }
@@ -99,7 +95,7 @@ namespace SeoClicker.Utils
 
                     while (true)
                     {
-                        Run();
+                       await Run();
                     }
                 }, CancellationTokens[i], TaskCreationOptions.LongRunning, TaskScheduler.Default);
                 ThreadInfos.Add(new ClickerThreadInfo { Geo = "", Info = "Started.", Id = task.Id, Order = i, Url = "" });
@@ -113,7 +109,7 @@ namespace SeoClicker.Utils
             n_parallel_exit_nodes = ClientSettings.NumberOfThread;
             switch_ip_every_n_req = ClientSettings.IpChangeRequestNumber;
             targetUrl = ClientSettings.TargetUrl;
-            _loadTime = ClientSettings.LoadTime * 1000;
+            _loadTime = ClientSettings.LoadCount;
             CancellationTokens = new CancellationToken[n_parallel_exit_nodes];
             CancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(CancellationTokens);
         }
@@ -130,7 +126,7 @@ namespace SeoClicker.Utils
             IsRunning = false;
             CancellationTokenSource.Cancel();
         }
-        public bool Run()
+        public async Task<bool> Run()
         {
 
             bool check = false;
@@ -153,7 +149,7 @@ namespace SeoClicker.Utils
 
             if (!check & info == null)
             {
-                Thread.Sleep(3000);
+                Thread.Sleep(2000);
                 return false;
             }
             if (dataItem.SequenceID == Guid.Empty && dataItem.UserID == null)
@@ -184,9 +180,14 @@ namespace SeoClicker.Utils
 
                 var userAgent = UserAgentHelper.GetUserAgentByDevice(dataItem.Device);
                 var resultList = new List<string>();
+                var count = 0;
                 while (!string.IsNullOrEmpty(uriString))
 
                 {
+                    if(count >= ClientSettings.LoadCount)
+                    {
+                        break;
+                    }
                     if (uriString.StartsWith("https") || uriString.StartsWith("http") || uriString.StartsWith("/"))
                     {
                         if (uriString.StartsWith("/"))
@@ -229,7 +230,7 @@ namespace SeoClicker.Utils
                             using (webResponse = (HttpWebResponse)webRequest.GetResponse())
                             {
 
-
+                                count++;
                                 timer.Stop();
                                 var loadtime = timer.Elapsed.Milliseconds;
 

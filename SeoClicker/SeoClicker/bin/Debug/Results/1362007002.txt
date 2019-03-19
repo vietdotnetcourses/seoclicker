@@ -1,7 +1,0 @@
-Url: https://track.iwoop.com/?aff_id=513935&offer_id=3053114 -- Load time : 636 miliseconds
-Url: http://apps.applift.com/aff_c?offer_id=69505&aff_id=28089&aff_click_id=a771cdca3e9ab545691c3ffbb9eb9b94&source=52_&ios_ifa= -- Load time : 677 miliseconds
-Url: http://apps.applift.com/aff_r?offer_id=69505&aff_id=28089&url=https%3A%2F%2Fapi.applike-services.info%2Fcampaign%2Fmcoins%2Fcc6346cbeb2f41ff9528997656805b3b%3FmobileId%3D%26subId%3D28089%26subAppId%3D28089_52_%26clickId%3D102735e7f6c62b04dbce8ba95c971a&urlauth=796287796452367368518744098381 -- Load time : 240 miliseconds
-Url: https://api.applike-services.info/campaign/mcoins/cc6346cbeb2f41ff9528997656805b3b?mobileId=&subId=28089&subAppId=28089_52_&clickId=102735e7f6c62b04dbce8ba95c971a -- Load time : 978 miliseconds
-Url: https://tracking.applike-marketing.info/campaign/mcoins/cc6346cbeb2f41ff9528997656805b3b?mobileId=&subId=28089&subAppId=28089_52_&clickId=102735e7f6c62b04dbce8ba95c971a -- Load time : 999 miliseconds
-Url: market://details?referrer=eyJtY29pbnNfY2FtcGFpZ24iOnsidHlwZSI6Im1jb2lucyIsImF0dHJpYnV0ZXMiOnsiY2xpY2tFdmVudElkIjoiMmI1NTcxYzktNGMyOC00NDYxLTllNzYtYzg2ZWU0YzA4MzVlIiwiaGFzaCI6ImNjNjM0NmNiZWIyZjQxZmY5NTI4OTk3NjU2ODA1YjNiIn19fQ==&id=online.cashalarm.app -- Load time : 999 miliseconds
-

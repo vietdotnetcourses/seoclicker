@@ -1,7 +1,0 @@
-Url: https://track.iwoop.com/?aff_id=513935&offer_id=3053114 -- Load time : 305 miliseconds
-Url: https://typrg.com/dep.php?pid=7822&subid=2&cid=8892d0dd3496de48ebe33ebf6e78531d -- Load time : 571 miliseconds
-Url: https://enjrg.com/dep.php?pid=7822&subid=2&cid=8892d0dd3496de48ebe33ebf6e78531d -- Load time : 92 miliseconds
-Url: https://svkrg.com/fep.php?rd=ctq.peak-serving.com&ct=6&id=15516882419599925265647472&tid=7822&t=imp&end=1 -- Load time : 582 miliseconds
-Url: https://ctq.peak-serving.com/?&version=1&id=15516882419599925265647472&tid=7822&ct=6&t=imp&ftype=js&filter=1&nf=14&nf2=15&trs=15516882442338729&end=1&fwidth= -- Load time : 15 miliseconds
-Url: https://adexchangegate.com/script/s2iurl.php?csid=1575873&s1=7822&md=1&stamat=m|,,QiM-d2P2tGU3BZ9GH0dEdHP3xP.5bd,cJus6bA1PmCtvtcZVdD8-RPvLHxwZbxmHvNtaLJNHadBKYF5l9GEYzzK1kzeHO-di4smje7AVf6j5_MwTdsBkhDzQaXRTrAOc9psXaIQsJW7HZikq_k4RF54KZS2En6qm6z1OdgIjTnFgWbsrQVkTsIJyWlGBo2nTMscpzupvKMMdQsEFBtuaxvD6-0cranr4PPsLv3DzttvRgmNdETumtFLgQFipM5nY_lKPCokYVwgtx74yThqwP7pBEMwbjqBZG94PeY01IB7r0pTuoMGn3KH8dLHAa6Y_qGP_LaI5YPLq8eAxCqE5PSyVQSE3HDr-Ky1H-YC47q5qCXTNumcxRC_NJ2HMvWps-5w2Brnrsgvn6mFTle77nAbPs7gd74Y1-G3z9wwIV9QdPysiiKF-6vjsrzjj19JERUkNC5EyKMgUSKVZFGWl1CL5s5l3gB2cxXY6lCjYMcXnAuL1pVXSw,, -- Load time : 9 miliseconds
-

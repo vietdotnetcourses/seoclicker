@@ -141,14 +141,14 @@ namespace Affilitest.Controllers
             var listAccount = GetAffilitestAccount();
             var recordsNeeding = 500;
             var records = db.SequenceUrls.OrderByDescending(s => s.Date).Take(recordsNeeding).ToList();
-            ProxyRequestPostData(records, listAccount);
+            ProxyRequestPostData(records);
             return Json(dtr);
 
         }
 
 
 
-        public void ProxyRequestPostData(List<SequenceUrl> lstu, List<AffilitestAccount> lsta)
+        public void ProxyRequestPostData(List<SequenceUrl> lstu)
         {
             if (lstu != null && lstu.Count > 0)
             {
@@ -219,7 +219,7 @@ namespace Affilitest.Controllers
             var deviceArray = device.Split('-');
             if (string.IsNullOrWhiteSpace(deviceArray[0]))deviceArray[0] = "ios";
             if (string.IsNullOrWhiteSpace(deviceArray[1])) deviceArray[0] = "11";
-            var callback = "http://api.offertest.net/offertest/8a85dc00-c7e7-4129-85d1-dae905f3da8b/result";
+            var callback = "https://www.google.com/offertest/8a85dc00-c7e7-4129-85d1-dae905f3da8b/result";
             try
             {
                 using (var streamWriter = new StreamWriter(wr.GetRequestStream()))

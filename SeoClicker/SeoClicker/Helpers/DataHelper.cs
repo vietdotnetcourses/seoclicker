@@ -51,10 +51,14 @@ namespace SeoClicker.Helpers
         {
             var path = Path.Combine(Application.StartupPath, $"Results");
             DirectoryInfo di = new DirectoryInfo(path);
-            foreach (FileInfo file in di.GetFiles())
+            if(di.GetFiles().Length >= 500)
             {
-                file.Delete();
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
             }
+            
 
         }
 

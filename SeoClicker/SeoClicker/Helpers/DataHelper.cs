@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System;
 using SeoClicker.Utils;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace SeoClicker.Helpers
 {
@@ -62,7 +63,7 @@ namespace SeoClicker.Helpers
 
         }
 
-        public static List<SequenceUrl> FetchDataFromApi(string apiurl, int take)
+        public static async Task<IEnumerable<SequenceUrl>> FetchDataFromApi(string apiurl, int take)
         {
 
             var url = $"{apiurl}?take={take}&token=O2ECaKWYM5Q1goceJDI9gNMQ2O8tKskZ";
@@ -80,7 +81,7 @@ namespace SeoClicker.Helpers
 
                 var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
-                return JsonConvert.DeserializeObject<List<SequenceUrl>>(responseString);
+                return JsonConvert.DeserializeObject<IEnumerable<SequenceUrl>>(responseString);
             }
             catch (Exception ex)
             {

@@ -58,11 +58,11 @@ namespace SeoClicker.Utils
 
 
         }
-        private void FetchData()
+        private async void FetchData()
         {
             if (!Data.Any())
             {
-                var data = DataHelper.FetchDataFromApi(ClientSettings.ApiDataUri, ClientSettings.Take);
+                var data = await DataHelper.FetchDataFromApi(ClientSettings.ApiDataUri, ClientSettings.Take);
                 foreach (var item in data)
                 {
                     Data.Enqueue(item);
@@ -226,8 +226,8 @@ namespace SeoClicker.Utils
                             info.Url = uriString;
 
                             timer.Start();
-
-                            using (webResponse = (HttpWebResponse)webRequest.GetResponse())
+                            var result = await webRequest.GetResponseAsync();
+                            using (webResponse =  (HttpWebResponse)result)
                             {
 
                                 count++;

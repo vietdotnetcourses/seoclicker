@@ -1,6 +1,6 @@
 {
   "DataServerSettings": {
-    "GetDataApiLink": "http://45.32.103.121/Api/GetDataForTool",
+    "GetDataApiLink": "http://45.77.41.199/Api/GetDataForTool",
     "ReportApiLink": "reporturl",
     "UrlCount": 40
   },

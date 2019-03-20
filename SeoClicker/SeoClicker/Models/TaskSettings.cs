@@ -11,6 +11,7 @@ namespace SeoClicker.Models
     {
         int _totalRequest;
         int _loadTime;
+        int _loadCount;
         int _numberOfThreads;
         bool _clearResultFiles;
         public int TotalRequest
@@ -38,6 +39,21 @@ namespace SeoClicker.Models
                 notifyPropertyChanged("LoadTime");
             }
         }
+
+        public int LoadCount
+        {
+            get
+            {
+                return _loadCount;
+            }
+            set
+            {
+                _loadCount = value;
+                notifyPropertyChanged("LoadCount");
+            }
+        }
+
+
         public int NumberOfThreads
         {
             get

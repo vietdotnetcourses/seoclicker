@@ -79,7 +79,8 @@ namespace SeoClicker.ViewModels
                 IpChangeRequestNumber = 1,
                 ApiDataUri = DataServerSettings.GetDataApiLink,
                 Take = DataServerSettings.UrlCount,
-                LoadCount = TaskSettings.LoadTime != 0 ? TaskSettings.LoadTime : 10,
+                LoadCount = TaskSettings.LoadCount != 0 ? TaskSettings.LoadCount : 10,
+                LoadTime = TaskSettings.LoadTime != 0 ? TaskSettings.LoadTime : 5,
                 ClearResult = TaskSettings.ClearResultFiles
             };
             try

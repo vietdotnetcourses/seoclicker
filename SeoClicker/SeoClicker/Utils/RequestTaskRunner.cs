@@ -32,6 +32,7 @@ namespace SeoClicker.Utils
         private int failCount = 0;
         private Random rdm = new Random();
         private int _loadTime = 0;
+        private int _loadCount = 0;
 
         private System.Diagnostics.Stopwatch timer = new Stopwatch();
         public ClientSettings ClientSettings { get; set; }
@@ -53,7 +54,7 @@ namespace SeoClicker.Utils
             IsRunning = false;
             Data = new Queue<SequenceUrl>();
             TimeLoadList = new Dictionary<int, int>();
-            DataFetcher = new MyTaskScheduler(0, 50);
+            DataFetcher = new MyTaskScheduler(0, 100);
             TaskList = new List<Task>();
 
 
@@ -68,6 +69,7 @@ namespace SeoClicker.Utils
                     Data.Enqueue(item);
                 }
                 DataHelper.DeleteResultsFolder();
+                Logs = "";
                 n_total_req = Data.Count;
             }
         }
@@ -76,6 +78,8 @@ namespace SeoClicker.Utils
         private CancellationToken[] CancellationTokens { get; set; }
         public void Start()
         {
+            ThreadInfos.Clear();
+            TaskList.Clear();
             IsEnabled = false;
             DataFetcher.Start();
             DataFetcher.DoWork = () =>
@@ -109,7 +113,9 @@ namespace SeoClicker.Utils
             n_parallel_exit_nodes = ClientSettings.NumberOfThread;
             switch_ip_every_n_req = ClientSettings.IpChangeRequestNumber;
             targetUrl = ClientSettings.TargetUrl;
-            _loadTime = ClientSettings.LoadCount;
+
+            _loadTime = ClientSettings.LoadTime * 1000;
+            _loadCount = ClientSettings.LoadCount;
             CancellationTokens = new CancellationToken[n_parallel_exit_nodes];
             CancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(CancellationTokens);
         }
@@ -182,13 +188,20 @@ namespace SeoClicker.Utils
                 var userAgent = UserAgentHelper.GetUserAgentByDevice(dataItem.Device);
                 var resultList = new List<string>();
                 var count = 0;
+                var totalLoadTime = 0;
                 while (!string.IsNullOrEmpty(uriString))
 
                 {
-                    if(count >= ClientSettings.LoadCount)
+                    if(count >= _loadCount)
                     {
                         break;
                     }
+
+                    if(totalLoadTime >= _loadTime)
+                    {
+                        break;
+                    }
+
                     if (uriString.StartsWith("https") || uriString.StartsWith("http") || uriString.StartsWith("/"))
                     {
                         if (uriString.StartsWith("/"))
@@ -210,7 +223,16 @@ namespace SeoClicker.Utils
                         }
                         preUri = uriString;
                         resultList.Add(preUri);
-                        HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(uriString);
+                        HttpWebRequest webRequest = null;
+                        try
+                        {
+                            webRequest = (HttpWebRequest)WebRequest.Create(uriString);
+                        }
+                        catch
+                        {
+                            resultStr += $"Url: {preUri} -- Load time : {timer.Elapsed.Milliseconds} miliseconds{Environment.NewLine}";
+                            break;
+                        }
                         webRequest.Proxy = proxy;
                         webRequest.Proxy.Credentials = proxyCredential;
                         webRequest.AllowAutoRedirect = false;  // IMPORTANT
@@ -227,13 +249,12 @@ namespace SeoClicker.Utils
                             info.Url = uriString;
 
                             timer.Start();
-                          
-                            using (webResponse =  (HttpWebResponse)webRequest.GetResponse())
+                            using (webResponse =  (HttpWebResponse)webRequest.GetResponseAsync().Result)
                             {
 
                                 count++;
                                 timer.Stop();
-                                var loadtime = timer.Elapsed.Milliseconds;
+                                totalLoadTime  += timer.Elapsed.Milliseconds;
 
                                 Logs += $"Sent request to {uriString} successfully.{Environment.NewLine}";
                                 resultStr += $"Url: {info.Url} -- Load time : {timer.Elapsed.Milliseconds} miliseconds{Environment.NewLine}";

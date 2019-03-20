@@ -2,7 +2,7 @@
   "DataServerSettings": {
     "GetDataApiLink": "http://45.77.41.199/Api/GetDataForTool",
     "ReportApiLink": "reporturl",
-    "UrlCount": 40
+    "UrlCount": 100
   },
   "ProxySettings": {
     "ProxyZone": "fitechtimes",
@@ -84,8 +84,9 @@
   },
   "TaskSettings": {
     "TotalRequest": 1,
-    "LoadTime": 10,
-    "NumberOfThreads": 20,
+    "LoadTime": 5,
+    "LoadCount": 10,
+    "NumberOfThreads": 30,
     "ClearResultFiles": false
   }
 }

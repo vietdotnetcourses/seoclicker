@@ -77,7 +77,8 @@ namespace SeoClicker.Helpers
                 request.Method = "GET";
                 request.ContentType = "application/x-www-form-urlencoded";
 
-                var response = (HttpWebResponse)request.GetResponse();
+                var result = await request.GetResponseAsync();
+                var response = (HttpWebResponse)result;
 
                 var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
 

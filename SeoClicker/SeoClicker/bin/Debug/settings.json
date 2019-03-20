@@ -84,7 +84,7 @@
   },
   "TaskSettings": {
     "TotalRequest": 1,
-    "LoadTime": 30,
+    "LoadTime": 10,
     "NumberOfThreads": 20,
     "ClearResultFiles": false
   }

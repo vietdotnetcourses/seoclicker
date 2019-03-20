@@ -126,7 +126,7 @@ namespace SeoClicker.Utils
             IsRunning = false;
             CancellationTokenSource.Cancel();
         }
-        public async Task<bool> Run()
+        public async Task Run()
         {
 
             bool check = false;
@@ -150,7 +150,7 @@ namespace SeoClicker.Utils
             if (!check & info == null)
             {
                 Thread.Sleep(2000);
-                return false;
+                
             }
             if (dataItem.SequenceID == Guid.Empty && dataItem.UserID == null)
             {
@@ -158,7 +158,7 @@ namespace SeoClicker.Utils
                 info.Geo = "";
                 info.Url = "No data";
                 Thread.Sleep(3000);
-                return false;
+                
             }
 
             var preUri = "";
@@ -168,6 +168,7 @@ namespace SeoClicker.Utils
 
             if (!string.IsNullOrWhiteSpace(dataItem.URL) && !string.IsNullOrWhiteSpace(dataItem.Country) && !string.IsNullOrWhiteSpace(dataItem.Device))
             {
+              
                 Data.Dequeue();
                 var sessionId = rdm.Next().ToString();
                 var proxy = new WebProxy($"session-{sessionId}.zproxy.lum-superproxy.io:22225");
@@ -226,8 +227,8 @@ namespace SeoClicker.Utils
                             info.Url = uriString;
 
                             timer.Start();
-                            var result = await webRequest.GetResponseAsync();
-                            using (webResponse =  (HttpWebResponse)result)
+                          
+                            using (webResponse =  (HttpWebResponse)webRequest.GetResponse())
                             {
 
                                 count++;
@@ -297,7 +298,7 @@ namespace SeoClicker.Utils
                                 ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
 
                             }
-
+                            
                         }
                         catch (Exception ex)
                         {
@@ -314,7 +315,7 @@ namespace SeoClicker.Utils
                             uriString = "";
                             Logs += $"Sent request to {uriString} failed. reason: {ex.Message}{Environment.NewLine}";
                             ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
-
+                            break;
 
                         }
 
@@ -324,15 +325,13 @@ namespace SeoClicker.Utils
                         Interlocked.Increment(ref successCount);
                         ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
                         uriString = "";
-
+                        
                     }
 
                 }
-
+               
             }
-            return true;
-
-
+           
 
         }
 

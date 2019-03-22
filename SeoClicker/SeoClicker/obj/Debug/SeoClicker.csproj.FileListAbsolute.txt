@@ -268,4 +268,3 @@ D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\obj\Debug\SeoClicker.csp
 D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\obj\Debug\SeoClicker.csproj.CopyComplete
 D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\obj\Debug\SeoClicker.exe
 D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\obj\Debug\SeoClicker.pdb
-D:\Projects\Freelancer\seoclicker\SeoClicker\SeoClicker\obj\Debug\SeoClicker.csprojAssemblyReference.cache

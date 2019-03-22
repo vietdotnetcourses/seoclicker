@@ -94,15 +94,16 @@ namespace SeoClicker.Utils
             for (var i = 0; i < n_parallel_exit_nodes; i++)
             {
 
-                var task = Task.Factory.StartNew( () =>
+                var task = Task.Factory.StartNew( async () =>
                 {
 
                     while (true)
                     {
-                        Run();
+                        await Run();
                     }
-                }, CancellationTokens[i], TaskCreationOptions.LongRunning, TaskScheduler.Default);
-                ThreadInfos.Add(new ClickerThreadInfo { Geo = "", Info = "Started.", Id = task.Id, Order = i, Url = "" });
+                }, CancellationTokens[i], TaskCreationOptions.None, TaskScheduler.Default);
+          
+                ThreadInfos.Add(new ClickerThreadInfo { Geo = "", Info = task.Status.ToString(), Id = task.Id, Order = i, Url = "" });
                 TaskList.Add(task);
 
             }
@@ -132,7 +133,7 @@ namespace SeoClicker.Utils
             IsRunning = false;
             CancellationTokenSource.Cancel();
         }
-        public void Run()
+        public async Task Run()
         {
 
             bool check = false;
@@ -156,7 +157,7 @@ namespace SeoClicker.Utils
             if (!check & info == null)
             {
                 Thread.Sleep(2000);
-                
+                return;
             }
             if (dataItem.SequenceID == Guid.Empty && dataItem.UserID == null)
             {
@@ -164,7 +165,7 @@ namespace SeoClicker.Utils
                 info.Geo = "";
                 info.Url = "No data";
                 Thread.Sleep(3000);
-                
+                return;
             }
 
             var preUri = "";

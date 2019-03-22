@@ -27,3 +27,5 @@ beacon
 .tff
 .css
 .ico
+.gif
+.jpeg

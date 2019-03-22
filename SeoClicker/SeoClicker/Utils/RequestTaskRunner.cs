@@ -94,12 +94,12 @@ namespace SeoClicker.Utils
             for (var i = 0; i < n_parallel_exit_nodes; i++)
             {
 
-                var task = Task.Factory.StartNew(async () =>
+                var task = Task.Factory.StartNew( () =>
                 {
 
                     while (true)
                     {
-                       await Run();
+                        Run();
                     }
                 }, CancellationTokens[i], TaskCreationOptions.LongRunning, TaskScheduler.Default);
                 ThreadInfos.Add(new ClickerThreadInfo { Geo = "", Info = "Started.", Id = task.Id, Order = i, Url = "" });
@@ -132,7 +132,7 @@ namespace SeoClicker.Utils
             IsRunning = false;
             CancellationTokenSource.Cancel();
         }
-        public async Task Run()
+        public void Run()
         {
 
             bool check = false;
@@ -174,8 +174,11 @@ namespace SeoClicker.Utils
 
             if (!string.IsNullOrWhiteSpace(dataItem.URL) && !string.IsNullOrWhiteSpace(dataItem.Country) && !string.IsNullOrWhiteSpace(dataItem.Device))
             {
-              
-                Data.Dequeue();
+                if (Data.Any())
+                {
+                    Data.Dequeue();
+                }
+               
                 var sessionId = rdm.Next().ToString();
                 var proxy = new WebProxy($"session-{sessionId}.zproxy.lum-superproxy.io:22225");
 

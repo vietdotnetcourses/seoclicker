@@ -1,5 +1,5 @@
 ﻿function HomeIndexMain() {
-
+   
     var _urlContainerSelectorClass = ".urlContainer";
     var _urlSelectorClass = ".url";
     var _numberOfUrlID = "#numberOfUrl";
@@ -130,6 +130,7 @@
         return promiseCall;
     }
     function startOne(index) {
+
         $("#startbuttonLabel00" + index).html("Stop");
         var data = [];
         data.push({
@@ -166,7 +167,6 @@
         if (!data.isStop) {
             totalClick += parseInt(data.thread);
         }
-        //$("#infoRow00" + index).html(totalClick);
         $("#numberOfClick00" + index).val(data.click);
         
         return parseInt(data.click) > 0;
@@ -418,6 +418,14 @@
         $('.startbutton').on('click', function () {
 
             var index = $(this).data('index');
+            if (runningStatus[index]) {
+                $("#startbuttonLabel00" + index).html("Start");
+                return;
+            } 
+            if (!$("#url00" + index).val() || !$("#speed00" + index).val() || !$("#numberOfClick00" + index).val()) {
+                alert("Hãy điền đủ thông tin!");
+                return;
+            }
             startOne(index);
         });
         $('#btnSendChangePassword').on('click', function () {
@@ -459,6 +467,8 @@
 
         $(".btnAddUrl").on("click", function () {
 
+          
+            runningStatus.push(false);
             var numberOfUrl = parseInt($("#numberOfUrl").val());
             var num = $(".url", ".urlContainer").length + 1;
             if (numberOfUrl == num) {

@@ -7,6 +7,9 @@
     int im = 0;
 
 }
+<script>
+    var runningStatus = [];
+</script>
 <input type="hidden" id="numberOfUrl" value="@numberOfUrl" />
 <div class="urlContainer">
     <div class="row form-group">
@@ -237,11 +240,10 @@
             </select>
         </div>
         <div class="col-md-1">
-            @*<input type="number" id="timerAll" class="form-control numberOfClick" title="Nhập số giây"/>*@
             <label>Hẹn giờ (giây)</label>
         </div>
         <div class="col-md-1">
-           
+
         </div>
     </div>
     @if (Model.Count > 0)
@@ -499,6 +501,10 @@
                 </div>
 
             </div>
+
+            <script>
+                runningStatus.push(false);
+            </script>
         }
     }
     else
@@ -746,6 +752,9 @@
 
             </div>
         }
+        <script>
+            runningStatus.push(false);
+        </script>
     }
 
 

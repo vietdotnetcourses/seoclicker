@@ -4,19 +4,21 @@
     var _urlSelectorClass = ".url";
     var _numberOfUrlID = "#numberOfUrl";
     var _numberOfClickID = "#numberOfClick00";
-    var _iphone11Items = ["iphone-11.1", "iphone-11.2.1", "iphone-11.2.5", "iphone-11.3", "iphone-11.4"];
-    var _iphone10Items = ["iphone-10", "iphone-10.2", "iphone-10.2.1", "iphone-10.3", "iphone-10.3.1", "iphone-10.3.2"];
-    var _iphone9Items = ["iphone-9", "iphone-9.2.1", "iphone-9.3", "iphone-9.3.1"];
-    var _iphone1011Items = ["iphone-11.1", "iphone-10", "iphone-10.2", "iphone-10.2.1", "iphone-10.3", "iphone-10.3.1", "iphone-10.3.2", "iphone-11.2.1", "iphone-11.2.5", "iphone-11.3", "iphone-11.4"];
-    var _iphoneItems = ["iphone-11.1", "iphone-10", "iphone-9", "iphone-8", "iphone-7", "iphone-9.2.1", "iphone-9.3", "iphone-9.3.1", "iphone-10.2", "iphone-10.2.1", "iphone-10.3", "iphone-10.3.1", "iphone-10.3.2", "iphone-11.2.1", "iphone-11.2.5", "iphone-11.3", "iphone-11.4"];
+    // var _iphone12Items = ["iphone-12"];
+    // var _iphone11Items = ["iphone-11.1", "iphone-11.2.1", "iphone-11.2.5", "iphone-11.3", "iphone-11.4"];
+    //var _iphone10Items = ["iphone-10", "iphone-10.2", "iphone-10.2.1", "iphone-10.3", "iphone-10.3.1", "iphone-10.3.2"];
+    //var _iphone9Items = ["iphone-9", "iphone-9.2.1", "iphone-9.3", "iphone-9.3.1"];
+    //var _iphone1011Items = ["iphone-11.1", "iphone-10", "iphone-10.2", "iphone-10.2.1", "iphone-10.3", "iphone-10.3.1", "iphone-10.3.2", "iphone-11.2.1", "iphone-11.2.5", "iphone-11.3", "iphone-11.4"];
+    //var _iphoneItems = ["iphone-11.1", "iphone-10", "iphone-9", "iphone-8", "iphone-7", "iphone-9.2.1", "iphone-9.3", "iphone-9.3.1", "iphone-10.2", "iphone-10.2.1", "iphone-10.3", "iphone-10.3.1", "iphone-10.3.2", "iphone-11.2.1", "iphone-11.2.5", "iphone-11.3", "iphone-11.4"];
 
-    var _android4Items = ["android-4.1", "android-4.4.2", "android-4.4.4", "android-4.4"];
-    var _android5Items = ["android-5", "android-5.1"];
-    var _android6Items = ["android-6", "android-6.0.1"];
-    var _android7Items = ["android-7", "android-7.1", "android-7.1.1", "android-7.1.2"];
-    var _android5678Items = ["android-5", "android-5.1", "android-6", "android-6.0.1", "android-7", "android-7.1", "android-7.1.1", "android-7.1.2", "android-8"];
-    var _android78Items = ["android-7", "android-7.1", "android-7.1.1", "android-7.1.2", "android-8"];
-    var _androidItems = ["android-8", "android-7", "android-6", "android-4.1", "android-4.4", "android-4.4.2", "android-4.4.4", "android-5", "android-5.1", "android-7.1", "android-6.0.1", "android-7.1.1", "android-7.1.2"];
+    //var _android4Items = ["android-4.1", "android-4.4.2", "android-4.4.4", "android-4.4"];
+    // var _android5Items = ["android-5", "android-5.1"];
+    // var _android6Items = ["android-6", "android-6.0.1"];
+    //var _android7Items = ["android-7", "android-7.1", "android-7.1.1", "android-7.1.2"];
+    //var _android5678Items = ["android-5", "android-5.1", "android-6", "android-6.0.1", "android-7", "android-7.1", "android-7.1.1", "android-7.1.2", "android-8"];
+    //var _android78Items = ["android-7", "android-7.1", "android-7.1.1", "android-7.1.2", "android-8"];
+    //var _android9Items = ["android-9"];
+    //var _androidItems = ["android-8", "android-7", "android-6", "android-4.1", "android-4.4", "android-4.4.2", "android-4.4.4", "android-5", "android-5.1", "android-7.1", "android-6.0.1", "android-7.1.1", "android-7.1.2"];
     // private function --------------------------------------
     function Click() {
         var promiseCall = new Promise(function (resolve, reject) {
@@ -26,9 +28,9 @@
             var thread = 0;
             if (numberOfUrl < num) {
                 alertify
-                        .alert('Thông báo', "Không được bật quá url mà người quản trị cho phép bạn.", function () {
-                            //alertify.message('OK');
-                        });
+                    .alert('Thông báo', "Không được bật quá url mà người quản trị cho phép bạn.", function () {
+                        //alertify.message('OK');
+                    });
             }
             for (var i = 1; i <= num; i++) {
                 var device = "";
@@ -40,50 +42,57 @@
                 thread = $(speedSelector, ".urlContainer").val();
                 if (parseInt($(speedSelector, ".urlContainer").val()) > 20) {
                     alertify
-                       .alert('Thông báo từ ban quản trị', " Tạm thời Không được để tốc độ lớn hơn 20.", function () {
-                           //alertify.message('OK');
-                       });
+                        .alert('Thông báo từ ban quản trị', " Tạm thời Không được để tốc độ lớn hơn 20.", function () {
+                            //alertify.message('OK');
+                        });
                     turnOffStart();
                 }
-                if ($(deviceSelector, ".urlContainer").val() == "rdiphone") {
-                    device = _iphoneItems[Math.floor(Math.random() * _iphoneItems.length)];
-                }
-                else if ($(deviceSelector, ".urlContainer").val() == "rdandroid") {
-                    device = _androidItems[Math.floor(Math.random() * _androidItems.length)];
-                }
-                else if ($(deviceSelector, ".urlContainer").val() == "rdandroid5678") {
-                    device = _android5678Items[Math.floor(Math.random() * _android5678Items.length)];
-                }
-                else if ($(deviceSelector, ".urlContainer").val() == "rdandroid78") {
-                    device = _android78Items[Math.floor(Math.random() * _android78Items.length)];
-                }
-                else if ($(deviceSelector, ".urlContainer").val() == "rdandroid7") {
-                    device = _android7Items[Math.floor(Math.random() * _android7Items.length)];
-                }
-                else if ($(deviceSelector, ".urlContainer").val() == "rdandroid6") {
-                    device = _android6Items[Math.floor(Math.random() * _android6Items.length)];
-                }
-                else if ($(deviceSelector, ".urlContainer").val() == "rdandroid5") {
-                    device = _android5Items[Math.floor(Math.random() * _android5Items.length)];
-                }
-                else if ($(deviceSelector, ".urlContainer").val() == "rdandroid4") {
-                    device = _android4Items[Math.floor(Math.random() * _android4Items.length)];
-                }
-                else if ($(deviceSelector, ".urlContainer").val() == "rdip1011") {
-                    device = _iphone1011Items[Math.floor(Math.random() * _iphone1011Items.length)];
-                }
-                else if ($(deviceSelector, ".urlContainer").val() == "rdip10") {
-                    device = _iphone10Items[Math.floor(Math.random() * _iphone10Items.length)];
-                }
-                else if ($(deviceSelector, ".urlContainer").val() == "rdip11") {
-                    device = _iphone11Items[Math.floor(Math.random() * _iphone11Items.length)];
-                }
-                else if ($(deviceSelector, ".urlContainer").val() == "rdip9") {
-                    device = _iphone9Items[Math.floor(Math.random() * _iphone9Items.length)];
-                }
-                else {
-                    device = $(deviceSelector, ".urlContainer").val();
-                }
+                var device = $(deviceSelector).val();
+                //if ($(deviceSelector, ".urlContainer").val() == "rdiphone") {
+                //    device = _iphoneItems[Math.floor(Math.random() * _iphoneItems.length)];
+                //}
+                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid") {
+                //    device = _androidItems[Math.floor(Math.random() * _androidItems.length)];
+                //}
+                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid5678") {
+                //    device = _android5678Items[Math.floor(Math.random() * _android5678Items.length)];
+                //}
+                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid78") {
+                //    device = _android78Items[Math.floor(Math.random() * _android78Items.length)];
+                //}
+                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid7") {
+                //    device = _android7Items[Math.floor(Math.random() * _android7Items.length)];
+                //}
+                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid9") {
+                //    device = _android9Items[0];
+                //}
+                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid6") {
+                //    device = _android6Items[Math.floor(Math.random() * _android6Items.length)];
+                //}
+                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid5") {
+                //    device = _android5Items[Math.floor(Math.random() * _android5Items.length)];
+                //}
+                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid4") {
+                //    device = _android4Items[Math.floor(Math.random() * _android4Items.length)];
+                //}
+                //else if ($(deviceSelector, ".urlContainer").val() == "rdip1011") {
+                //    device = _iphone1011Items[Math.floor(Math.random() * _iphone1011Items.length)];
+                //}
+                //else if ($(deviceSelector, ".urlContainer").val() == "rdip10") {
+                //    device = _iphone10Items[Math.floor(Math.random() * _iphone10Items.length)];
+                //}
+                //else if ($(deviceSelector, ".urlContainer").val() == "rdip11") {
+                //    device = _iphone11Items[Math.floor(Math.random() * _iphone11Items.length)];
+                //}
+                //else if ($(deviceSelector, ".urlContainer").val() == "rdip11") {
+                //    device = _iphone11Items[Math.floor(Math.random() * _iphone11Items.length)];
+                //}
+                //else if ($(deviceSelector, ".urlContainer").val() == "rdip9") {
+                //    device = _iphone9Items[Math.floor(Math.random() * _iphone9Items.length)];
+                //}
+                //else {
+                //    device = $(deviceSelector, ".urlContainer").val();
+                //}
                 data.push({
                     url: $(urlSelector, ".urlContainer").val(),
                     country: $(countrySelector, ".urlContainer").val(),
@@ -104,15 +113,15 @@
                         }
                         resolve();
                     }
-                    else if(data.Status == 2){
+                    else if (data.Status == 2) {
                         window.location.href = data.LinkRedirect;
                     }
                     else {
                         turnOffStart();
                         alertify
-                        .alert('Thông báo', data.Message, function () {
-                            //alertify.message('OK');
-                        });
+                            .alert('Thông báo', data.Message, function () {
+                                //alertify.message('OK');
+                            });
                         reject();
                     }
                 });
@@ -120,19 +129,48 @@
         });
         return promiseCall;
     }
+    function startOne(index) {
+        $("#startbuttonLabel00" + index).html("Stop");
+        var data = [];
+        data.push({
+            url: $("#url00" + index).val(),
+            country: $("#country00" + index).val(),
+            device: $("#device00" + index).val(),
+            thread: $("#speed00" + index).val(),
+            index: index,
+            click: $("#numberOfClick00" + index).val(),
+        });
 
-    //function checkValidate() {
-    //    var numberOfUrl = parseInt($(_numberOfUrlID).val());
-    //    var num = $(_urlSelectorClass, _urlContainerSelectorClass).length;
-    //    if (numberOfUrl < num) {
-    //        alertify
-    //                .alert("Không được bật quá url mà người quản trị cho phép bạn.", function () {
-    //                    //alertify.message('OK');
-    //                });
-    //        return;
-    //    }
-    //}
-
+        postDataJson(window.url, JSON.stringify(data), function (data) {
+            if (data.Status == 0 && data.Data[0]) {
+                if (updateRowData(data.Data[0], index)) {
+                    setTimeout(function () { startOne(index); }, 5000);
+                }
+                else {
+                    $("#infoRow00" + index).html("OK");
+                    $("#startbuttonLabel00" + index).html("Start");
+                }
+            }
+            else if (data.Status == 2) {
+                $("#infoRow00" + index).html("Lỗi");
+                $("#startbuttonLabel00" + index).html("Start");
+            }
+            else {
+                $("#infoRow00" + index).html("Lỗi");
+                $("#startbuttonLabel00" + index).html("Start");
+            }
+        });
+    }
+    function updateRowData(data, index) {
+        var totalClick = 0;
+        if (!data.isStop) {
+            totalClick += parseInt(data.thread);
+        }
+        //$("#infoRow00" + index).html(totalClick);
+        $("#numberOfClick00" + index).val(data.click);
+        
+        return parseInt(data.click) > 0;
+    }
     function updateData(dataArray) {
         var isContinue = false;
         var totalClick = 0;
@@ -225,9 +263,9 @@
             }
             else {
                 alertify
-                .alert(data.Message, function () {
-                    //alertify.message('OK');
-                });
+                    .alert(data.Message, function () {
+                        //alertify.message('OK');
+                    });
             }
         });
     }
@@ -293,11 +331,11 @@
     function tab_GUID() {
         function s4() {
             return Math.floor((1 + Math.random()) * 0x10000)
-              .toString(16)
-              .substring(1);
+                .toString(16)
+                .substring(1);
         }
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-          s4() + '-' + s4() + s4() + s4();
+            s4() + '-' + s4() + s4() + s4();
     }
 
     function tab_Warning() {
@@ -316,9 +354,9 @@
             if (checkFieldsEmpty()) {
                 turnOffStart();
                 alertify
-                        .alert('Thông báo từ ban quản trị', "Vui lòng không được để trống trường nào.", function () {
-                            //alertify.message('OK');
-                        });
+                    .alert('Thông báo từ ban quản trị', "Vui lòng không được để trống trường nào.", function () {
+                        //alertify.message('OK');
+                    });
                 return;
             }
             //$(".numberOfClick", ".urlContainer").each(function (index, element) {
@@ -377,32 +415,36 @@
             // How to use the cross domain proxy
 
         });
+        $('.startbutton').on('click', function () {
 
+            var index = $(this).data('index');
+            startOne(index);
+        });
         $('#btnSendChangePassword').on('click', function () {
             var data = { curentPassword: $("#current_password").val(), newPassword: $("#new_password").val(), passwordConfirm: $("#confirm_password").val() };
-            if(data.curentPassword == "" || data.newPassword == "" || data.passwordConfirm == ""){
+            if (data.curentPassword == "" || data.newPassword == "" || data.passwordConfirm == "") {
                 alertify
                     .alert('Thông báo', "không được để trống trường nào", function () {
-                        
+
                     });
                 return;
             }
             postData(window.urlChangePassword, data, function (data) { // Use the jQuery promises interface
                 if (data.Status == 0) {
                     alertify
-                    .alert('Thông báo', data.Message, function () {
-                        //alertify.message('OK');
-                        $('#changePasswordModal').modal('hide');
-                    });
+                        .alert('Thông báo', data.Message, function () {
+                            //alertify.message('OK');
+                            $('#changePasswordModal').modal('hide');
+                        });
                 }
                 else if (data.Status == 2) {
                     window.location.href = data.LinkRedirect;
                 }
                 else {
                     alertify
-                    .alert('Thông báo', data.Message, function () {
-                        //alertify.message('OK');
-                    });
+                        .alert('Thông báo', data.Message, function () {
+                            //alertify.message('OK');
+                        });
                 }
             });
         });

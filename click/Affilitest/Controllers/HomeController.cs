@@ -163,9 +163,9 @@ namespace Affilitest.Controllers
             var totalClick = 0;
             foreach (URLModel u in lstu)
             {
-                int click = Int32.Parse(u.click);
-                int thread = Int32.Parse(u.thread);
-                int times = 0;
+                var click = int.Parse(u.click);
+                var thread = int.Parse(u.thread);
+                var times = 0;
                 u.isStop = true;
                 if (click > 0)
                 {

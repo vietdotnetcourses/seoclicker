@@ -5,93 +5,28 @@
 @{
     var numberOfUrl = ViewBag.numberOfUrl;
     int im = 0;
-    Dictionary<string, string> iphones = new Dictionary<string, string>();
-    iphones.Add("rdip1011", "random iphone 10-11");
-    iphones.Add("rdip11", "random iphone 11");
-    //iphones.Add("rdip10", "random iphone 10");
-    //iphones.Add("rdip9", "random iphone 9");
-    //iphones.Add("rdiphone", "random iphone");
-    iphones.Add("iphone-11.4", "iphone 11.4");
-    iphones.Add("iphone-11.3", "iphone 11.3");
-    iphones.Add("iphone-11.2.5", "iphone 11.2.5");
-    iphones.Add("iphone-11.2.1", "iphone 11.2.1");
-    iphones.Add("iphone-11.1", "iphone 11.1");
-    //iphones.Add("iphone-10.3.2", "iphone 10.3.2");
-    //iphones.Add("iphone-10.3.1", "iphone 10.3.1");
-    //iphones.Add("iphone-10.3", "iphone 10.3");
-    //iphones.Add("iphone-10.2.1", "iphone 10.2.1");
-    //iphones.Add("iphone-10.2", "iphone 10.2");
-    //iphones.Add("iphone-10", "iphone 10");
-    //iphones.Add("iphone-9.3.1", "iphone 9.3.1");
-    //iphones.Add("iphone-9.3", "iphone 9.3");
-    //iphones.Add("iphone-9.2.1", "iphone 9.2.1");
-    //iphones.Add("iphone-9", "iphone 9");
-    //iphones.Add("iphone-8", "iphone 8");
-    //iphones.Add("iphone-7", "iphone 7");
-
-    Dictionary<string, string> androids = new Dictionary<string, string>();
-    //iphones.Add("rdandroid5678", "random android 5-6-7-8");
-    iphones.Add("rdandroid78", "random android 7-8");
-    iphones.Add("rdandroid7", "random android 7");
-    //iphones.Add("rdandroid6", "random android 6");
-    //iphones.Add("rdandroid5", "random android 5");
-    //iphones.Add("rdandroid4", "random android 4");
-    //iphones.Add("rdandroid", "random android");
-    iphones.Add("android-8", "android 8");
-    iphones.Add("android-7.1.2", "android 7.1.2");
-    iphones.Add("android-7.1.1", "android 7.1.1");
-    iphones.Add("android-7.1", "android 7.1");
-    iphones.Add("android-7", "android 7.0");
-    //iphones.Add("android-6.0.1", "android 6.0.1");
-    //iphones.Add("android-6", "android 6.0");
-    //iphones.Add("android-5.1", "android 5.1");
-    //iphones.Add("android-5", "android 5.0");
-    //iphones.Add("android-4.4.4", "android 4.4.4");
-    //iphones.Add("android-4.4.2", "android 4.4.2");
-    //iphones.Add("android-4.4", "android 4.4");
-    //iphones.Add("android-4.1", "android 4.1");
 
 }
 <input type="hidden" id="numberOfUrl" value="@numberOfUrl" />
 <div class="urlContainer">
     <div class="row form-group">
-        <div class="col-md-4 padding5">
+        <div class="col-md-4">
             <label class="h4 text-info">Chọn cho tất cả ô bên dưới</label>
         </div>
-        <div class="col-md-2 padding5">
-            <input type="text" id="numberOfClickAll" class="form-control" placeholder="Nhập số lần click" />
+        <div class="col-md-1">
+            <input type="text" id="numberOfClickAll" class="form-control" title="Nhập số lần click" />
         </div>
-        <div class="col-md-1 padding5">
-            <input type="text" id="speedAll" class="form-control" placeholder="Tốc độ" />
+        <div class="col-md-1">
+            <input type="text" id="speedAll" class="form-control" title="Tốc độ" />
         </div>
-        <div class="col-md-2 padding5">
-            <select class="select2" id='deviceAll' style="width: 200px">
-                @*<optgroup label="iphone">
-                        @foreach (var ip in iphones)
-                        {
-                            <option value="@ip.Key">@ip.Value</option>
-                        }
-                    </optgroup>
-                    <optgroup label="android">
-                        @foreach (var ad in androids)
-                        {
-                            <option value="@ad.Key">@ad.Value</option>
-                        }
-                    </optgroup>
-                    <option value="ipad-11.1">iPad</option>
-                    <option value="desktop-1.0">Desktop</option>
-                    <option value="windowsPhone-8.0">Windows Phone</option>
-                    @*<option value="blackberry">Blackberry</option>*@
+        <div class="col-md-1">
+            <select class="select2" id='deviceAll'>
 
-                @*<option value="android-4">Android 4</option>
-                    <option value="android-5">Android 5</option>
-                    <option value="android-6">Android 6</option>*@
-                <option value="android-7">Android 7</option>
-                <option value="android-8">Android 8</option>
-                <option value="android-9">Android 9</option>
-                @*<option value="ios-10">IOs 10</option>*@
-                <option value="ios-11">IOs 11</option>
-                <option value="ios-12">IOs 12</option>
+                <option value="android-7" title="Android-7">AD 7</option>
+                <option value="android-8" title="Android-8">AD 8</option>
+                <option value="android-9" title="Android-9">AD 9</option>
+                <option value="ios-11" title="iOS-11">I 11</option>
+                <option value="ios-12" title="iOS-12">I 12</option>
 
             </select>
         </div>
@@ -301,7 +236,13 @@
                 <option value="zw">Zimbabwe</option>
             </select>
         </div>
-
+        <div class="col-md-1">
+            @*<input type="number" id="timerAll" class="form-control numberOfClick" title="Nhập số giây"/>*@
+            <label>Hẹn giờ (giây)</label>
+        </div>
+        <div class="col-md-1">
+           
+        </div>
     </div>
     @if (Model.Count > 0)
     {
@@ -309,26 +250,25 @@
         {
             im++;
             <div class="row form-group">
-                <div class="col-md-4 padding5">
+                <div class="col-md-2">
+                    <input type="text" class="form-control" placeholder="Nhập tên" />
+                </div>
+                <div class="col-md-2 padding5">
                     @Html.TextBox("url00" + im.ToString(), m.url, new { @class = "form-control url", placeholder = "Link URL" })
                 </div>
-                <div class="col-md-2 padding5">
-                    <input type="text" id="@string.Format("numberOfClick00{0}", im)" class="form-control numberOfClick" placeholder="Nhập số lần click" value='@m.click' />
+                <div class="col-md-1 padding5">
+                    <input type="text" id="@string.Format("numberOfClick00{0}", im)" class="form-control numberOfClick" title="Nhập số click" value='@m.click' />
                 </div>
                 <div class="col-md-1 padding5">
-                    <input type="text" id="@string.Format("speed00{0}", im)" class="form-control speed" placeholder="Tốc độ" value="@m.thread" />
+                    <input type="text" id="@string.Format("speed00{0}", im)" class="form-control speed" title="Tốc độ" value="@m.thread" />
                 </div>
-                <div class="col-md-2 padding5">
+                <div class="col-md-1 padding5">
                     <select class="select2 device" id='@string.Format("device00{0}",im)'>
-                        @*<option value="android-4">Android 4</option>
-                            <option value="android-5">Android 5</option>
-                            <option value="android-6">Android 6</option>*@
-                        <option value="android-7">Android 7</option>
-                        <option value="android-8">Android 8</option>
-                        <option value="android-9">Android 9</option>
-                        @*<option value="ios-10">IOs 10</option>*@
-                        <option value="ios-11">IOs 11</option>
-                        <option value="ios-12">IOs 12</option>
+                        <option value="android-7" title="Android-7">AD 7</option>
+                        <option value="android-8" title="Android-8">AD 8</option>
+                        <option value="android-9" title="Android-9">AD 9</option>
+                        <option value="ios-11" title="iOS-11">I 11</option>
+                        <option value="ios-12" title="iOS-12">I 12</option>
                     </select>
                 </div>
                 <div class="col-md-2 padding5">
@@ -538,6 +478,15 @@
                         <option value="zw">Zimbabwe</option>
                     </select>
                 </div>
+                <div class="col-md-1">
+                    <input type="number" id="@string.Format("timer00{0}", im)" class="form-control" title="Nhập số giây" />
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-primary startbutton" id="@("btnStart00" + im)" data-index="@im">
+                        <span id="@("startbuttonLabel00" + im)">Start</span>
+                        <span class="badge badge-info" id="@("infoRow00" + im)"></span>
+                    </button>
+                </div>
                 <div class="col-md-1 @string.Format("removeFormButtonContainer00{0}", im)">
                     @if (Model.Count > 1 && Model.Count == im)
                     {
@@ -557,48 +506,38 @@
         for (int i = 1; i < 2; i++)
         {
             <div class="row form-group">
-                <div class="col-md-4 padding5">
+                <div class="col-md-2">
+                    <input type="text" class="form-control" title="Nhập tên" />
+                </div>
+                <div class="col-md-2">
                     @Html.TextBox("url00" + i.ToString(), null, new { @class = "form-control url", placeholder = "Link URL" })
                 </div>
-                <div class="col-md-2 padding5">
-                    <input type="text" id="@string.Format("numberOfClick00{0}", i)" class="form-control numberOfClick" placeholder="Nhập số lần click" />
+                <div class="col-md-1 padding5">
+                    <input type="text" id="@string.Format("numberOfClick00{0}", i)" class="form-control numberOfClick" title="Nhập số click" />
                 </div>
                 <div class="col-md-1 padding5">
-                    <input type="text" id="@string.Format("speed00{0}", i)" class="form-control speed" placeholder="Tốc độ" />
-                </div>
-                @*<div class="col-md-2 padding5">
-                        <select class="select2 device" id='@string.Format("device00{0}",i)'>
-                            <optgroup label="iphone">
-                                @foreach (var ip in iphones)
-                                {
-                                    <option value="@ip.Key">@ip.Value</option>
-                                }
-                            </optgroup>
-                            <optgroup label="android">
-                                @foreach (var ad in androids)
-                                {
-                                    <option value="@ad.Key">@ad.Value</option>
-                                }
-                            </optgroup>
-                            <option value="ipad-11.1">iPad</option>
-                            <option value="desktop-1.0">Desktop</option>
-                            <option value="windowsPhone-8.0">Windows Phone</option>
-                        </select>
-                    </div>*@
-                <div class="col-md-2 padding5">
-                    <select class="select2 device" id='@string.Format("device00{0}",i)'>
-                        <option value="android-4">Android 4</option>
-                        <option value="android-5">Android 5</option>
-                        <option value="android-6">Android 6</option>
-                        <option value="android-7">Android 7</option>
-                        <option value="android-8">Android 8</option>
-                        <option value="ios-10">IOs 10</option>
-                        <option value="ios-11">IOs 11</option>
-                        <option value="ios-12">IOs 12</option>
-                    </select>
+                    <input type="text" id="@string.Format("speed00{0}", i)" class="form-control speed" title="Tốc độ" />
                 </div>
 
-                <div class="col-md-2 padding5">
+                <div class="col-md-1">
+                    <select class="select2 device" id='@string.Format("device00{0}",i)'>
+                        <option value="android-7" title="Android-7">AD 7</option>
+                        <option value="android-8" title="Android-8">AD 8</option>
+                        <option value="android-9" title="Android-9">AD 9</option>
+                        <option value="ios-11" title="iOS-11">I 11</option>
+                        <option value="ios-12" title="iOS-12">I 12</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <input type="number" id="@string.Format("timer00{0}", i)" class="form-control" title="Nhập số giây" />
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-primary startbutton" id="@("btnStart00" + i)" data-index="@i">
+                        <span id="@("startbuttonLabel00" + im)">Start</span>
+                        <span class="badge badge-info" id="@("infoRow00" + im)"></span>
+                    </button>
+                </div>
+                <div class="col-md-2">
                     <select class="select2 country" id="@string.Format("country00{0}",i)">
                         <option value="af">Afghanistan</option>
                         <option value="ax">Åland Islands</option>
@@ -813,29 +752,28 @@
 </div>
 <div class="urlTemp hide">
     <div class="row form-group">
-        <div class="col-md-4 padding5">
+        <div class="col-md-2">
+            <input type="text" class="form-control" placeholder="Nhập tên" />
+        </div>
+        <div class="col-md-2">
             <input type="text" id="url00{{Index}}" class="form-control url" placeholder="Link URL" />
         </div>
-        <div class="col-md-2 padding5">
-            <input type="text" id="numberOfClick00{{Index}}" class="form-control numberOfClick" placeholder="Nhập số lần click" />
+        <div class="col-md-1">
+            <input type="text" id="numberOfClick00{{Index}}" class="form-control numberOfClick" title="Nhập số lần click" />
         </div>
-        <div class="col-md-1 padding5">
-            <input type="text" id="speed00{{Index}}" class="form-control speed" placeholder="Tốc độ" />
+        <div class="col-md-1">
+            <input type="text" id="speed00{{Index}}" class="form-control speed" title="Tốc độ" />
         </div>
-        <div class="col-md-2 padding5">
-            <select class="device" id='device00{{Index}}' style="width: 170px">
-                @*<option value="android-4">Android 4</option>
-                    <option value="android-5">Android 5</option>
-                    <option value="android-6">Android 6</option>*@
-                <option value="android-7">Android 7</option>
-                <option value="android-8">Android 8</option>
-                <option value="android-9">Android 9</option>
-                <option value="ios-10">IOs 10</option>
-                <option value="ios-11">IOs 11</option>
-                <option value="ios-12">IOs 12</option>
+        <div class="col-md-1">
+            <select class="device" id='device00{{Index}}'>
+                <option value="android-7" title="Android-7">AD 7</option>
+                <option value="android-8" title="Android-8">AD 8</option>
+                <option value="android-9" title="Android-9">AD 9</option>
+                <option value="ios-11" title="iOS-11">I 11</option>
+                <option value="ios-12" title="iOS-12">I 12</option>
             </select>
         </div>
-        <div class="col-md-2 padding5">
+        <div class="col-md-2">
             <select class="country" id="country00{{Index}}" style="width: 170px">
                 <option value="af">Afghanistan</option>
                 <option value="ax">Åland Islands</option>
@@ -1040,6 +978,15 @@
                 <option value="zm">Zambia</option>
                 <option value="zw">Zimbabwe</option>
             </select>
+        </div>
+        <div class="col-md-1">
+            <input type="number" id="timer00{{Index}}" class="form-control numberOfClick" title="Nhập số giây" />
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-primary startbutton" id="btnStart00{{Index}}" data-index="{{Index}}">
+                <span id="startbuttonLabel00{{Index}}">Start</span>
+                <span class="badge badge-info" id="infoRow00{{Index}}"></span>
+            </button>
         </div>
         <div class="col-md-1 removeFormButtonContainer00{{Index}}">
             <div class="pull-right removeFormButton">

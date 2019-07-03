@@ -4,22 +4,7 @@
     var _urlSelectorClass = ".url";
     var _numberOfUrlID = "#numberOfUrl";
     var _numberOfClickID = "#numberOfClick00";
-    // var _iphone12Items = ["iphone-12"];
-    // var _iphone11Items = ["iphone-11.1", "iphone-11.2.1", "iphone-11.2.5", "iphone-11.3", "iphone-11.4"];
-    //var _iphone10Items = ["iphone-10", "iphone-10.2", "iphone-10.2.1", "iphone-10.3", "iphone-10.3.1", "iphone-10.3.2"];
-    //var _iphone9Items = ["iphone-9", "iphone-9.2.1", "iphone-9.3", "iphone-9.3.1"];
-    //var _iphone1011Items = ["iphone-11.1", "iphone-10", "iphone-10.2", "iphone-10.2.1", "iphone-10.3", "iphone-10.3.1", "iphone-10.3.2", "iphone-11.2.1", "iphone-11.2.5", "iphone-11.3", "iphone-11.4"];
-    //var _iphoneItems = ["iphone-11.1", "iphone-10", "iphone-9", "iphone-8", "iphone-7", "iphone-9.2.1", "iphone-9.3", "iphone-9.3.1", "iphone-10.2", "iphone-10.2.1", "iphone-10.3", "iphone-10.3.1", "iphone-10.3.2", "iphone-11.2.1", "iphone-11.2.5", "iphone-11.3", "iphone-11.4"];
-
-    //var _android4Items = ["android-4.1", "android-4.4.2", "android-4.4.4", "android-4.4"];
-    // var _android5Items = ["android-5", "android-5.1"];
-    // var _android6Items = ["android-6", "android-6.0.1"];
-    //var _android7Items = ["android-7", "android-7.1", "android-7.1.1", "android-7.1.2"];
-    //var _android5678Items = ["android-5", "android-5.1", "android-6", "android-6.0.1", "android-7", "android-7.1", "android-7.1.1", "android-7.1.2", "android-8"];
-    //var _android78Items = ["android-7", "android-7.1", "android-7.1.1", "android-7.1.2", "android-8"];
-    //var _android9Items = ["android-9"];
-    //var _androidItems = ["android-8", "android-7", "android-6", "android-4.1", "android-4.4", "android-4.4.2", "android-4.4.4", "android-5", "android-5.1", "android-7.1", "android-6.0.1", "android-7.1.1", "android-7.1.2"];
-    // private function --------------------------------------
+   
     function Click() {
         var promiseCall = new Promise(function (resolve, reject) {
             var numberOfUrl = parseInt($(_numberOfUrlID).val());
@@ -47,52 +32,7 @@
                         });
                     turnOffStart();
                 }
-                var device = $(deviceSelector).val();
-                //if ($(deviceSelector, ".urlContainer").val() == "rdiphone") {
-                //    device = _iphoneItems[Math.floor(Math.random() * _iphoneItems.length)];
-                //}
-                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid") {
-                //    device = _androidItems[Math.floor(Math.random() * _androidItems.length)];
-                //}
-                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid5678") {
-                //    device = _android5678Items[Math.floor(Math.random() * _android5678Items.length)];
-                //}
-                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid78") {
-                //    device = _android78Items[Math.floor(Math.random() * _android78Items.length)];
-                //}
-                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid7") {
-                //    device = _android7Items[Math.floor(Math.random() * _android7Items.length)];
-                //}
-                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid9") {
-                //    device = _android9Items[0];
-                //}
-                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid6") {
-                //    device = _android6Items[Math.floor(Math.random() * _android6Items.length)];
-                //}
-                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid5") {
-                //    device = _android5Items[Math.floor(Math.random() * _android5Items.length)];
-                //}
-                //else if ($(deviceSelector, ".urlContainer").val() == "rdandroid4") {
-                //    device = _android4Items[Math.floor(Math.random() * _android4Items.length)];
-                //}
-                //else if ($(deviceSelector, ".urlContainer").val() == "rdip1011") {
-                //    device = _iphone1011Items[Math.floor(Math.random() * _iphone1011Items.length)];
-                //}
-                //else if ($(deviceSelector, ".urlContainer").val() == "rdip10") {
-                //    device = _iphone10Items[Math.floor(Math.random() * _iphone10Items.length)];
-                //}
-                //else if ($(deviceSelector, ".urlContainer").val() == "rdip11") {
-                //    device = _iphone11Items[Math.floor(Math.random() * _iphone11Items.length)];
-                //}
-                //else if ($(deviceSelector, ".urlContainer").val() == "rdip11") {
-                //    device = _iphone11Items[Math.floor(Math.random() * _iphone11Items.length)];
-                //}
-                //else if ($(deviceSelector, ".urlContainer").val() == "rdip9") {
-                //    device = _iphone9Items[Math.floor(Math.random() * _iphone9Items.length)];
-                //}
-                //else {
-                //    device = $(deviceSelector, ".urlContainer").val();
-                //}
+                var device = $(deviceSelector).val();            
                 data.push({
                     url: $(urlSelector, ".urlContainer").val(),
                     country: $(countrySelector, ".urlContainer").val(),
@@ -129,48 +69,8 @@
         });
         return promiseCall;
     }
-    function startOne(index) {
-
-        $("#startbuttonLabel00" + index).html("Stop");
-        var data = [];
-        data.push({
-            url: $("#url00" + index).val(),
-            country: $("#country00" + index).val(),
-            device: $("#device00" + index).val(),
-            thread: $("#speed00" + index).val(),
-            index: index,
-            click: $("#numberOfClick00" + index).val(),
-        });
-
-        postDataJson(window.url, JSON.stringify(data), function (data) {
-            if (data.Status == 0 && data.Data[0]) {
-                if (updateRowData(data.Data[0], index)) {
-                    setTimeout(function () { startOne(index); }, 5000);
-                }
-                else {
-                    $("#infoRow00" + index).html("OK");
-                    $("#startbuttonLabel00" + index).html("Start");
-                }
-            }
-            else if (data.Status == 2) {
-                $("#infoRow00" + index).html("Lỗi");
-                $("#startbuttonLabel00" + index).html("Start");
-            }
-            else {
-                $("#infoRow00" + index).html("Lỗi");
-                $("#startbuttonLabel00" + index).html("Start");
-            }
-        });
-    }
-    function updateRowData(data, index) {
-        var totalClick = 0;
-        if (!data.isStop) {
-            totalClick += parseInt(data.thread);
-        }
-        $("#numberOfClick00" + index).val(data.click);
-        
-        return parseInt(data.click) > 0;
-    }
+   
+  
     function updateData(dataArray) {
         var isContinue = false;
         var totalClick = 0;
@@ -187,9 +87,6 @@
             $(numberOfClickSelectorID, _urlContainerSelectorClass).val(data.click);
         });
         alertify.success('đã xong ' + totalClick + ' lần.');
-        //$(".resultPartial").empty().append("<p>" + jsonData + "<p>");
-        //times = checkTimes < 0 ? times : checkTimes;
-        //times = (times - parseInt($("#speed001").val())) < 0 ? 0 : (times - parseInt($("#speed001").val()));
         return isContinue;
     }
     function turnOffStart() {
@@ -359,53 +256,7 @@
                     });
                 return;
             }
-            //$(".numberOfClick", ".urlContainer").each(function (index, element) {
-            //    if ($(element).val() == '') {
-            //        turnOffStart();
-            //        return;
-            //        alertify
-            //        .alert("Thông báo", "Vui lòng không được để trống trường nào.", function () {
-            //            //alertify.message('OK');
-            //        });
-
-            //    }
-            //});
-            //$(".speed", ".urlContainer").each(function (index, element) {
-            //    if ($(element).val() == '') {
-            //        turnOffStart();
-            //        return;
-            //        alertify
-            //        .alert("Thông báo", "Vui lòng không được để trống trường nào.", function () {
-            //            //alertify.message('OK');
-            //        });
-
-            //    }
-            //});
-            //$this.button('loading');
-            //setTimeout(function () {
-            //    $this.button('reset');
-            //}, 8000);
-            //if ($("#url001").val() == '' || $("#country001").val() == '' || $("#device001").val() == '' || $("#numberOfClick").val() == '') {
-            //    alertify
-            //        .alert("Vui lòng không được để trống trường nào.", function () {
-            //            //alertify.message('OK');
-            //        });
-            //    turnOffStart();
-            //    return;
-            //}
-
-            //postData('https://affilitest.com/user/login', dataLogin, function (data) { // Use the jQuery promises interface
-            //    postData('https://affilitest.com/api/v1/test', data, function (data) { // Use the jQuery promises interface
-            //                var jsonData = JSON.parse(data); // Assume it returns a JSON string
-            //                console.log(jsonData); // Do whatever you want with the data
-            //                $(".resultPartial").empty().append("<p>" + jsonData + "<p>");
-            //            });
-            //});
-            //Click(parseInt($("#numberOfClick").val()));
-            //if (!Click()) {
-
-            //    return;
-            //}
+        
             Click().then(function () {
                 //saveHistory("Start");
                 saveUrlToDB();
@@ -414,19 +265,6 @@
             });
             // How to use the cross domain proxy
 
-        });
-        $('.startbutton').on('click', function () {
-
-            var index = $(this).data('index');
-            if (runningStatus[index]) {
-                $("#startbuttonLabel00" + index).html("Start");
-                return;
-            } 
-            if (!$("#url00" + index).val() || !$("#speed00" + index).val() || !$("#numberOfClick00" + index).val()) {
-                alert("Hãy điền đủ thông tin!");
-                return;
-            }
-            startOne(index);
         });
         $('#btnSendChangePassword').on('click', function () {
             var data = { curentPassword: $("#current_password").val(), newPassword: $("#new_password").val(), passwordConfirm: $("#confirm_password").val() };
@@ -468,7 +306,7 @@
         $(".btnAddUrl").on("click", function () {
 
           
-            runningStatus.push(false);
+            isRunning.push(false);
             var numberOfUrl = parseInt($("#numberOfUrl").val());
             var num = $(".url", ".urlContainer").length + 1;
             if (numberOfUrl == num) {
@@ -484,6 +322,7 @@
             $(".urlContainer").append(htmlTemp);
             var selectorDevice = "#device00" + i;
             var selectorCountry = "#country00" + i;
+
             $(selectorDevice, ".urlContainer").select2();
             $(selectorCountry, ".urlContainer").select2({ dropdownCssClass: 'select2Country' });
 
@@ -518,5 +357,97 @@
         });
         setIntervalUpdateCurrentClick();
     }
+
+}
+
+function updateRowData(data, index) {
+    var totalClick = 0;
+    if (!data.isStop) {
+        totalClick += parseInt(data.thread);
+    }
+    $("#numberOfClick00" + index).val(data.click);
+
+    return parseInt(data.click) > 0;
+}
+function startOne(i) {
+    if (isRunning[i - 1]) {
+
+        //if already running
+        isRunning[i - 1] = false;
+        $("#startbuttonLabel00" + i).html("Start");
+        $("#infoRow00" + i).html("Đã dừng");
+        return;
+    } else {
+
+        if (!$("#url00" + i).val() || !$("#speed00" + i).val() || !$("#numberOfClick00" + i).val()) {
+            alert("Hãy điền đủ thông tin: url, số click và tốc độ!");
+            return;
+        }
+        isRunning[i - 1] = true;
+        $("#startbuttonLabel00" + i).html("Stop");
+        $("#infoRow00" + i).html("Đang chạy");
+
+         //countdown timer does its job here before starting
+
+        var secondNumber = parseInt($("#timer00" + i).val());
+        if (secondNumber && secondNumber > 0) {
+            var myInterval = setInterval(function () {
+                secondNumber -= 1;
+                $("#timer00" + i).val(secondNumber);
+                if (secondNumber <= 0) {
+                    clearInterval(myInterval);
+                    postrowData(i);
+                }
+
+            }, 1000);
+        } else {
+            //do it straightaway
+            postrowData(i);
+        }
+       
+      
+    }
+
+}
+function postrowData(i) {
+
+
+        if (!isRunning[i - 1]) {
+            clearInterval(myIntervals[i - 1]);
+            return;
+
+        }
+        var data = [];
+        data.push({
+            url: $("#url00" + i).val(),
+            country: $("#country00" + i).val(),
+            device: $("#device00" + i).val(),
+            thread: $("#speed00" + i).val(),
+            index: i,
+            click: $("#numberOfClick00" + i).val(),
+        });
+
+        postDataJson(window.url, JSON.stringify(data), function (data) {
+            if (data.Status == 0 && data.Data[0]) {
+                if (updateRowData(data.Data[0], i)) {
+                    var myinterval = setTimeout(function () { postrowData(i); }, 5000);
+                    //myIntervals[i - 1] = myinterval;
+                }
+                else {
+                    clearInterval(myIntervals[i - 1]);
+                    $("#infoRow00" + i).html("Xong");
+                    $("#startbuttonLabel00" + i).html("Start");
+                }
+            }
+            else if (data.Status == 2) {
+                $("#infoRow00" + i).html("Lỗi");
+                $("#startbuttonLabel00" + i).html("Start");
+            }
+            else {
+                $("#infoRow00" + i).html("Lỗi");
+                $("#startbuttonLabel00" + i).html("Start");
+            }
+        });
+
 
 }

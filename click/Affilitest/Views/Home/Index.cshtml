@@ -8,7 +8,8 @@
 
 }
 <script>
-    var runningStatus = [];
+    var isRunning = [];
+    var myIntervals = [];
 </script>
 <input type="hidden" id="numberOfUrl" value="@numberOfUrl" />
 <div class="urlContainer">
@@ -484,7 +485,7 @@
                     <input type="number" id="@string.Format("timer00{0}", im)" class="form-control" title="Nhập số giây" />
                 </div>
                 <div class="col-md-1">
-                    <button class="btn btn-primary startbutton" id="@("btnStart00" + im)" data-index="@im">
+                    <button class="btn btn-primary startbutton" id="@("btnStart00" + im)" data-index="@im" onclick="startOne(@im)">
                         <span id="@("startbuttonLabel00" + im)">Start</span>
                         <span class="badge badge-info" id="@("infoRow00" + im)"></span>
                     </button>
@@ -503,7 +504,8 @@
             </div>
 
             <script>
-                runningStatus.push(false);
+                isRunning.push(false);
+                myIntervals.push(null);
             </script>
         }
     }
@@ -538,7 +540,7 @@
                     <input type="number" id="@string.Format("timer00{0}", i)" class="form-control" title="Nhập số giây" />
                 </div>
                 <div class="col-md-1">
-                    <button class="btn btn-primary startbutton" id="@("btnStart00" + i)" data-index="@i">
+                    <button class="btn btn-primary startbutton" id="@("btnStart00" + i)" data-index="@i" onclick="startOne(@i)">
                         <span id="@("startbuttonLabel00" + im)">Start</span>
                         <span class="badge badge-info" id="@("infoRow00" + im)"></span>
                     </button>
@@ -753,7 +755,8 @@
             </div>
         }
         <script>
-            runningStatus.push(false);
+            isRunning.push(false);
+            myIntervals.push(null);
         </script>
     }
 
@@ -774,7 +777,7 @@
             <input type="text" id="speed00{{Index}}" class="form-control speed" title="Tốc độ" />
         </div>
         <div class="col-md-1">
-            <select class="device" id='device00{{Index}}'>
+            <select class="form-control" id='device00{{Index}}'>
                 <option value="android-7" title="Android-7">AD 7</option>
                 <option value="android-8" title="Android-8">AD 8</option>
                 <option value="android-9" title="Android-9">AD 9</option>
@@ -992,7 +995,7 @@
             <input type="number" id="timer00{{Index}}" class="form-control numberOfClick" title="Nhập số giây" />
         </div>
         <div class="col-md-1">
-            <button class="btn btn-primary startbutton" id="btnStart00{{Index}}" data-index="{{Index}}">
+            <button class="btn btn-primary startbutton" id="btnStart00{{Index}}" data-index="{{Index}}" onclick="startOne({{Index}})">
                 <span id="startbuttonLabel00{{Index}}">Start</span>
                 <span class="badge badge-info" id="infoRow00{{Index}}"></span>
             </button>

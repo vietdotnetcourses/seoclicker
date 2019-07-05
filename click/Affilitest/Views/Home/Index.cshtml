@@ -18,7 +18,7 @@
             <label class="h4 text-info">Chọn cho tất cả ô bên dưới</label>
         </div>
         <div class="col-md-1">
-            <input type="text" id="numberOfClickAll" class="form-control" title="Nhập số lần click" />
+            <input type="text" id="numberOfClickAll" class="form-control " title="Nhập số lần click" />
         </div>
         <div class="col-md-1">
             <input type="text" id="speedAll" class="form-control" title="Tốc độ" />
@@ -26,11 +26,14 @@
         <div class="col-md-1">
             <select class="select2" id='deviceAll'>
 
+                <option value="android-6" title="Android-6">AD 6</option>
                 <option value="android-7" title="Android-7">AD 7</option>
                 <option value="android-8" title="Android-8">AD 8</option>
                 <option value="android-9" title="Android-9">AD 9</option>
+                <option value="ios-10" title="iOS-10">I 10</option>
                 <option value="ios-11" title="iOS-11">I 11</option>
                 <option value="ios-12" title="iOS-12">I 12</option>
+                <option value="pc">PC</option>
 
             </select>
         </div>
@@ -254,7 +257,8 @@
             im++;
             <div class="row form-group">
                 <div class="col-md-2">
-                    <input type="text" class="form-control" placeholder="Nhập tên" />
+                    @*<input type="text" id="@("urlName00" + im)" class="form-control" placeholder="Nhập tên" />*@
+                    @Html.TextBox("urlName00" + im.ToString(), m.textSelected, new { @class = "form-control", placeholder = "Nhập tên" })
                 </div>
                 <div class="col-md-2 padding5">
                     @Html.TextBox("url00" + im.ToString(), m.url, new { @class = "form-control url", placeholder = "Link URL" })
@@ -267,11 +271,14 @@
                 </div>
                 <div class="col-md-1 padding5">
                     <select class="select2 device" id='@string.Format("device00{0}",im)'>
+                        <option value="android-6" title="Android-6">AD 6</option>
                         <option value="android-7" title="Android-7">AD 7</option>
                         <option value="android-8" title="Android-8">AD 8</option>
                         <option value="android-9" title="Android-9">AD 9</option>
+                        <option value="ios-10" title="iOS-10">I 10</option>
                         <option value="ios-11" title="iOS-11">I 11</option>
                         <option value="ios-12" title="iOS-12">I 12</option>
+                        <option value="pc">PC</option>
                     </select>
                 </div>
                 <div class="col-md-2 padding5">
@@ -515,7 +522,8 @@
         {
             <div class="row form-group">
                 <div class="col-md-2">
-                    <input type="text" class="form-control" title="Nhập tên" />
+                   @* <input type="text" id="urlName00@(i)" class="form-control" title="Nhập tên" />*@
+                    @Html.TextBox("urlName00" + i.ToString(), null, new { @class = "form-control", placeholder = "Nhập tên" })
                 </div>
                 <div class="col-md-2">
                     @Html.TextBox("url00" + i.ToString(), null, new { @class = "form-control url", placeholder = "Link URL" })
@@ -529,21 +537,15 @@
 
                 <div class="col-md-1">
                     <select class="select2 device" id='@string.Format("device00{0}",i)'>
+                        <option value="android-6" title="Android-6">AD 6</option>
                         <option value="android-7" title="Android-7">AD 7</option>
                         <option value="android-8" title="Android-8">AD 8</option>
                         <option value="android-9" title="Android-9">AD 9</option>
+                        <option value="ios-10" title="iOS-10">I 10</option>
                         <option value="ios-11" title="iOS-11">I 11</option>
                         <option value="ios-12" title="iOS-12">I 12</option>
+                        <option value="pc">PC</option>
                     </select>
-                </div>
-                <div class="col-md-1">
-                    <input type="number" id="@string.Format("timer00{0}", i)" class="form-control" title="Nhập số giây" />
-                </div>
-                <div class="col-md-1">
-                    <button class="btn btn-primary startbutton" id="@("btnStart00" + i)" data-index="@i" onclick="startOne(@i)">
-                        <span id="@("startbuttonLabel00" + im)">Start</span>
-                        <span class="badge badge-info" id="@("infoRow00" + im)"></span>
-                    </button>
                 </div>
                 <div class="col-md-2">
                     <select class="select2 country" id="@string.Format("country00{0}",i)">
@@ -751,6 +753,16 @@
                         <option value="zw">Zimbabwe</option>
                     </select>
                 </div>
+                <div class="col-md-1">
+                    <input type="number" id="@string.Format("timer00{0}", i)" class="form-control" title="Nhập số giây" />
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-primary startbutton" id="@("btnStart00" + i)" data-index="@i" onclick="startOne(@i)">
+                        <span id="@("startbuttonLabel00" + im)">Start</span>
+                        <span class="badge badge-info" id="@("infoRow00" + im)"></span>
+                    </button>
+                </div>
+
 
             </div>
         }
@@ -765,7 +777,7 @@
 <div class="urlTemp hide">
     <div class="row form-group">
         <div class="col-md-2">
-            <input type="text" class="form-control" placeholder="Nhập tên" />
+            <input type="text" id="urlName00{{Index}}" class="form-control" placeholder="Nhập tên" />
         </div>
         <div class="col-md-2">
             <input type="text" id="url00{{Index}}" class="form-control url" placeholder="Link URL" />
@@ -778,11 +790,14 @@
         </div>
         <div class="col-md-1">
             <select class="form-control" id='device00{{Index}}'>
+                <option value="android-6" title="Android-6">AD 6</option>
                 <option value="android-7" title="Android-7">AD 7</option>
                 <option value="android-8" title="Android-8">AD 8</option>
                 <option value="android-9" title="Android-9">AD 9</option>
+                <option value="ios-10" title="iOS-10">I 10</option>
                 <option value="ios-11" title="iOS-11">I 11</option>
                 <option value="ios-12" title="iOS-12">I 12</option>
+                <option value="pc">PC</option>
             </select>
         </div>
         <div class="col-md-2">
@@ -992,7 +1007,7 @@
             </select>
         </div>
         <div class="col-md-1">
-            <input type="number" id="timer00{{Index}}" class="form-control numberOfClick" title="Nhập số giây" />
+            <input type="number" id="timer00{{Index}}" class="form-control" title="Nhập số giây" />
         </div>
         <div class="col-md-1">
             <button class="btn btn-primary startbutton" id="btnStart00{{Index}}" data-index="{{Index}}" onclick="startOne({{Index}})">

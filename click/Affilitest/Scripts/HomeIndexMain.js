@@ -119,7 +119,7 @@
             let speedSelector = "#speed00" + i.toString();
             let click = "#numberOfClick00" + i.toString();
             let textSelectedselector = "#device00" + i.toString() + " option:selected";
-            data.push({ url: $(urlSelector, ".urlContainer").val(), country: $(countrySelector, ".urlContainer").val(), device: $(deviceSelector, ".urlContainer").val(), thread: $(speedSelector, ".urlContainer").val(), click: $(click, ".urlContainer").val(), textSelected: $(textSelectedselector, ".urlContainer").text() });
+            data.push({ url: $(urlSelector, ".urlContainer").val(), country: $(countrySelector, ".urlContainer").val(), device: $(deviceSelector, ".urlContainer").val(), thread: $(speedSelector, ".urlContainer").val(), click: $(click, ".urlContainer").val(), textSelected: $("#urlName00" + i).val() });
         }
         postDataJson(window.urlSaving, JSON.stringify(data), function (data) { // Use the jQuery promises interface
             console.log(data); // Do whatever you want with the data

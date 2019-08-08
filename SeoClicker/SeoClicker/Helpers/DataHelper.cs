@@ -7,6 +7,7 @@ using System;
 using SeoClicker.Utils;
 using System.Net;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace SeoClicker.Helpers
 {
@@ -69,19 +70,11 @@ namespace SeoClicker.Helpers
             var url = $"{apiurl}?take={take}&token=O2ECaKWYM5Q1goceJDI9gNMQ2O8tKskZ";
             try
             {
-                var request = (HttpWebRequest)WebRequest.Create(url);
-                var username = "admin";
-                var password = "Woohyuk91@@";
-                var encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
-                request.Headers.Add("Authorization", "Basic " + encoded);
-                request.Method = "GET";
-                request.ContentType = "application/x-www-form-urlencoded";
 
-                var result = await request.GetResponseAsync();
-                var response = (HttpWebResponse)result;
-
-                var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-
+                var client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                var responseString = await response.Content.ReadAsStringAsync();     
                 return JsonConvert.DeserializeObject<IEnumerable<SequenceUrl>>(responseString);
             }
             catch (Exception ex)

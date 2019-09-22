@@ -5,7 +5,6 @@
 @{
     var numberOfUrl = ViewBag.numberOfUrl;
     int im = 0;
-
     var countriesList = new List<SelectListItem>()
 {
 new SelectListItem{Selected = false, Text = "Afghanistan", Value = "af"},
@@ -216,6 +215,7 @@ new SelectListItem{Selected = false, Text = "Zimbabwe", Value = "zw"},
 <script>
     var isRunning = [];
     var myIntervals = [];
+    var urlList = [];
 </script>
 <input type="hidden" id="numberOfUrl" value="@numberOfUrl" />
 <div class="urlContainer">
@@ -496,7 +496,7 @@ new SelectListItem{Selected = false, Text = "Zimbabwe", Value = "zw"},
                     </select>
                 </div>
                 <div class="col-md-1">
-                    <input type="number" id="@string.Format("timer00{0}", im)" class="form-control" title="Nhập số giây" />
+                    <input type="number" id="@string.Format("timer00{0}", im)" class="form-control" title="Nhập số giây" required value="0"/>
                 </div>
                 <div class="col-md-1">
                     <button class="btn btn-primary startbutton" id="@("btnStart00" + im)" data-index="@im" onclick="clickstartOne(@im)">
@@ -520,6 +520,7 @@ new SelectListItem{Selected = false, Text = "Zimbabwe", Value = "zw"},
             <script>
                 isRunning.push(false);
                 myIntervals.push(null);
+                urlList.push('@m.url.Trim()')
             </script>
         }
     }
@@ -761,7 +762,7 @@ new SelectListItem{Selected = false, Text = "Zimbabwe", Value = "zw"},
                     </select>
                 </div>
                 <div class="col-md-1">
-                    <input type="number" id="@string.Format("timer00{0}", i)" class="form-control" title="Nhập số giây" />
+                    <input type="number" id="@string.Format("timer00{0}", i)" class="form-control" title="Nhập số giây" required value="0" />
                 </div>
                 <div class="col-md-1">
                     <button class="btn btn-primary startbutton" id="@("btnStart00" + i)" data-index="@i" onclick="clickstartOne(@i)">
@@ -1014,7 +1015,7 @@ new SelectListItem{Selected = false, Text = "Zimbabwe", Value = "zw"},
             </select>
         </div>
         <div class="col-md-1">
-            <input type="number" id="timer00{{Index}}" class="form-control" title="Nhập số giây" />
+            <input type="number" id="timer00{{Index}}" class="form-control" title="Nhập số giây" required value="0"/>
         </div>
         <div class="col-md-1">
             <button class="btn btn-primary startbutton" id="btnStart00{{Index}}" data-index="{{Index}}" onclick="clickstartOne({{Index}})">

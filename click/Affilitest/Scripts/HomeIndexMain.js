@@ -17,34 +17,48 @@
                         //alertify.message('OK');
                     });
             }
-            for (var i = 1; i <= num; i++) {
-                var device = "";
-                let urlSelector = "#url00" + i.toString();
-                let countrySelector = "#country00" + i.toString();
-                let deviceSelector = "#device00" + i.toString();
-                let speedSelector = "#speed00" + i.toString();
-                let numberOfClick = _numberOfClickID + i.toString();
-                thread = $(speedSelector, ".urlContainer").val();
-                if (parseInt($(speedSelector, ".urlContainer").val()) > 20) {
-                    alertify
-                        .alert('Thông báo từ ban quản trị', " Tạm thời Không được để tốc độ lớn hơn 20.", function () {
-                            //alertify.message('OK');
-                        });
-                    turnOffStart();
+            var count = 0;
+            for (var j = 0; j < isRunning.length; j++) {
+                if (!isRunning[j - 1]) {
+                    count++;
                 }
-                var device = $(deviceSelector).val();
-                data.push({
-                    url: $(urlSelector, ".urlContainer").val(),
-                    country: $(countrySelector, ".urlContainer").val(),
-                    device: device,
-                    thread: $(speedSelector, ".urlContainer").val(),
-                    index: i,
-                    click: $(numberOfClick, _urlContainerSelectorClass).val(),
-                });
             }
-            if ($("#stop").prop("checked") == false) {
+
+            if (count === num) {
+                setTimeout(function () { Click(); }, 5000);
+                return;
+            }
+            for (var i = 1; i <= num; i++) {
+                if (isRunning[i - 1]) {
+                    var device = "";
+                    let urlSelector = "#url00" + i.toString();
+                    let countrySelector = "#country00" + i.toString();
+                    let deviceSelector = "#device00" + i.toString();
+                    let speedSelector = "#speed00" + i.toString();
+                    let numberOfClick = _numberOfClickID + i.toString();
+                    thread = $(speedSelector, ".urlContainer").val();
+                    if (parseInt($(speedSelector, ".urlContainer").val()) > 20) {
+                        alertify
+                            .alert('Thông báo từ ban quản trị', " Tạm thời Không được để tốc độ lớn hơn 20.", function () {
+                                //alertify.message('OK');
+                            });
+                        turnOffStart();
+                    }
+                    var device = $(deviceSelector).val();
+                    data.push({
+                        url: $(urlSelector, ".urlContainer").val(),
+                        country: $(countrySelector, ".urlContainer").val(),
+                        device: device,
+                        thread: $(speedSelector, ".urlContainer").val(),
+                        index: i,
+                        click: $(numberOfClick, _urlContainerSelectorClass).val(),
+                    });
+                }
+            }
+            if ($("#stop").prop("checked") === false) {
                 postDataJson(window.url, JSON.stringify(data), function (data) { // Use the jQuery promises interface
-                    if (data.Status == 0) {
+                    if (data.Status === 0) {
+                        changebuttonStatus(data.Data);
                         if (updateData(data.Data)) {
                             setTimeout(function () { Click(); }, 5000);
                         }
@@ -53,7 +67,7 @@
                         }
                         resolve();
                     }
-                    else if (data.Status == 2) {
+                    else if (data.Status === 2) {
                         window.location.href = data.LinkRedirect;
                     }
                     else {
@@ -70,7 +84,27 @@
         return promiseCall;
     }
 
+    function changebuttonStatus(data) {
+        for (var i = 0; i < data.length; i++) {
 
+            if (data[i].isStop) {
+                var index = getButtonIndex(data[i].url);
+                $("#infoRow00" + (index + 1)).html("Xong");
+                $("#startbuttonLabel00" + (index +1)).html("Start");
+            }
+
+
+        }
+
+
+
+    };
+
+    function getButtonIndex(url) {
+        for (var i = 0; i < urlList.length; i++) {
+            if (urlList[i] === url) return i;
+        }
+    }
     function updateData(dataArray) {
         var isContinue = false;
         var totalClick = 0;
@@ -155,7 +189,7 @@
         }
         var dataupload = { lstu: data, status: status }
         postDataJson(window.urlSaveHistory, JSON.stringify(dataupload), function (data) { // Use the jQuery promises interface
-            if (data.Status == 0) {
+            if (data.Status === 0) {
                 // success
             }
             else {
@@ -169,7 +203,7 @@
 
     function getCurrentClick() {
         postData(window.urlGetCurrentClick, {}, function (data) { // Use the jQuery promises interface
-            if (data.Status == 0 && data.Data) {
+            if (data.Status === 0 && data.Data) {
                 // success
                 if (parseInt(data.Data[0].CurrentOfClick) > 0) {
                     updateCurrentClick(data.Data[0].CurrentOfClick);
@@ -184,18 +218,18 @@
     function checkFieldsEmpty() {
         var result = false;
         $(".url", ".urlContainer").each(function (index, element) {
-            if ($(element).val() == '') {
+            if ($(element).val() === '') {
                 result = true;
             }
         });
         $(".numberOfClick", ".urlContainer").each(function (index, element) {
-            if ($(element).val() == '') {
+            if ($(element).val() === '') {
                 result = true;
 
             }
         });
         $(".speed", ".urlContainer").each(function (index, element) {
-            if ($(element).val() == '') {
+            if ($(element).val() === '') {
                 result = true;
 
             }
@@ -207,7 +241,7 @@
         // detect local storage available
         if (typeof (Storage) !== "undefined") {
             // get (set if not) tab GUID and store in tab session
-            if (sessionStorage["tabGUID"] == null) sessionStorage["tabGUID"] = tab_GUID();
+            if (sessionStorage["tabGUID"] === null) sessionStorage["tabGUID"] = tab_GUID();
             var guid = sessionStorage["tabGUID"];
 
             // add eventlistener to local storage
@@ -220,8 +254,8 @@
 
     function storage_Handler(e) {
         // if tabGUID does not match then more than one tab and GUID
-        if (e.key == 'tabGUID') {
-            if (e.oldValue != e.newValue) tab_Warning();
+        if (e.key === 'tabGUID') {
+            if (e.oldValue !== e.newValue) tab_Warning();
         }
     }
 
@@ -268,7 +302,7 @@
         });
         $('#btnSendChangePassword').on('click', function () {
             var data = { curentPassword: $("#current_password").val(), newPassword: $("#new_password").val(), passwordConfirm: $("#confirm_password").val() };
-            if (data.curentPassword == "" || data.newPassword == "" || data.passwordConfirm == "") {
+            if (data.curentPassword === "" || data.newPassword === "" || data.passwordConfirm === "") {
                 alertify
                     .alert('Thông báo', "không được để trống trường nào", function () {
 
@@ -276,14 +310,14 @@
                 return;
             }
             postData(window.urlChangePassword, data, function (data) { // Use the jQuery promises interface
-                if (data.Status == 0) {
+                if (data.Status === 0) {
                     alertify
                         .alert('Thông báo', data.Message, function () {
                             //alertify.message('OK');
                             $('#changePasswordModal').modal('hide');
                         });
                 }
-                else if (data.Status == 2) {
+                else if (data.Status === 2) {
                     window.location.href = data.LinkRedirect;
                 }
                 else {
@@ -304,12 +338,10 @@
         });
 
         $(".btnAddUrl").on("click", function () {
-
-
             isRunning.push(false);
             var numberOfUrl = parseInt($("#numberOfUrl").val());
             var num = $(".url", ".urlContainer").length + 1;
-            if (numberOfUrl == num) {
+            if (numberOfUrl === num) {
                 $(this).addClass("hide");
             }
 
@@ -350,8 +382,8 @@
 
             var removeElement = $(this).parent().html();
             $(this).closest(".row").remove();
-            var num = $(".url", ".urlContainer").length;
-            var selector = ".removeFormButtonContainer00" + num.toString();
+            var number = $(".url", ".urlContainer").length;
+            var selector = ".removeFormButtonContainer00" + number.toString();
             $(selector, ".urlContainer").append(removeElement);
 
         });
@@ -371,7 +403,7 @@ function updateRowData(data, index) {
 }
 
 function clickstartOne(i) {
-    startOne(i).then(function () { saveUrls(); });
+    startOne(i);
 }
 
 function startOne(i) {
@@ -400,7 +432,7 @@ function startOne(i) {
                 alert("Hãy điền đủ thông tin: url, số click và tốc độ!");
                 return;
             }
-            isRunning[i - 1] = true;
+
             $("#startbuttonLabel00" + i).html("Stop");
             $("#infoRow00" + i).html("Đang chạy");
 
@@ -413,15 +445,13 @@ function startOne(i) {
                     $("#timer00" + i).val(secondNumber);
                     if (secondNumber <= 0) {
                         clearInterval(myInterval);
-                        postrowData(i);
-                        resolve();
+                        isRunning[i - 1] = true;
                     }
 
                 }, 1000);
             } else {
-                //do it straightaway
-                postrowData(i);
-                resolve();
+                isRunning[i - 1] = true;
+
             }
 
 

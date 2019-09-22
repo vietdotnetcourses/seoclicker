@@ -11,6 +11,7 @@ using Affilitest.Models;
 using System.Web.Security;
 using System.Globalization;
 using System.Data.Entity.Validation;
+using System.Threading.Tasks;
 
 namespace Affilitest.Controllers
 {
@@ -120,7 +121,7 @@ namespace Affilitest.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult ProxyRequestPostData(List<URLModel> lstu)
+        public async Task<JsonResult> ProxyRequestPostData(List<URLModel> lstu)
         {
             DataResult dtr = new DataResult();
             dtr.Status = Status.Success;
@@ -209,7 +210,7 @@ namespace Affilitest.Controllers
                     um.NumberClick = totalClick;
                 }
             }
-            SaveHistory(lstu, um.UserID);
+            await SaveHistory(lstu, um.UserID);
 
             try
             {
@@ -258,45 +259,48 @@ namespace Affilitest.Controllers
             return RedirectToAction("Index", "History");
         }
 
-        private void SaveHistory(List<URLModel> lstu, Guid userID)
+        private async Task SaveHistory(List<URLModel> lstu, Guid userID)
         {
-            DataResult dtr = new DataResult();
-            dtr.Status = Status.Success;
+            await Task.Run(() => {
+                DataResult dtr = new DataResult();
+                dtr.Status = Status.Success;
 
-            List<string> listUrl = new List<string>();
-            List<string> listClick = new List<string>();
-            List<string> listSpeed = new List<string>();
-            List<string> listGEO = new List<string>();
-            List<string> listDevice = new List<string>();
-            foreach (URLModel u in lstu)
-            {
-                listUrl.Add(u.url);
-                listGEO.Add(u.country);
-                listDevice.Add(u.device);
-                listClick.Add(u.click);
-                listSpeed.Add(u.thread);
-            }
-            History historyEntity = new History()
-            {
-                UserID = userID,
-                Click = string.Join("|", listClick.ToArray()),
-                Speed = string.Join("|", listSpeed.ToArray()),
-                URL = string.Join("|", listUrl.ToArray()),
-                GEO = string.Join("|", listGEO.ToArray()),
-                Device = string.Join("|", listDevice.ToArray()),
-                Date = DateTime.Now.ToString("dd/MM/yyyy"),
-                DateDefault = DateTime.Now,
-            };
-            try
-            {
-                db.Histories.Add(historyEntity);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                dtr.Status = Status.Error;
-                dtr.Message = "Không lưu được lịch sử";
-            }
+                List<string> listUrl = new List<string>();
+                List<string> listClick = new List<string>();
+                List<string> listSpeed = new List<string>();
+                List<string> listGEO = new List<string>();
+                List<string> listDevice = new List<string>();
+                foreach (URLModel u in lstu)
+                {
+                    listUrl.Add(u.url);
+                    listGEO.Add(u.country);
+                    listDevice.Add(u.device);
+                    listClick.Add(u.click);
+                    listSpeed.Add(u.thread);
+                }
+                History historyEntity = new History()
+                {
+                    UserID = userID,
+                    Click = string.Join("|", listClick.ToArray()),
+                    Speed = string.Join("|", listSpeed.ToArray()),
+                    URL = string.Join("|", listUrl.ToArray()),
+                    GEO = string.Join("|", listGEO.ToArray()),
+                    Device = string.Join("|", listDevice.ToArray()),
+                    Date = DateTime.Now.ToString("dd/MM/yyyy"),
+                    DateDefault = DateTime.Now,
+                };
+                try
+                {
+                    db.Histories.Add(historyEntity);
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    dtr.Status = Status.Error;
+                    dtr.Message = "Không lưu được lịch sử";
+                }
+            });
+
         }
         [HttpPost]
         [Authorize]
@@ -362,7 +366,7 @@ namespace Affilitest.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult SaveUrl(List<SavingUrlModel> lstSaving)
+        public async Task<ActionResult> SaveUrl(List<SavingUrlModel> lstSaving)
         {
             if (!User.Identity.IsAuthenticated)
             {

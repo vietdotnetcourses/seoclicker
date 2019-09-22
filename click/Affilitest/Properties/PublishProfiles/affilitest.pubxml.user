@@ -10,304 +10,304 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/HelpPage/HelpPage.css">
-      <publishTime>01/11/2019 21:18:23</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/Api.cshtml">
-      <publishTime>01/11/2019 21:18:23</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ApiGroup.cshtml">
-      <publishTime>01/11/2019 21:18:23</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/HelpPageApiModel.cshtml">
-      <publishTime>01/11/2019 21:18:23</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ImageSample.cshtml">
-      <publishTime>01/11/2019 21:18:23</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/InvalidSample.cshtml">
-      <publishTime>01/11/2019 21:18:23</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/Parameters.cshtml">
-      <publishTime>01/11/2019 21:18:23</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/Samples.cshtml">
-      <publishTime>01/11/2019 21:18:23</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/TextSample.cshtml">
-      <publishTime>01/11/2019 21:18:23</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/Index.cshtml">
-      <publishTime>01/11/2019 21:18:23</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Shared/_Layout.cshtml">
-      <publishTime>01/11/2019 21:18:23</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Web.config">
-      <publishTime>01/11/2019 21:18:23</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/_ViewStart.cshtml">
-      <publishTime>01/11/2019 21:18:23</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="bin/Affilitest.dll">
-      <publishTime>03/06/2019 21:37:42</publishTime>
+      <publishTime>08/08/2019 21:30:02</publishTime>
     </File>
     <File Include="bin/Affilitest.pdb">
-      <publishTime>03/06/2019 21:37:42</publishTime>
+      <publishTime>08/08/2019 21:30:02</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.pdb">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="bin/Dapper.dll">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
       <publishTime>09/23/2018 11:59:24</publishTime>
     </File>
     <File Include="bin/log4net.dll">
-      <publishTime>01/11/2019 21:18:25</publishTime>
+      <publishTime>08/08/2019 20:47:13</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:13</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:13</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:13</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:13</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:13</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:13</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:13</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:13</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:13</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:13</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:13</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:13</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>01/11/2019 21:18:25</publishTime>
+      <publishTime>08/08/2019 20:47:13</publishTime>
     </File>
     <File Include="Content/alertify.min.css">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Content/modules/jquery-ui/images/ui-icons_444444_256x240.png">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Content/modules/jquery-ui/images/ui-icons_555555_256x240.png">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Content/modules/jquery-ui/images/ui-icons_777620_256x240.png">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Content/modules/jquery-ui/images/ui-icons_777777_256x240.png">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Content/modules/jquery-ui/images/ui-icons_cc0000_256x240.png">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Content/modules/jquery-ui/images/ui-icons_ffffff_256x240.png">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Content/modules/jquery-ui/jquery-ui.min.css">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Content/modules/jquery-ui/jquery-ui.min.js">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Content/modules/jquery-ui/jquery-ui.structure.min.css">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Content/modules/jquery-ui/jquery-ui.theme.min.css">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Content/select2.min.css">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="favicon.ico">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Models/AutoClickModel.edmx.diagram">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Scripts/alertify.min.js">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Scripts/HistoryMain.js">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Scripts/HomeIndexMain.js">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 21:05:50</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.js">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.map">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Scripts/respond.js">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Scripts/respond.min.js">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Scripts/Script.js">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Scripts/select2.full.min.js">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/AffilitestAccount/Create.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/AffilitestAccount/Delete.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/AffilitestAccount/Details.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/AffilitestAccount/Edit.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/AffilitestAccount/Index.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/History/Create.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/History/Delete.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/History/Details.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/History/Edit.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/History/Index.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>03/06/2019 19:10:04</publishTime>
+      <publishTime>08/08/2019 21:06:14</publishTime>
     </File>
     <File Include="Views/Home/Login.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/Home/_ResultPartial.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/Notify/Index.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/SequenceUrl/click.cshtml">
-      <publishTime>03/04/2019 18:14:57</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/SequenceUrl/Create.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/SequenceUrl/Delete.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/SequenceUrl/Details.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/SequenceUrl/Edit.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/SequenceUrl/Index.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/Shared/_HeaderNav.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutLogin.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/User/Create.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/User/Delete.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/User/Details.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/User/Edit.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/User/Index.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/UserAutoClick/Create.cshtml">
       <publishTime>09/07/2017 00:49:25</publishTime>
@@ -325,13 +325,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/07/2017 00:14:12</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>01/11/2019 21:18:24</publishTime>
+      <publishTime>08/08/2019 20:47:12</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/06/2019 21:37:44</publishTime>
+      <publishTime>08/08/2019 21:30:03</publishTime>
     </File>
   </ItemGroup>
 </Project>

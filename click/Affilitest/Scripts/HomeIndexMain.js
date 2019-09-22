@@ -1,10 +1,10 @@
 ﻿function HomeIndexMain() {
-   
+
     var _urlContainerSelectorClass = ".urlContainer";
     var _urlSelectorClass = ".url";
     var _numberOfUrlID = "#numberOfUrl";
     var _numberOfClickID = "#numberOfClick00";
-   
+
     function Click() {
         var promiseCall = new Promise(function (resolve, reject) {
             var numberOfUrl = parseInt($(_numberOfUrlID).val());
@@ -32,7 +32,7 @@
                         });
                     turnOffStart();
                 }
-                var device = $(deviceSelector).val();            
+                var device = $(deviceSelector).val();
                 data.push({
                     url: $(urlSelector, ".urlContainer").val(),
                     country: $(countrySelector, ".urlContainer").val(),
@@ -69,8 +69,8 @@
         });
         return promiseCall;
     }
-   
-  
+
+
     function updateData(dataArray) {
         var isContinue = false;
         var totalClick = 0;
@@ -256,7 +256,7 @@
                     });
                 return;
             }
-        
+
             Click().then(function () {
                 //saveHistory("Start");
                 saveUrlToDB();
@@ -305,7 +305,7 @@
 
         $(".btnAddUrl").on("click", function () {
 
-          
+
             isRunning.push(false);
             var numberOfUrl = parseInt($("#numberOfUrl").val());
             var num = $(".url", ".urlContainer").length + 1;
@@ -356,7 +356,7 @@
 
         });
         setIntervalUpdateCurrentClick();
-    }
+    };
 
 }
 
@@ -369,85 +369,147 @@ function updateRowData(data, index) {
 
     return parseInt(data.click) > 0;
 }
+
+function clickstartOne(i) {
+    startOne(i).then(function () { saveUrls(); });
+}
+
 function startOne(i) {
-    if (isRunning[i - 1]) {
 
-        //if already running
-        isRunning[i - 1] = false;
-        $("#startbuttonLabel00" + i).html("Start");
-        $("#infoRow00" + i).html("Đã dừng");
-        return;
-    } else {
+    var promiseRow = new Promise(function (resolve, reject) {
 
-        if (!$("#url00" + i).val() || !$("#speed00" + i).val() || !$("#numberOfClick00" + i).val()) {
-            alert("Hãy điền đủ thông tin: url, số click và tốc độ!");
+        var speedNumber = parseInt($("#speed00" + i).val());
+        if (speedNumber > 20) {
+            alertify
+                .alert('Thông báo', "Tốc độ không để quá 20.", function () {
+
+                });
+            reject();
+        }
+
+        if (isRunning[i - 1]) {
+
+            //if already running
+            isRunning[i - 1] = false;
+            $("#startbuttonLabel00" + i).html("Start");
+            $("#infoRow00" + i).html("Đã dừng");
             return;
-        }
-        isRunning[i - 1] = true;
-        $("#startbuttonLabel00" + i).html("Stop");
-        $("#infoRow00" + i).html("Đang chạy");
-
-         //countdown timer does its job here before starting
-
-        var secondNumber = parseInt($("#timer00" + i).val());
-        if (secondNumber && secondNumber > 0) {
-            var myInterval = setInterval(function () {
-                secondNumber -= 1;
-                $("#timer00" + i).val(secondNumber);
-                if (secondNumber <= 0) {
-                    clearInterval(myInterval);
-                    postrowData(i);
-                }
-
-            }, 1000);
         } else {
-            //do it straightaway
-            postrowData(i);
+
+            if (!$("#url00" + i).val() || !$("#speed00" + i).val() || !$("#numberOfClick00" + i).val()) {
+                alert("Hãy điền đủ thông tin: url, số click và tốc độ!");
+                return;
+            }
+            isRunning[i - 1] = true;
+            $("#startbuttonLabel00" + i).html("Stop");
+            $("#infoRow00" + i).html("Đang chạy");
+
+            //countdown timer does its job here before starting
+
+            var secondNumber = parseInt($("#timer00" + i).val());
+            if (secondNumber && secondNumber > 0) {
+                var myInterval = setInterval(function () {
+                    secondNumber -= 1;
+                    $("#timer00" + i).val(secondNumber);
+                    if (secondNumber <= 0) {
+                        clearInterval(myInterval);
+                        postrowData(i);
+                        resolve();
+                    }
+
+                }, 1000);
+            } else {
+                //do it straightaway
+                postrowData(i);
+                resolve();
+            }
+
+
         }
-       
-      
-    }
+
+
+
+    });
+    return promiseRow;
 
 }
+function saveUrls() {
+    var data = [];
+    var num = $(".url", ".urlContainer").length + 1;
+    for (var i = 1; i < num; i++) {
+        let urlSelector = "#url00" + i.toString();
+        let countrySelector = "#country00" + i.toString();
+        let deviceSelector = "#device00" + i.toString();
+        let speedSelector = "#speed00" + i.toString();
+        let click = "#numberOfClick00" + i.toString();
+        let textSelectedselector = "#device00" + i.toString() + " option:selected";
+        data.push({ url: $(urlSelector, ".urlContainer").val(), country: $(countrySelector, ".urlContainer").val(), device: $(deviceSelector, ".urlContainer").val(), thread: $(speedSelector, ".urlContainer").val(), click: $(click, ".urlContainer").val(), textSelected: $("#urlName00" + i).val() });
+    }
+    postDataJson(window.urlSaving, JSON.stringify(data), function (data) { // Use the jQuery promises interface
+        console.log(data); // Do whatever you want with the data
+        //alertify.success('đã lưu thành công');
+    });
+
+}
+
 function postrowData(i) {
 
+    if (!isRunning[i - 1]) {
+        clearInterval(myIntervals[i - 1]);
+        return;
 
-        if (!isRunning[i - 1]) {
-            clearInterval(myIntervals[i - 1]);
-            return;
+    }
+    var data = [];
+    data.push({
+        url: $("#url00" + i).val(),
+        country: $("#country00" + i).val(),
+        device: $("#device00" + i).val(),
+        thread: $("#speed00" + i).val(),
+        index: i,
+        click: $("#numberOfClick00" + i).val(),
+    });
 
-        }
-        var data = [];
-        data.push({
-            url: $("#url00" + i).val(),
-            country: $("#country00" + i).val(),
-            device: $("#device00" + i).val(),
-            thread: $("#speed00" + i).val(),
-            index: i,
-            click: $("#numberOfClick00" + i).val(),
-        });
+    postDataJson(window.url, JSON.stringify(data), function (data) {
+        if (data.Status === 0 && data.Data[0]) {
+            if (updateRowData(data.Data[0], i)) {
+                var myinterval = setTimeout(function () { postrowData(i); }, 5000);
 
-        postDataJson(window.url, JSON.stringify(data), function (data) {
-            if (data.Status == 0 && data.Data[0]) {
-                if (updateRowData(data.Data[0], i)) {
-                    var myinterval = setTimeout(function () { postrowData(i); }, 5000);
-                    //myIntervals[i - 1] = myinterval;
-                }
-                else {
-                    clearInterval(myIntervals[i - 1]);
-                    $("#infoRow00" + i).html("Xong");
-                    $("#startbuttonLabel00" + i).html("Start");
-                }
-            }
-            else if (data.Status == 2) {
-                $("#infoRow00" + i).html("Lỗi");
-                $("#startbuttonLabel00" + i).html("Start");
+                //myIntervals[i - 1] = myinterval;
             }
             else {
-                $("#infoRow00" + i).html("Lỗi");
+                clearInterval(myIntervals[i - 1]);
+                $("#infoRow00" + i).html("Xong");
                 $("#startbuttonLabel00" + i).html("Start");
             }
-        });
+        }
+        else if (data.Status === 2) {
+            $("#infoRow00" + i).html("Lỗi");
+            $("#startbuttonLabel00" + i).html("Start");
+            reject();
+        }
+        else {
+            $("#infoRow00" + i).html("Lỗi");
+            $("#startbuttonLabel00" + i).html("Start");
+            reject();
+        }
+    });
 
 
+
+}
+function saverowUrlToDB(i) {
+    var data = [];
+
+    let urlSelector = "#url00" + i.toString();
+    let countrySelector = "#country00" + i.toString();
+    let deviceSelector = "#device00" + i.toString();
+    let speedSelector = "#speed00" + i.toString();
+    let click = "#numberOfClick00" + i.toString();
+    let textSelectedselector = "#device00" + i.toString() + " option:selected";
+    data.push({ url: $(urlSelector, ".urlContainer").val(), country: $(countrySelector, ".urlContainer").val(), device: $(deviceSelector, ".urlContainer").val(), thread: $(speedSelector, ".urlContainer").val(), click: $(click, ".urlContainer").val(), textSelected: $("#urlName00" + i).val() });
+
+    postDataJson(window.urlSaving, JSON.stringify(data), function (data) { // Use the jQuery promises interface
+        console.log(data); // Do whatever you want with the data
+        //alertify.success('đã lưu thành công');
+    });
 }

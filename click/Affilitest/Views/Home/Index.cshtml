@@ -6,6 +6,212 @@
     var numberOfUrl = ViewBag.numberOfUrl;
     int im = 0;
 
+    var countriesList = new List<SelectListItem>()
+{
+new SelectListItem{Selected = false, Text = "Afghanistan", Value = "af"},
+new SelectListItem{Selected = false, Text = "Åland Islands", Value = "ax"},
+new SelectListItem{Selected = false, Text = "Albania", Value = "al"},
+new SelectListItem{Selected = false, Text = "Algeria", Value = "dz"},
+new SelectListItem{Selected = false, Text = "Andorra", Value = "ad"},
+new SelectListItem{Selected = false, Text = "Angola", Value = "ao"},
+new SelectListItem{Selected = false, Text = "Anguilla", Value = "ai"},
+new SelectListItem{Selected = false, Text = "Antigua and Barbuda", Value = "ag"},
+new SelectListItem{Selected = false, Text = "Argentina", Value = "ar"},
+new SelectListItem{Selected = false, Text = "Armenia", Value = "am"},
+new SelectListItem{Selected = false, Text = "Austria", Value = "at"},
+new SelectListItem{Selected = false, Text = "Azerbaijan", Value = "az"},
+new SelectListItem{Selected = false, Text = "Bahamas", Value = "bs"},
+new SelectListItem{Selected = false, Text = "Bahrain", Value = "bh"},
+new SelectListItem{Selected = false, Text = "Bangladesh", Value = "bd"},
+new SelectListItem{Selected = false, Text = "Barbados", Value = "bb"},
+new SelectListItem{Selected = false, Text = "Belarus", Value = "by"},
+new SelectListItem{Selected = false, Text = "Belgium", Value = "be"},
+new SelectListItem{Selected = false, Text = "Belize", Value = "bz"},
+new SelectListItem{Selected = false, Text = "Benin", Value = "bj"},
+new SelectListItem{Selected = false, Text = "Bermuda", Value = "bm"},
+new SelectListItem{Selected = false, Text = "Bhutan", Value = "bt"},
+new SelectListItem{Selected = false, Text = "Bolivia", Value = "bo"},
+new SelectListItem{Selected = false, Text = "Bonaire, Sint Eustatius and Saba", Value = "bq"},
+new SelectListItem{Selected = false, Text = "Bosnia and Herzegovina", Value = "ba"},
+new SelectListItem{Selected = false, Text = "Botswana", Value = "bw"},
+new SelectListItem{Selected = false, Text = "Brazil", Value = "br"},
+new SelectListItem{Selected = false, Text = "Brunei Darussalam", Value = "bn"},
+new SelectListItem{Selected = false, Text = "Bulgaria", Value = "bg"},
+new SelectListItem{Selected = false, Text = "Burkina Faso", Value = "bf"},
+new SelectListItem{Selected = false, Text = "Cambodia", Value = "kh"},
+new SelectListItem{Selected = false, Text = "Cameroon", Value = "cm"},
+new SelectListItem{Selected = false, Text = "Canada", Value = "ca"},
+new SelectListItem{Selected = false, Text = "Cape Verde", Value = "cv"},
+new SelectListItem{Selected = false, Text = "Cayman Islands", Value = "ky"},
+new SelectListItem{Selected = false, Text = "Central African Republic", Value = "cf"},
+new SelectListItem{Selected = false, Text = "Chile", Value = "cl"},
+new SelectListItem{Selected = false, Text = "China", Value = "cn"},
+new SelectListItem{Selected = false, Text = "Cocos (Keeling) Islands", Value = "cc"},
+new SelectListItem{Selected = false, Text = "Colombia", Value = "co"},
+new SelectListItem{Selected = false, Text = "Costa Rica", Value = "cr"},
+new SelectListItem{Selected = false, Text = "Côte d'Ivoire", Value = "ci"},
+new SelectListItem{Selected = false, Text = "Croatia", Value = "hr"},
+new SelectListItem{Selected = false, Text = "Curaçao", Value = "cw"},
+new SelectListItem{Selected = false, Text = "Cyprus", Value = "cy"},
+new SelectListItem{Selected = false, Text = "Czech Republic", Value = "cz"},
+new SelectListItem{Selected = false, Text = "Denmark", Value = "dk"},
+new SelectListItem{Selected = false, Text = "Djibouti", Value = "dj"},
+new SelectListItem{Selected = false, Text = "Dominica", Value = "dm"},
+new SelectListItem{Selected = false, Text = "Dominican Republic", Value = "do"},
+new SelectListItem{Selected = false, Text = "Ecuador", Value = "ec"},
+new SelectListItem{Selected = false, Text = "Egypt", Value = "eg"},
+new SelectListItem{Selected = false, Text = "El Salvador", Value = "sv"},
+new SelectListItem{Selected = false, Text = "Equatorial Guinea", Value = "gq"},
+new SelectListItem{Selected = false, Text = "Estonia", Value = "ee"},
+new SelectListItem{Selected = false, Text = "Ethiopia", Value = "et"},
+new SelectListItem{Selected = false, Text = "Faroe Islands", Value = "fo"},
+new SelectListItem{Selected = false, Text = "Fiji", Value = "fj"},
+new SelectListItem{Selected = false, Text = "Finland", Value = "fi"},
+new SelectListItem{Selected = false, Text = "France", Value = "fr"},
+new SelectListItem{Selected = false, Text = "French Guiana", Value = "gf"},
+new SelectListItem{Selected = false, Text = "French Polynesia", Value = "pf"},
+new SelectListItem{Selected = false, Text = "Gambia", Value = "gm"},
+new SelectListItem{Selected = false, Text = "Georgia", Value = "ge"},
+new SelectListItem{Selected = false, Text = "Germany", Value = "de"},
+new SelectListItem{Selected = false, Text = "Ghana", Value = "gh"},
+new SelectListItem{Selected = false, Text = "Gibraltar", Value = "gi"},
+new SelectListItem{Selected = false, Text = "Greece", Value = "gr"},
+new SelectListItem{Selected = false, Text = "Greenland", Value = "gl"},
+new SelectListItem{Selected = false, Text = "Grenada", Value = "gd"},
+new SelectListItem{Selected = false, Text = "Guadeloupe", Value = "gp"},
+new SelectListItem{Selected = false, Text = "Guam", Value = "gu"},
+new SelectListItem{Selected = false, Text = "Guatemala", Value = "gt"},
+new SelectListItem{Selected = false, Text = "Guernsey", Value = "gg"},
+new SelectListItem{Selected = false, Text = "Guinea", Value = "gn"},
+new SelectListItem{Selected = false, Text = "Guyana", Value = "gy"},
+new SelectListItem{Selected = false, Text = "Haiti", Value = "ht"},
+new SelectListItem{Selected = false, Text = "Haiti", Value = "ht"},
+new SelectListItem{Selected = false, Text = "Honduras", Value = "hn"},
+new SelectListItem{Selected = false, Text = "Hong Kong", Value = "hk"},
+new SelectListItem{Selected = false, Text = "Hungary", Value = "hu"},
+new SelectListItem{Selected = false, Text = "Iceland", Value = "is"},
+new SelectListItem{Selected = false, Text = "India", Value = "in"},
+new SelectListItem{Selected = false, Text = "Indonesia", Value = "id"},
+new SelectListItem{Selected = false, Text = "Iran", Value = "ir"},
+new SelectListItem{Selected = false, Text = "Iraq", Value = "iq"},
+new SelectListItem{Selected = false, Text = "Ireland", Value = "ie"},
+new SelectListItem{Selected = false, Text = "Isle of Man", Value = "im"},
+new SelectListItem{Selected = false, Text = "Israel", Value = "il"},
+new SelectListItem{Selected = false, Text = "Italy", Value = "it"},
+new SelectListItem{Selected = false, Text = "Jamaica", Value = "jm"},
+new SelectListItem{Selected = false, Text = "Japan", Value = "jp"},
+new SelectListItem{Selected = false, Text = "Jersey", Value = "je"},
+new SelectListItem{Selected = false, Text = "Jordan", Value = "jo"},
+new SelectListItem{Selected = false, Text = "Kazakhstan", Value = "kz"},
+new SelectListItem{Selected = false, Text = "Kenya", Value = "ke"},
+new SelectListItem{Selected = false, Text = "Korea - South", Value = "kr"},
+new SelectListItem{Selected = false, Text = "Kuwait", Value = "kw"},
+new SelectListItem{Selected = false, Text = "Kyrgyzstan", Value = "kg"},
+new SelectListItem{Selected = false, Text = "Laos", Value = "la"},
+new SelectListItem{Selected = false, Text = "Latvia", Value = "lv"},
+new SelectListItem{Selected = false, Text = "Lebanon", Value = "lb"},
+new SelectListItem{Selected = false, Text = "Liberia", Value = "lr"},
+new SelectListItem{Selected = false, Text = "Libya", Value = "ly"},
+new SelectListItem{Selected = false, Text = "Liechtenstein", Value = "li"},
+new SelectListItem{Selected = false, Text = "Lithuania", Value = "lt"},
+new SelectListItem{Selected = false, Text = "Luxembourg", Value = "lu"},
+new SelectListItem{Selected = false, Text = "Macao", Value = "mo"},
+new SelectListItem{Selected = false, Text = "Macedonia", Value = "mk"},
+new SelectListItem{Selected = false, Text = "Madagascar", Value = "mg"},
+new SelectListItem{Selected = false, Text = "Malawi", Value = "mw"},
+new SelectListItem{Selected = false, Text = "Malaysia", Value = "my"},
+new SelectListItem{Selected = false, Text = "Maldives", Value = "mv"},
+new SelectListItem{Selected = false, Text = "Mali", Value = "ml"},
+new SelectListItem{Selected = false, Text = "Malta", Value = "mt"},
+new SelectListItem{Selected = false, Text = "Marshall Islands", Value = "mh"},
+new SelectListItem{Selected = false, Text = "Martinique", Value = "mq"},
+new SelectListItem{Selected = false, Text = "Mauritius", Value = "mu"},
+new SelectListItem{Selected = false, Text = "Mexico", Value = "mx"},
+new SelectListItem{Selected = false, Text = "Moldova", Value = "md"},
+new SelectListItem{Selected = false, Text = "Monaco", Value = "mc"},
+new SelectListItem{Selected = false, Text = "Mongolia", Value = "mn"},
+new SelectListItem{Selected = false, Text = "Montenegro", Value = "me"},
+new SelectListItem{Selected = false, Text = "Montserrat", Value = "ms"},
+new SelectListItem{Selected = false, Text = "Morocco", Value = "ma"},
+new SelectListItem{Selected = false, Text = "Mozambique", Value = "mz"},
+new SelectListItem{Selected = false, Text = "Myanmar", Value = "mm"},
+new SelectListItem{Selected = false, Text = "Nauru", Value = "nr"},
+new SelectListItem{Selected = false, Text = "Nepal", Value = "np"},
+new SelectListItem{Selected = false, Text = "Netherlands", Value = "nl"},
+new SelectListItem{Selected = false, Text = "New Caledonia", Value = "nc"},
+new SelectListItem{Selected = false, Text = "New Zealand", Value = "nz"},
+new SelectListItem{Selected = false, Text = "Nicaragua", Value = "ni"},
+new SelectListItem{Selected = false, Text = "Niger", Value = "ne"},
+new SelectListItem{Selected = false, Text = "Nigeria", Value = "ng"},
+new SelectListItem{Selected = false, Text = "Northern Mariana Islands", Value = "mp"},
+new SelectListItem{Selected = false, Text = "Norway", Value = "no"},
+new SelectListItem{Selected = false, Text = "Oman", Value = "om"},
+new SelectListItem{Selected = false, Text = "Pakistan", Value = "pk"},
+new SelectListItem{Selected = false, Text = "Palestinian Territory", Value = "ps"},
+new SelectListItem{Selected = false, Text = "Panama", Value = "pa"},
+new SelectListItem{Selected = false, Text = "Paraguay", Value = "py"},
+new SelectListItem{Selected = false, Text = "Peru", Value = "pe"},
+new SelectListItem{Selected = false, Text = "Philippines", Value = "ph"},
+new SelectListItem{Selected = false, Text = "Poland", Value = "pl"},
+new SelectListItem{Selected = false, Text = "Portugal", Value = "pt"},
+new SelectListItem{Selected = false, Text = "Puerto Rico", Value = "pr"},
+new SelectListItem{Selected = false, Text = "Qatar", Value = "qa"},
+new SelectListItem{Selected = false, Text = "Reunion", Value = "re"},
+new SelectListItem{Selected = false, Text = "Romania", Value = "ro"},
+new SelectListItem{Selected = false, Text = "Russian Federation", Value = "ru"},
+new SelectListItem{Selected = false, Text = "Rwanda", Value = "rw"},
+new SelectListItem{Selected = false, Text = "Saint Kitts and Nevis", Value = "kn"},
+new SelectListItem{Selected = false, Text = "Saint Lucia", Value = "lc"},
+new SelectListItem{Selected = false, Text = "Saint Martin", Value = "mf"},
+new SelectListItem{Selected = false, Text = "Saint Vincent and the Grenadines", Value = "vc"},
+new SelectListItem{Selected = false, Text = "Samoa", Value = "ws"},
+new SelectListItem{Selected = false, Text = "Saudi Arabia", Value = "sa"},
+new SelectListItem{Selected = false, Text = "Senegal", Value = "sn"},
+new SelectListItem{Selected = false, Text = "Serbia", Value = "rs"},
+new SelectListItem{Selected = false, Text = "Seychelles", Value = "sc"},
+new SelectListItem{Selected = false, Text = "Sierra Leone", Value = "sl"},
+new SelectListItem{Selected = false, Text = "Singapore", Value = "sg"},
+new SelectListItem{Selected = false, Text = "Sint Maarten (Dutch part)", Value = "sx"},
+new SelectListItem{Selected = false, Text = "Slovakia", Value = "sk"},
+new SelectListItem{Selected = false, Text = "Slovenia", Value = "so"},
+new SelectListItem{Selected = false, Text = "Somalia", Value = "sc"},
+new SelectListItem{Selected = false, Text = "South Africa", Value = "za"},
+new SelectListItem{Selected = false, Text = "Spain", Value = "es"},
+new SelectListItem{Selected = false, Text = "Sri Lanka", Value = "lk"},
+new SelectListItem{Selected = false, Text = "Sudan", Value = "sd"},
+new SelectListItem{Selected = false, Text = "Suriname", Value = "sr"},
+new SelectListItem{Selected = false, Text = "Swaziland", Value = "sz"},
+new SelectListItem{Selected = false, Text = "Sweden", Value = "se"},
+new SelectListItem{Selected = false, Text = "Switzerland", Value = "ch"},
+new SelectListItem{Selected = false, Text = "Syria", Value = "sy"},
+new SelectListItem{Selected = false, Text = "Taiwan", Value = "tw"},
+new SelectListItem{Selected = false, Text = "Tajikistan", Value = "tj"},
+new SelectListItem{Selected = false, Text = "Tanzania", Value = "tz"},
+new SelectListItem{Selected = false, Text = "Thailand", Value = "th"},
+new SelectListItem{Selected = false, Text = "Timor-Leste", Value = "tl"},
+new SelectListItem{Selected = false, Text = "Trinidad and Tobago", Value = "tt"},
+new SelectListItem{Selected = false, Text = "Tunisia", Value = "tn"},
+new SelectListItem{Selected = false, Text = "Turkey", Value = "tr"},
+new SelectListItem{Selected = false, Text = "Turkmenistan", Value = "tm"},
+new SelectListItem{Selected = false, Text = "Turks and Caicos Islands", Value = "tc"},
+new SelectListItem{Selected = false, Text = "Uganda", Value = "ug"},
+new SelectListItem{Selected = false, Text = "Ukraine", Value = "ua"},
+new SelectListItem{Selected = false, Text = "United Arab Emirates", Value = "ae"},
+new SelectListItem{Selected = false, Text = "United Kingdom", Value = "gb"},
+new SelectListItem{Selected = false, Text = "United States", Value = "us"},
+new SelectListItem{Selected = false, Text = "Uruguay", Value = "uy"},
+new SelectListItem{Selected = false, Text = "Uzbekistan", Value = "uz"},
+new SelectListItem{Selected = false, Text = "Vanuatu", Value = "vu"},
+new SelectListItem{Selected = false, Text = "Venezuela, Bolivarian Republic of", Value = "ve"},
+new SelectListItem{Selected = false, Text = "Vietnam", Value = "vn"},
+new SelectListItem{Selected = false, Text = "Virgin Islands, British", Value = "vg"},
+new SelectListItem{Selected = false, Text = "Virgin Islands, U.S", Value = "vi"},
+new SelectListItem{Selected = false, Text = "Yemen", Value = "ye"},
+new SelectListItem{Selected = false, Text = "Zambia", Value = "zm"},
+new SelectListItem{Selected = false, Text = "Zimbabwe", Value = "zw"},
+
+
+};
 }
 <script>
     var isRunning = [];
@@ -283,216 +489,17 @@
                 </div>
                 <div class="col-md-2 padding5">
                     <select class="select2 country" id="@string.Format("country00{0}",im)">
-                        <option value="@m.country" selected="selected">@m.country</option>
-                        <option value="af">Afghanistan</option>
-                        <option value="ax">Åland Islands</option>
-                        <option value="al">Albania</option>
-                        <option value="dz">Algeria</option>
-                        <option value="ad">Andorra</option>
-                        <option value="ao">Angola</option>
-                        <option value="ai">Anguilla</option>
-                        <option value="ag">Antigua and Barbuda</option>
-                        <option value="ar">Argentina</option>
-                        <option value="am">Armenia</option>
-                        <option value="aw">Aruba</option>
-                        <option value="au">Australia</option>
-                        <option value="at">Austria</option>
-                        <option value="az">Azerbaijan</option>
-                        <option value="bs">Bahamas</option>
-                        <option value="bh">Bahrain</option>
-                        <option value="bd">Bangladesh</option>
-                        <option value="bb">Barbados</option>
-                        <option value="by">Belarus</option>
-                        <option value="be">Belgium</option>
-                        <option value="bz">Belize</option>
-                        <option value="bj">Benin</option>
-                        <option value="bm">Bermuda</option>
-                        <option value="bt">Bhutan</option>
-                        <option value="bo">Bolivia</option>
-                        <option value="bq">Bonaire, Sint Eustatius and Saba</option>
-                        <option value="ba">Bosnia and Herzegovina</option>
-                        <option value="bw">Botswana</option>
-                        <option value="br">Brazil</option>
-                        <option value="bn">Brunei Darussalam</option>
-                        <option value="bg">Bulgaria</option>
-                        <option value="bf">Burkina Faso</option>
-                        <option value="kh">Cambodia</option>
-                        <option value="cm">Cameroon</option>
-                        <option value="ca">Canada</option>
-                        <option value="cv">Cape Verde</option>
-                        <option value="ky">Cayman Islands</option>
-                        <option value="cf">Central African Republic</option>
-                        <option value="cl">Chile</option>
-                        <option value="cn">China</option>
-                        <option value="cc">Cocos (Keeling) Islands</option>
-                        <option value="co">Colombia</option>
-                        <option value="cr">Costa Rica</option>
-                        <option value="ci">Côte d'Ivoire</option>
-                        <option value="hr">Croatia</option>
-                        <option value="cw">Curaçao</option>
-                        <option value="cy">Cyprus</option>
-                        <option value="cz">Czech Republic</option>
-                        <option value="dk">Denmark</option>
-                        <option value="dj">Djibouti</option>
-                        <option value="dm">Dominica</option>
-                        <option value="do">Dominican Republic</option>
-                        <option value="ec">Ecuador</option>
-                        <option value="eg">Egypt</option>
-                        <option value="sv">El Salvador</option>
-                        <option value="gq">Equatorial Guinea</option>
-                        <option value="ee">Estonia</option>
-                        <option value="et">Ethiopia</option>
-                        <option value="fo">Faroe Islands</option>
-                        <option value="fj">Fiji</option>
-                        <option value="fi">Finland</option>
-                        <option value="fr">France</option>
-                        <option value="gf">French Guiana</option>
-                        <option value="pf">French Polynesia</option>
-                        <option value="gm">Gambia</option>
-                        <option value="ge">Georgia</option>
-                        <option value="de">Germany</option>
-                        <option value="gh">Ghana</option>
-                        <option value="gi">Gibraltar</option>
-                        <option value="gr">Greece</option>
-                        <option value="gl">Greenland</option>
-                        <option value="gd">Grenada</option>
-                        <option value="gp">Guadeloupe</option>
-                        <option value="gu">Guam</option>
-                        <option value="gt">Guatemala</option>
-                        <option value="gg">Guernsey</option>
-                        <option value="gn">Guinea</option>
-                        <option value="gy">Guyana</option>
-                        <option value="ht">Haiti</option>
-                        <option value="hn">Honduras</option>
-                        <option value="hk">Hong Kong</option>
-                        <option value="hu">Hungary</option>
-                        <option value="is">Iceland</option>
-                        <option value="in">India</option>
-                        <option value="id">Indonesia</option>
-                        <option value="ir">Iran</option>
-                        <option value="iq">Iraq</option>
-                        <option value="ie">Ireland</option>
-                        <option value="im">Isle of Man</option>
-                        <option value="il">Israel</option>
-                        <option value="it">Italy</option>
-                        <option value="jm">Jamaica</option>
-                        <option value="jp">Japan</option>
-                        <option value="je">Jersey</option>
-                        <option value="jo">Jordan</option>
-                        <option value="kz">Kazakhstan</option>
-                        <option value="ke">Kenya</option>
-                        <option value="kr">Korea - South</option>
-                        <option value="kw">Kuwait</option>
-                        <option value="kg">Kyrgyzstan</option>
-                        <option value="la">Laos</option>
-                        <option value="lv">Latvia</option>
-                        <option value="lb">Lebanon</option>
-                        <option value="lr">Liberia</option>
-                        <option value="ly">Libya</option>
-                        <option value="li">Liechtenstein</option>
-                        <option value="lt">Lithuania</option>
-                        <option value="lu">Luxembourg</option>
-                        <option value="mo">Macao</option>
-                        <option value="mk">Macedonia</option>
-                        <option value="mg">Madagascar</option>
-                        <option value="mw">Malawi</option>
-                        <option value="my">Malaysia</option>
-                        <option value="mv">Maldives</option>
-                        <option value="ml">Mali</option>
-                        <option value="mt">Malta</option>
-                        <option value="mh">Marshall Islands</option>
-                        <option value="mq">Martinique</option>
-                        <option value="mu">Mauritius</option>
-                        <option value="mx">Mexico</option>
-                        <option value="md">Moldova</option>
-                        <option value="mc">Monaco</option>
-                        <option value="mn">Mongolia</option>
-                        <option value="me">Montenegro</option>
-                        <option value="ms">Montserrat</option>
-                        <option value="ma">Morocco</option>
-                        <option value="mz">Mozambique</option>
-                        <option value="mm">Myanmar</option>
-                        <option value="nr">Nauru</option>
-                        <option value="np">Nepal</option>
-                        <option value="nl">Netherlands</option>
-                        <option value="nc">New Caledonia</option>
-                        <option value="nz">New Zealand</option>
-                        <option value="ni">Nicaragua</option>
-                        <option value="ne">Niger</option>
-                        <option value="ng">Nigeria</option>
-                        <option value="mp">Northern Mariana Islands</option>
-                        <option value="no">Norway</option>
-                        <option value="om">Oman</option>
-                        <option value="pk">Pakistan</option>
-                        <option value="ps">Palestinian Territory</option>
-                        <option value="pa">Panama</option>
-                        <option value="py">Paraguay</option>
-                        <option value="pe">Peru</option>
-                        <option value="ph">Philippines</option>
-                        <option value="pl">Poland</option>
-                        <option value="pt">Portugal</option>
-                        <option value="pr">Puerto Rico</option>
-                        <option value="qa">Qatar</option>
-                        <option value="re">Reunion</option>
-                        <option value="ro">Romania</option>
-                        <option value="ru">Russian Federation</option>
-                        <option value="rw">Rwanda</option>
-                        <option value="kn">Saint Kitts and Nevis</option>
-                        <option value="lc">Saint Lucia</option>
-                        <option value="mf">Saint Martin</option>
-                        <option value="vc">Saint Vincent and the Grenadines</option>
-                        <option value="ws">Samoa</option>
-                        <option value="sa">Saudi Arabia</option>
-                        <option value="sn">Senegal</option>
-                        <option value="rs">Serbia</option>
-                        <option value="sc">Seychelles</option>
-                        <option value="sl">Sierra Leone</option>
-                        <option value="sg">Singapore</option>
-                        <option value="sx">Sint Maarten (Dutch part)</option>
-                        <option value="sk">Slovakia</option>
-                        <option value="si">Slovenia</option>
-                        <option value="so">Somalia</option>
-                        <option value="za">South Africa</option>
-                        <option value="es">Spain</option>
-                        <option value="lk">Sri Lanka</option>
-                        <option value="sd">Sudan</option>
-                        <option value="sr">Suriname</option>
-                        <option value="sz">Swaziland</option>
-                        <option value="se">Sweden</option>
-                        <option value="ch">Switzerland</option>
-                        <option value="sy">Syria</option>
-                        <option value="tw">Taiwan</option>
-                        <option value="tj">Tajikistan</option>
-                        <option value="tz">Tanzania, United Republic of</option>
-                        <option value="th">Thailand</option>
-                        <option value="tl">Timor-Leste</option>
-                        <option value="tt">Trinidad and Tobago</option>
-                        <option value="tn">Tunisia</option>
-                        <option value="tr">Turkey</option>
-                        <option value="tm">Turkmenistan</option>
-                        <option value="tc">Turks and Caicos Islands</option>
-                        <option value="ug">Uganda</option>
-                        <option value="ua">Ukraine</option>
-                        <option value="ae">United Arab Emirates</option>
-                        <option value="gb">United Kingdom</option>
-                        <option value="us" selected="selected">United States</option>
-                        <option value="uy">Uruguay</option>
-                        <option value="uz">Uzbekistan</option>
-                        <option value="vu">Vanuatu</option>
-                        <option value="ve">Venezuela, Bolivarian Republic of</option>
-                        <option value="vn">Vietnam</option>
-                        <option value="vg">Virgin Islands, British</option>
-                        <option value="vi">Virgin Islands, U.S.</option>
-                        <option value="ye">Yemen</option>
-                        <option value="zm">Zambia</option>
-                        <option value="zw">Zimbabwe</option>
+                        @foreach (var item in countriesList)
+                        {
+                            <option value="@item.Value" @(item.Value == m.country ? "selected=\"selected\"" : "")>@item.Text</option>
+                        }
                     </select>
                 </div>
                 <div class="col-md-1">
                     <input type="number" id="@string.Format("timer00{0}", im)" class="form-control" title="Nhập số giây" />
                 </div>
                 <div class="col-md-1">
-                    <button class="btn btn-primary startbutton" id="@("btnStart00" + im)" data-index="@im" onclick="startOne(@im)">
+                    <button class="btn btn-primary startbutton" id="@("btnStart00" + im)" data-index="@im" onclick="clickstartOne(@im)">
                         <span id="@("startbuttonLabel00" + im)">Start</span>
                         <span class="badge badge-info" id="@("infoRow00" + im)"></span>
                     </button>
@@ -522,7 +529,7 @@
         {
             <div class="row form-group">
                 <div class="col-md-2">
-                   @* <input type="text" id="urlName00@(i)" class="form-control" title="Nhập tên" />*@
+                    @* <input type="text" id="urlName00@(i)" class="form-control" title="Nhập tên" />*@
                     @Html.TextBox("urlName00" + i.ToString(), null, new { @class = "form-control", placeholder = "Nhập tên" })
                 </div>
                 <div class="col-md-2">
@@ -757,7 +764,7 @@
                     <input type="number" id="@string.Format("timer00{0}", i)" class="form-control" title="Nhập số giây" />
                 </div>
                 <div class="col-md-1">
-                    <button class="btn btn-primary startbutton" id="@("btnStart00" + i)" data-index="@i" onclick="startOne(@i)">
+                    <button class="btn btn-primary startbutton" id="@("btnStart00" + i)" data-index="@i" onclick="clickstartOne(@i)">
                         <span id="@("startbuttonLabel00" + im)">Start</span>
                         <span class="badge badge-info" id="@("infoRow00" + im)"></span>
                     </button>
@@ -1010,7 +1017,7 @@
             <input type="number" id="timer00{{Index}}" class="form-control" title="Nhập số giây" />
         </div>
         <div class="col-md-1">
-            <button class="btn btn-primary startbutton" id="btnStart00{{Index}}" data-index="{{Index}}" onclick="startOne({{Index}})">
+            <button class="btn btn-primary startbutton" id="btnStart00{{Index}}" data-index="{{Index}}" onclick="clickstartOne({{Index}})">
                 <span id="startbuttonLabel00{{Index}}">Start</span>
                 <span class="badge badge-info" id="infoRow00{{Index}}"></span>
             </button>

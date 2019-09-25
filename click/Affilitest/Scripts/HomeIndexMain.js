@@ -19,7 +19,7 @@
             }
             var count = 0;
             for (var j = 0; j < isRunning.length; j++) {
-                if (!isRunning[j - 1]) {
+                if (!isRunning[j]) {
                     count++;
                 }
             }
@@ -63,7 +63,15 @@
                             setTimeout(function () { Click(); }, 5000);
                         }
                         else {
+
                             turnOffStart();
+
+                            for (var i = 0; i < isRunning.length; i++) {
+                                $("#infoRow00" + (i + 1)).html("Xong");
+                                $("#startbuttonLabel00" + (i + 1)).html("Start");
+                                isRunning[i] = false;
+                            }
+                          
                         }
                         resolve();
                     }
@@ -339,6 +347,8 @@
 
         $(".btnAddUrl").on("click", function () {
             isRunning.push(false);
+            urlList.push("");
+
             var numberOfUrl = parseInt($("#numberOfUrl").val());
             var num = $(".url", ".urlContainer").length + 1;
             if (numberOfUrl === num) {
@@ -386,6 +396,9 @@
             var selector = ".removeFormButtonContainer00" + number.toString();
             $(selector, ".urlContainer").append(removeElement);
 
+            urlList.pop();
+            isRunning.pop();
+
         });
         setIntervalUpdateCurrentClick();
     };
@@ -403,6 +416,7 @@ function updateRowData(data, index) {
 }
 
 function clickstartOne(i) {
+    urlList[i - 1] = $("#url00" + i).val();
     startOne(i);
 }
 

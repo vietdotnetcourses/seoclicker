@@ -530,7 +530,7 @@ new SelectListItem{Selected = false, Text = "Zimbabwe", Value = "zw"},
         {
             <div class="row form-group">
                 <div class="col-md-2">
-                    @* <input type="text" id="urlName00@(i)" class="form-control" title="Nhập tên" />*@
+
                     @Html.TextBox("urlName00" + i.ToString(), null, new { @class = "form-control", placeholder = "Nhập tên" })
                 </div>
                 <div class="col-md-2">

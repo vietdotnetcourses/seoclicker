@@ -1,5 +1,0 @@
-market://details?
-itunes.apple.com
-play.google.com
-m.lottorich.co.kr
-intent://app/

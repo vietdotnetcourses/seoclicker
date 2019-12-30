@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using ThreadTimer = System.Threading.Timer;
+using System.Threading.Tasks;
 
 namespace SeoClicker.Utils
 {
@@ -19,7 +20,8 @@ namespace SeoClicker.Utils
         public void Start()
         {
             _threadTimer = new ThreadTimer(doWork, null, Timeout.Infinite, 1000);
-            _threadTimer.Change(_startAfter * 1000, _interval * 100);
+            _threadTimer.Change(_startAfter * 1000, _interval * 1000);
+
         }
 
         public void Stop()
@@ -30,7 +32,6 @@ namespace SeoClicker.Utils
 
         private void doWork(object state)
         {
-            if (DoWork != null)
                 DoWork();
         }
     }

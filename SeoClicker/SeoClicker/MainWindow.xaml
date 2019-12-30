@@ -143,44 +143,6 @@
                             <!--End-->
 
                             <!--Column 3 & 4-->
-                            <TextBlock Margin="3" Text="Route" Grid.Row="0" Grid.Column="2"/>
-                            <ComboBox Grid.Column="3" Grid.Row="0" SelectedIndex="0"
-                         ItemsSource="{Binding ProxySettings.Route}"
-                         DisplayMemberPath="Text"
-                         Margin="2.8,3,0,0" Width="120" HorizontalAlignment="Left" TabIndex="3" Height="26" VerticalAlignment="Top">
-                                <ComboBox.ItemContainerStyle>
-                                    <Style TargetType="{x:Type ComboBoxItem}">
-                                        <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                    </Style>
-                                </ComboBox.ItemContainerStyle>
-                            </ComboBox>
-
-
-
-
-                            <TextBlock Grid.Row="1" Grid.Column="2" Margin="3" Text="Super Proxy" />
-                            <ComboBox Grid.Column="3" Grid.Row="1" SelectedIndex="0"
-                         ItemsSource="{Binding ProxySettings.SuperProxy}"
-                          DisplayMemberPath="Text"
-                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3">
-                                <ComboBox.ItemContainerStyle>
-                                    <Style TargetType="{x:Type ComboBoxItem}">
-                                        <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                    </Style>
-                                </ComboBox.ItemContainerStyle>
-                            </ComboBox>
-
-                            <TextBlock Grid.Row="2" Grid.Column="2" Margin="3" Text="DNS" />
-                            <ComboBox Grid.Column="3" Grid.Row="2" SelectedIndex="0"
-                         ItemsSource="{Binding ProxySettings.DNSResolution}"
-                          DisplayMemberPath="Text"
-                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3">
-                                <ComboBox.ItemContainerStyle>
-                                    <Style TargetType="{x:Type ComboBoxItem}">
-                                        <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                    </Style>
-                                </ComboBox.ItemContainerStyle>
-                            </ComboBox>
 
 
 

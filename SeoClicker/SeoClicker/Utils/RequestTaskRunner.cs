@@ -7,10 +7,7 @@ using System.Linq;
 using SeoClicker.Helpers;
 using System.Diagnostics;
 using System.ComponentModel;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SeoClicker.Utils
@@ -24,25 +21,18 @@ namespace SeoClicker.Utils
         bool _isEnabled;
 
         private int n_parallel_exit_nodes = 0;
-        private int n_total_req = 0;
-        private int switch_ip_every_n_req = 1;
-        private int at_req = 0;
-        private string targetUrl;
         private int successCount = 0;
         private int failCount = 0;
         private Random rdm = new Random();
         private int _loadTime = 0;
         private int _loadCount = 0;
 
-        private System.Diagnostics.Stopwatch timer = new Stopwatch();
+        private Stopwatch timer = new Stopwatch();
         public ClientSettings ClientSettings { get; set; }
-        private Queue<SequenceUrl> Data { get; set; }
-        private bool IsRunning { get; set; }
+
         public static string super_proxy_ip;
         private Dictionary<int, int> TimeLoadList { get; set; }
-        private SimpleTaskScheduler taskScheduler { get; set; }
-
-        private List<Task> TaskList { get; set; }
+        private List<MyTaskScheduler> TaskList { get; set; }
         private MyTaskScheduler DataFetcher { get; set; }
         public RequestTaskRunner()
         {
@@ -51,29 +41,27 @@ namespace SeoClicker.Utils
             ResultMessage = "";
             SpinnerVisibility = "Hidden";
             IsEnabled = true;
-            IsRunning = false;
-            Data = new Queue<SequenceUrl>();
             TimeLoadList = new Dictionary<int, int>();
-            DataFetcher = new MyTaskScheduler(0, 100);
-            TaskList = new List<Task>();
-
-
+            DataFetcher = new MyTaskScheduler(0, 90);
+            TaskList = new List<MyTaskScheduler>();
         }
         private async void FetchData()
         {
-            if (!Data.Any())
-            {
-                var data = await DataHelper.FetchDataFromApi(ClientSettings.ApiDataUri, ClientSettings.Take);
-                foreach (var item in data)
-                {
-                    Data.Enqueue(item);
-                }
-                DataHelper.DeleteResultsFolder();
-                Logs = "";
-                n_total_req = Data.Count;
-            }
-        }
 
+            var data = await DataHelper.FetchDataFromApi(ClientSettings.ApiDataUri, ClientSettings.Take);
+            foreach (var item in data)
+            {
+                try
+                {
+                    DataHelper.WriteDataToFile(item);
+                }
+                catch { }
+
+            }
+            DataHelper.DeleteResultsFolder();
+            Logs = "";
+
+        }
         private CancellationTokenSource CancellationTokenSource { get; set; }
         private CancellationToken[] CancellationTokens { get; set; }
         public void Start()
@@ -88,22 +76,17 @@ namespace SeoClicker.Utils
             };
 
 
-
-            //// create multiple tasks to run paralelly
-
+         
             for (var i = 0; i < n_parallel_exit_nodes; i++)
             {
 
-                var task = Task.Factory.StartNew( async () =>
+                var task = new MyTaskScheduler(0, 3000);
+                task.DoWork = async () =>
                 {
-
-                    while (true)
-                    {
-                        await Run();
-                    }
-                }, CancellationTokens[i], TaskCreationOptions.None, TaskScheduler.Default);
-          
-                ThreadInfos.Add(new ClickerThreadInfo { Geo = "", Info = task.Status.ToString(), Id = task.Id, Order = i, Url = "" });
+                    await Run();
+                };
+                task.Start();
+                ThreadInfos.Add(new ClickerThreadInfo { Geo = "", Info = "running...", Id = task.Id, Order = i, Url = "" });
                 TaskList.Add(task);
 
             }
@@ -112,82 +95,53 @@ namespace SeoClicker.Utils
         public void ConfigureTask()
         {
             n_parallel_exit_nodes = ClientSettings.NumberOfThread;
-            switch_ip_every_n_req = ClientSettings.IpChangeRequestNumber;
-            targetUrl = ClientSettings.TargetUrl;
-
             _loadTime = ClientSettings.LoadTime * 1000;
             _loadCount = ClientSettings.LoadCount;
-            CancellationTokens = new CancellationToken[n_parallel_exit_nodes];
-            CancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(CancellationTokens);
+
         }
-
-
         public void Stop()
         {
             DataFetcher.Stop();
-
             IsEnabled = true;
             SpinnerVisibility = "Hidden";
             ThreadInfos.Clear();
-
-            IsRunning = false;
-            CancellationTokenSource.Cancel();
         }
         public async Task Run()
         {
-
-            bool check = false;
-            SequenceUrl dataItem = new SequenceUrl();
-            var info = new ClickerThreadInfo();
-            lock (ThreadInfos)
+            var dataItem = DataHelper.GetDataItem();
+            var info = ThreadInfos.FirstOrDefault(x => x.Id == Task.CurrentId);
+            if (dataItem == null || (dataItem.SequenceID == Guid.Empty && dataItem.UserID == null))
             {
-                info = ThreadInfos.FirstOrDefault(x => x.Id == Task.CurrentId);
-            }
-            lock (Data)
-            {
-                if (Data.Any())
+                if (info != null)
                 {
-
-                    check = true;
-                    dataItem = Data.FirstOrDefault();
+                    info.Info = "No data...";
+                    info.Geo = "";
+                    info.Url = "No data";
                 }
-            }
 
-
-            if (!check & info == null)
-            {
                 Thread.Sleep(2000);
                 return;
             }
-            if (dataItem.SequenceID == Guid.Empty && dataItem.UserID == null)
+            var preUri = "";
+            if (info != null)
             {
-                info.Info = "No data...";
-                info.Geo = "";
-                info.Url = "No data";
-                Thread.Sleep(3000);
-                return;
+                info.Id = Task.CurrentId.Value;
+                info.Info = "Running...";
+                info.Geo = dataItem.Country;
             }
 
-            var preUri = "";
-            info.Id = Task.CurrentId.Value;
-            info.Info = "Running...";
-            info.Geo = dataItem.Country;
 
             if (!string.IsNullOrWhiteSpace(dataItem.URL) && !string.IsNullOrWhiteSpace(dataItem.Country) && !string.IsNullOrWhiteSpace(dataItem.Device))
             {
-                if (Data.Any())
-                {
-                    Data.Dequeue();
-                }
-               
+
                 var sessionId = rdm.Next().ToString();
                 var proxy = new WebProxy($"session-{sessionId}.zproxy.lum-superproxy.io:22225");
 
-                var proxyCredential = new NetworkCredential($"lum-customer-{ClientSettings.UserName}-zone-{ClientSettings.Zone}-route_err-{ClientSettings.Route}-country-{dataItem.Country}-session-{sessionId}", ClientSettings.Password);
+                var proxyCredential = new NetworkCredential($"lum-customer-{ClientSettings.UserName}-zone-{ClientSettings.Zone}-country-{dataItem.Country}-session-{sessionId}", ClientSettings.Password);
                 var uriString = dataItem.URL;
 
                 var resultStr = "";
-                
+
 
                 var userAgent = UserAgentHelper.GetUserAgentByDevice(dataItem.Device);
                 var resultList = new List<string>();
@@ -196,12 +150,12 @@ namespace SeoClicker.Utils
                 while (!string.IsNullOrEmpty(uriString))
 
                 {
-                    if(count >= _loadCount)
+                    if (count >= _loadCount)
                     {
                         break;
                     }
 
-                    if(totalLoadTime >= _loadTime)
+                    if (totalLoadTime >= _loadTime)
                     {
                         break;
                     }
@@ -227,7 +181,7 @@ namespace SeoClicker.Utils
                         }
                         preUri = uriString;
                         resultList.Add(preUri);
-                        HttpWebRequest webRequest = null;
+                        HttpWebRequest webRequest;
                         try
                         {
                             webRequest = (HttpWebRequest)WebRequest.Create(uriString);
@@ -253,12 +207,12 @@ namespace SeoClicker.Utils
                             info.Url = uriString;
 
                             timer.Start();
-                            using (webResponse =  (HttpWebResponse)webRequest.GetResponseAsync().Result)
+                            using (webResponse = (HttpWebResponse)webRequest.GetResponseAsync().Result)
                             {
 
                                 count++;
                                 timer.Stop();
-                                totalLoadTime  += timer.Elapsed.Milliseconds;
+                                totalLoadTime += timer.Elapsed.Milliseconds;
 
                                 Logs += $"Sent request to {uriString} successfully.{Environment.NewLine}";
                                 resultStr += $"Url: {info.Url} -- Load time : {timer.Elapsed.Milliseconds} miliseconds{Environment.NewLine}";
@@ -323,7 +277,7 @@ namespace SeoClicker.Utils
                                 ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
 
                             }
-                            
+
                         }
                         catch (Exception ex)
                         {
@@ -350,13 +304,13 @@ namespace SeoClicker.Utils
                         Interlocked.Increment(ref successCount);
                         ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
                         uriString = "";
-                        
+
                     }
 
                 }
-               
+
             }
-           
+
 
         }
 
@@ -420,7 +374,6 @@ namespace SeoClicker.Utils
             }
         }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
         private void notifyPropertyChanged(string propertyName)
         {
@@ -430,10 +383,6 @@ namespace SeoClicker.Utils
             }
         }
         #endregion
-        public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
-        {
-            return true;
-        }
 
         private bool IsRepeatedDomain(string url, List<string> resultList, string preUrl)
         {

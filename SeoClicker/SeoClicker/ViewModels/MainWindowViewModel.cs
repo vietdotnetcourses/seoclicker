@@ -3,7 +3,6 @@ using SeoClicker.Utils;
 using SeoClicker.Models;
 using SeoClicker.Helpers;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System;
 
@@ -18,7 +17,6 @@ namespace SeoClicker.ViewModels
             setupData();
             setupCommands();
             manageAppExit();
-            initTaskScheduler();
         }
         public string SpinnerImagePath { get; set; }
         public DelegateCommand<string> DoStart { set; get; }
@@ -28,10 +26,7 @@ namespace SeoClicker.ViewModels
         public ProxySettings ProxySettings { get; set; }
         public DataServerSettings DataServerSettings { get; set; }
         public TaskSettings TaskSettings { get; set; }
-        bool canDoStart(string data)
-        {
-            return false;
-        }
+      
         void currentExit(object sender, ExitEventArgs e)
         {
             exit();
@@ -41,57 +36,38 @@ namespace SeoClicker.ViewModels
         {
             exit();
         }
-
-
-
         void doStart(string data)
         {
             if (Designer.IsInDesignModeStatic)
                 return;
-            var proxyRoute = ProxySettings.Route.FirstOrDefault(x => x.IsSelected)?.Value ?? "pass_dyn";
-            var superProxy = ProxySettings.SuperProxy.FirstOrDefault(x => x.IsSelected)?.Value ?? "zproxy.lum-superproxy.io";
-            var dnsResolution = ProxySettings.DNSResolution.FirstOrDefault(x => x.IsSelected)?.Value ?? "-session-";
-            var dataItem = DataHelper.LoadData();
-
+          
             RequestWorker.SpinnerVisibility = "Visible";
             RequestWorker.ResultMessage = "";
             RequestWorker.ThreadInfos.Clear();
             RequestWorker.Logs = "";
             RequestWorker.IsEnabled = false;
-
-            var targetUri = dataItem.url;
-            var geo = !string.IsNullOrWhiteSpace(dataItem.geo) ? dataItem.geo : "us";
             var clientSettings = new ClientSettings
-            {
-                Country = geo,
-                DNSResolution = dnsResolution,
-                Password = ProxySettings.Password,
-                Port = ProxySettings.Port,
-                Route = proxyRoute,
-                SuperProxy = superProxy,
-                TargetUrl = targetUri,
-                Device = dataItem.device,
-                UserName = ProxySettings.UserName,
-                Zone = ProxySettings.ProxyZone,
-                Timeout = Timeout.Infinite,
-                NumberOfThread = TaskSettings.NumberOfThreads,
-                RequestNumber = TaskSettings.TotalRequest,
-                IpChangeRequestNumber = 1,
-                ApiDataUri = DataServerSettings.GetDataApiLink,
-                Take = DataServerSettings.UrlCount,
-                LoadCount = TaskSettings.LoadCount != 0 ? TaskSettings.LoadCount : 10,
-                LoadTime = TaskSettings.LoadTime != 0 ? TaskSettings.LoadTime : 5,
-                ClearResult = TaskSettings.ClearResultFiles
-            };
+            (
+               ProxySettings.ProxyZone,
+               ProxySettings.UserName,
+               ProxySettings.Password,
+               Timeout.Infinite,
+               TaskSettings.NumberOfThreads > 20? 20: TaskSettings.NumberOfThreads,
+               DataServerSettings.GetDataApiLink,
+               DataServerSettings.UrlCount,
+               TaskSettings.LoadCount != 0 ? TaskSettings.LoadCount : 10,
+               TaskSettings.LoadTime != 0 ? TaskSettings.LoadTime : 5,
+               TaskSettings.ClearResultFiles
+            );
             try
             {
                 RequestWorker.ClientSettings = clientSettings;
                 RequestWorker.ConfigureTask();
                 RequestWorker.Start();
             }
-           catch(Exception ex)
+            catch (Exception ex)
             {
-                
+                RequestWorker.Logs = ex.Message;
             }
 
         }
@@ -117,10 +93,6 @@ namespace SeoClicker.ViewModels
             RequestWorker.Logs = "";
         }
 
-        private void initTaskScheduler()
-        {
-
-        }
 
         private void exit()
         {

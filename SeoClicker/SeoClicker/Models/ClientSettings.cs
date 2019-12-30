@@ -10,20 +10,26 @@ namespace SeoClicker.Models
 {
     public class ClientSettings
     {
+        public ClientSettings(string zone, string username, string pwd,
+            int timeout, int numberofthread, string apidatauri, int take, int loadcount, int loadtime, bool clearresult = false)
+        {
+            Zone = zone;
+            UserName = username;
+            Password = pwd;
+            Timeout = timeout;
+            NumberOfThread = numberofthread;
+            ApiDataUri = apidatauri;
+            Take = take;
+            LoadCount = loadcount;
+            LoadTime = loadtime;
+            ClearResult = clearresult;
+        }
         public string Zone { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public int Port { get; set; }
-        public string Country { get; set; }
-        public string Device { get; set; }
-        public string Route { get; set; }
-        public string SuperProxy { get; set; }
-        public string DNSResolution { get; set; }
-        public string TargetUrl { get; set; }
+
         public int Timeout { get; set; }
         public int NumberOfThread { get; set; }
-        public int RequestNumber { get; set; }
-        public int IpChangeRequestNumber { get; set; }
 
         public string ApiDataUri { get; set; }
 

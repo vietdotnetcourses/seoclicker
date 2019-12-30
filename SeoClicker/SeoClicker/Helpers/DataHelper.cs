@@ -14,25 +14,56 @@ namespace SeoClicker.Helpers
 
     public static class DataHelper
     {
-        public static string DataFilePath
+        public static string DataFolderPath
         {
-            get { return Path.Combine(Application.StartupPath, "data.json"); }
-        }
-        public static void SaveSettings(TargetUrl data)
-        {
-            File.WriteAllText(DataFilePath, JsonConvert.SerializeObject(data, new JsonSerializerSettings { Formatting = Formatting.Indented }));
+            get { return Path.Combine(Application.StartupPath, "DataItems"); }
         }
 
-        public static TargetUrl LoadData()
+        public static void WriteDataToFile(SequenceUrl url)
         {
-            if (!File.Exists(DataFilePath))
+            File.WriteAllText($"{DataFolderPath}\\{Guid.NewGuid().ToString("N")}.txt", $"{url.URL}|{url.Device}|{url.Country}");
+        }
+
+        public static SequenceUrl GetDataItem()
+        {
+           
+            var items = Directory.GetFiles(DataFolderPath);
+            if(items.Length <= 0) { return null; }
+            var result = new SequenceUrl();
+            var content = "";
+            for (var i=0; i<items.Length; i++)
             {
-                SaveSettings(new TargetUrl());
+                var dataItem = items[i].Trim();
+               
+                if (File.Exists(dataItem))
+                {
+                    try
+                    {
+                        content = File.ReadAllText(dataItem);
+                        File.Delete(dataItem);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }        
             }
-
-            return JsonConvert.DeserializeObject<TargetUrl>(File.ReadAllText(DataFilePath));
+           
+            var contentItems = content.Split('|');
+            if(contentItems.Length >= 3)
+            {
+                result.URL = contentItems[0];
+                result.Device = contentItems[1];
+                result.Country = contentItems[2];
+               
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+           
         }
-
         public static string SpinnerImagePath
         {
             get { return Path.Combine(Application.StartupPath, "Images\\spinner.gif"); }

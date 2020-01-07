@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 namespace SeoClicker.Utils
 {
@@ -20,6 +21,7 @@ namespace SeoClicker.Utils
         string _spinnerVisibility;
         bool _isEnabled;
 
+        private CancellationTokenSource TokenSource { get; set; }
         private int n_parallel_exit_nodes = 0;
         private int successCount = 0;
         private int failCount = 0;
@@ -31,8 +33,7 @@ namespace SeoClicker.Utils
         public ClientSettings ClientSettings { get; set; }
 
         public static string super_proxy_ip;
-        private Dictionary<int, int> TimeLoadList { get; set; }
-        private List<MyTaskScheduler> TaskList { get; set; }
+        private static ConcurrentBag<Task> TaskList { get; set; }
         private MyTaskScheduler DataFetcher { get; set; }
         public RequestTaskRunner()
         {
@@ -41,9 +42,17 @@ namespace SeoClicker.Utils
             ResultMessage = "";
             SpinnerVisibility = "Hidden";
             IsEnabled = true;
-            TimeLoadList = new Dictionary<int, int>();
             DataFetcher = new MyTaskScheduler(0, 90);
-            TaskList = new List<MyTaskScheduler>();
+            TaskList = new ConcurrentBag<Task>();
+            TokenSource = new CancellationTokenSource(); 
+        }
+
+        public void ClearTaskList()
+        {
+            while (!TaskList.IsEmpty)
+            {
+                TaskList.TryTake(out _);
+            }
         }
         private async void FetchData()
         {
@@ -62,42 +71,39 @@ namespace SeoClicker.Utils
             Logs = "";
 
         }
-        private CancellationTokenSource CancellationTokenSource { get; set; }
-        private CancellationToken[] CancellationTokens { get; set; }
         public void Start()
         {
+
+            //generate a new token for cancellation
+
+            var token = TokenSource.Token;
             ThreadInfos.Clear();
-            TaskList.Clear();
+            ClearTaskList();
             IsEnabled = false;
-            DataFetcher.Start();
-            DataFetcher.DoWork = () =>
-            {
-                FetchData();
-            };
+            //DataFetcher.Start();
+            //DataFetcher.DoWork = () =>
+            //{
+            //    FetchData();
+            //};
 
-
+             
          
             for (var i = 0; i < n_parallel_exit_nodes; i++)
             {
-
-                var task = new MyTaskScheduler(0, 3000);
-                task.DoWork = async () =>
-                {
-                    await Run();
-                };
-                task.Start();
+                var task = new Task(() => DoWork(token), token);             
                 ThreadInfos.Add(new ClickerThreadInfo { Geo = "", Info = "running...", Id = task.Id, Order = i, Url = "" });
-                TaskList.Add(task);
-
+                task.Start();
             }
 
         }
-        public void ConfigureTask()
+
+
+        public RequestTaskRunner ConfigureTask()
         {
             n_parallel_exit_nodes = ClientSettings.NumberOfThread;
             _loadTime = ClientSettings.LoadTime * 1000;
             _loadCount = ClientSettings.LoadCount;
-
+            return this;
         }
         public void Stop()
         {
@@ -105,45 +111,71 @@ namespace SeoClicker.Utils
             IsEnabled = true;
             SpinnerVisibility = "Hidden";
             ThreadInfos.Clear();
+            TokenSource.Cancel();
         }
-        public async Task Run()
+        
+        private void DoWork(CancellationToken ct)
         {
-            var dataItem = DataHelper.GetDataItem();
-            var info = ThreadInfos.FirstOrDefault(x => x.Id == Task.CurrentId);
-            if (dataItem == null || (dataItem.SequenceID == Guid.Empty && dataItem.UserID == null))
+            // Was cancellation already requested?
+            var requestDetails = new SequenceUrl
             {
-                if (info != null)
+                Country = "US",
+                Device = "andoid-9",
+                URL = "http://google.com"
+
+            };
+            if (ct.IsCancellationRequested)
+            {
+                ct.ThrowIfCancellationRequested();
+            }
+            SetTaskInfo(requestDetails);
+           
+            while (true)
+            {
+                //var requestDetails = DataHelper.GetDataItem();
+              
+                MakeRequest(requestDetails);
+                if (ct.IsCancellationRequested)
                 {
-                    info.Info = "No data...";
-                    info.Geo = "";
-                    info.Url = "No data";
+                    try
+                    {
+                        ct.ThrowIfCancellationRequested();
+                    }
+                    catch
+                    {
+
+                    }
                 }
 
-                Thread.Sleep(2000);
-                return;
             }
+        }
+
+        private void SetTaskInfo(SequenceUrl detail)
+        {
+            var info = ThreadInfos.FirstOrDefault(x => x.Id == Task.CurrentId.Value);
+            if (info == null) return;
+            info.Url = detail.URL;
+            info.Info = $"running...";
+            info.Geo = detail.Country;
+        }
+      
+        private void MakeRequest(SequenceUrl detail)
+        {
+           
             var preUri = "";
-            if (info != null)
-            {
-                info.Id = Task.CurrentId.Value;
-                info.Info = "Running...";
-                info.Geo = dataItem.Country;
-            }
-
-
-            if (!string.IsNullOrWhiteSpace(dataItem.URL) && !string.IsNullOrWhiteSpace(dataItem.Country) && !string.IsNullOrWhiteSpace(dataItem.Device))
+            if (!string.IsNullOrWhiteSpace(detail.URL) && !string.IsNullOrWhiteSpace(detail.Country) && !string.IsNullOrWhiteSpace(detail.Device))
             {
 
                 var sessionId = rdm.Next().ToString();
                 var proxy = new WebProxy($"session-{sessionId}.zproxy.lum-superproxy.io:22225");
 
-                var proxyCredential = new NetworkCredential($"lum-customer-{ClientSettings.UserName}-zone-{ClientSettings.Zone}-country-{dataItem.Country}-session-{sessionId}", ClientSettings.Password);
-                var uriString = dataItem.URL;
+                var proxyCredential = new NetworkCredential($"lum-customer-{ClientSettings.UserName}-zone-{ClientSettings.Zone}-country-{detail.Country}-session-{sessionId}", ClientSettings.Password);
+                var uriString = detail.URL;
 
                 var resultStr = "";
 
 
-                var userAgent = UserAgentHelper.GetUserAgentByDevice(dataItem.Device);
+                var userAgent = UserAgentHelper.GetUserAgentByDevice(detail.Device);
                 var resultList = new List<string>();
                 var count = 0;
                 var totalLoadTime = 0;
@@ -204,9 +236,10 @@ namespace SeoClicker.Utils
                         HttpWebResponse webResponse = null;
                         try
                         {
-                            info.Url = uriString;
+                           // info.Url = uriString;
 
                             timer.Start();
+                           
                             using (webResponse = (HttpWebResponse)webRequest.GetResponseAsync().Result)
                             {
 
@@ -215,7 +248,7 @@ namespace SeoClicker.Utils
                                 totalLoadTime += timer.Elapsed.Milliseconds;
 
                                 Logs += $"Sent request to {uriString} successfully.{Environment.NewLine}";
-                                resultStr += $"Url: {info.Url} -- Load time : {timer.Elapsed.Milliseconds} miliseconds{Environment.NewLine}";
+                                //resultStr += $"Url: {info.Url} -- Load time : {timer.Elapsed.Milliseconds} miliseconds{Environment.NewLine}";
 
                                 var statusCode = (int)webResponse.StatusCode;
                                 if (statusCode > 300 && statusCode < 399)
@@ -313,7 +346,6 @@ namespace SeoClicker.Utils
 
 
         }
-
         #region observable part
 
         public AsyncObservableCollection<ClickerThreadInfo> ThreadInfos

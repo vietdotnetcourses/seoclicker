@@ -26,7 +26,7 @@ namespace SeoClicker.ViewModels
         public ProxySettings ProxySettings { get; set; }
         public DataServerSettings DataServerSettings { get; set; }
         public TaskSettings TaskSettings { get; set; }
-      
+
         void currentExit(object sender, ExitEventArgs e)
         {
             exit();
@@ -40,7 +40,7 @@ namespace SeoClicker.ViewModels
         {
             if (Designer.IsInDesignModeStatic)
                 return;
-          
+
             RequestWorker.SpinnerVisibility = "Visible";
             RequestWorker.ResultMessage = "";
             RequestWorker.ThreadInfos.Clear();
@@ -52,29 +52,29 @@ namespace SeoClicker.ViewModels
                ProxySettings.UserName,
                ProxySettings.Password,
                Timeout.Infinite,
-               TaskSettings.NumberOfThreads > 20? 20: TaskSettings.NumberOfThreads,
+               TaskSettings.NumberOfThreads > 20 ? 20 : TaskSettings.NumberOfThreads,
                DataServerSettings.GetDataApiLink,
                DataServerSettings.UrlCount,
                TaskSettings.LoadCount != 0 ? TaskSettings.LoadCount : 10,
                TaskSettings.LoadTime != 0 ? TaskSettings.LoadTime : 5,
                TaskSettings.ClearResultFiles
             );
-            try
-            {
-                RequestWorker.ClientSettings = clientSettings;
-                RequestWorker.ConfigureTask();
-                RequestWorker.Start();
-            }
-            catch (Exception ex)
-            {
-                RequestWorker.Logs = ex.Message;
-            }
+            // try
+            // {
+            RequestWorker.ClientSettings = clientSettings;
+            RequestWorker.ConfigureTask().Start(); ;
+
+            // }
+            //catch (Exception ex)
+            //{
+            //   RequestWorker.Logs = ex.Message;
+            //}
 
         }
         void doStop(string data)
         {
             RequestWorker.Stop();
-
+            RequestWorker.ResultMessage = "";
         }
 
         void doSaveSettings(string data)

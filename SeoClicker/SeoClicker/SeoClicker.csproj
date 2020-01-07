@@ -85,6 +85,7 @@
     <Compile Include="Models\ClientSettings.cs" />
     <Compile Include="Models\DataServerSettings.cs" />
     <Compile Include="Models\ProxySettings.cs" />
+    <Compile Include="Models\RequestDetail.cs" />
     <Compile Include="Models\SelectionItem.cs" />
     <Compile Include="Models\SequenceUrl.cs" />
     <Compile Include="Models\Settings.cs" />

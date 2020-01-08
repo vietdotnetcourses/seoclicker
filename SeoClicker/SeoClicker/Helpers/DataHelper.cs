@@ -41,11 +41,15 @@ namespace SeoClicker.Helpers
                     {
                         content = File.ReadAllText(dataItem);
                         File.Delete(dataItem);
+                        break;
                     }
                     catch
                     {
-                        continue;
+                        return null;
+  
                     }
+                  
+
                 }        
             }
            

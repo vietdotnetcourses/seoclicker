@@ -20,7 +20,6 @@ namespace SeoClicker.Utils
         string _resultMessage;
         string _spinnerVisibility;
         bool _isEnabled;
-
         private CancellationTokenSource TokenSource { get; set; }
         private int n_parallel_exit_nodes = 0;
         private int successCount = 0;
@@ -42,9 +41,9 @@ namespace SeoClicker.Utils
             ResultMessage = "";
             SpinnerVisibility = "Hidden";
             IsEnabled = true;
-            DataFetcher = new MyTaskScheduler(0, 90);
+            DataFetcher = new MyTaskScheduler(0, 30);
             TaskList = new ConcurrentBag<Task>();
-            TokenSource = new CancellationTokenSource(); 
+            TokenSource = new CancellationTokenSource();
         }
 
         public void ClearTaskList()
@@ -54,45 +53,27 @@ namespace SeoClicker.Utils
                 TaskList.TryTake(out _);
             }
         }
-        private async void FetchData()
-        {
 
-            var data = await DataHelper.FetchDataFromApi(ClientSettings.ApiDataUri, ClientSettings.Take);
-            foreach (var item in data)
-            {
-                try
-                {
-                    DataHelper.WriteDataToFile(item);
-                }
-                catch { }
-
-            }
-            DataHelper.DeleteResultsFolder();
-            Logs = "";
-
-        }
         public void Start()
         {
-
-            //generate a new token for cancellation
-
+            TokenSource.Dispose();
+            TokenSource = new CancellationTokenSource();
             var token = TokenSource.Token;
             ThreadInfos.Clear();
             ClearTaskList();
-            IsEnabled = false;
-            //DataFetcher.Start();
-            //DataFetcher.DoWork = () =>
-            //{
-            //    FetchData();
-            //};
 
-             
-         
+            IsEnabled = false;
+            DataFetcher.Start();
+            DataFetcher.DoWork = async () =>
+            {
+                await FetchData();
+            };
+
+
             for (var i = 0; i < n_parallel_exit_nodes; i++)
             {
-                var task = new Task(() => DoWork(token), token);             
-                ThreadInfos.Add(new ClickerThreadInfo { Geo = "", Info = "running...", Id = task.Id, Order = i, Url = "" });
-                task.Start();
+                var task = Task.Factory.StartNew(() => DoWork(token), token);
+                ThreadInfos.Add(new ClickerThreadInfo { Geo = "", Info = Constants.TaskStatus.STARTING, Id = task.Id, Order = i, Url = "" });
             }
 
         }
@@ -113,68 +94,71 @@ namespace SeoClicker.Utils
             ThreadInfos.Clear();
             TokenSource.Cancel();
         }
-        
+
         private void DoWork(CancellationToken ct)
         {
-            // Was cancellation already requested?
-            var requestDetails = new SequenceUrl
-            {
-                Country = "US",
-                Device = "andoid-9",
-                URL = "http://google.com"
-
-            };
+            var currentTaskId = Task.CurrentId;
             if (ct.IsCancellationRequested)
             {
                 ct.ThrowIfCancellationRequested();
             }
-            SetTaskInfo(requestDetails);
-           
-            while (true)
-            {
-                //var requestDetails = DataHelper.GetDataItem();
-              
-                MakeRequest(requestDetails);
-                if (ct.IsCancellationRequested)
-                {
-                    try
-                    {
-                        ct.ThrowIfCancellationRequested();
-                    }
-                    catch
-                    {
 
+
+            try
+            {
+                while (true)
+                {
+
+                    ct.ThrowIfCancellationRequested();
+
+                    var requestDetails = DataHelper.GetDataItem();
+                    if (currentTaskId != null && requestDetails != null)
+                    {
+                        SetTaskInfo(currentTaskId, requestDetails.URL, Constants.TaskStatus.STARTED, requestDetails.Country);
+                        MakeRequest(requestDetails, currentTaskId);
                     }
+
+
                 }
 
             }
+            catch (Exception ex)
+            {
+            }
+
         }
 
-        private void SetTaskInfo(SequenceUrl detail)
+        private void SetTaskInfo(int? id, string url = "", string info = "", string geo = "")
         {
-            var info = ThreadInfos.FirstOrDefault(x => x.Id == Task.CurrentId.Value);
-            if (info == null) return;
-            info.Url = detail.URL;
-            info.Info = $"running...";
-            info.Geo = detail.Country;
+            var infoItem = ThreadInfos.FirstOrDefault(x => x.Id == id);
+            if (infoItem == null) return;
+            if (!string.IsNullOrWhiteSpace(url))
+            {
+                infoItem.Url = url;
+            }
+            if (!string.IsNullOrWhiteSpace(info))
+            {
+                infoItem.Info = info;
+            }
+            if (!string.IsNullOrWhiteSpace(geo))
+            {
+                infoItem.Geo = geo;
+            }
         }
-      
-        private void MakeRequest(SequenceUrl detail)
+
+        private void MakeRequest(SequenceUrl detail, int? currentTaskId)
         {
-           
+            SetTaskInfo(currentTaskId, detail.URL, Constants.TaskStatus.RUNNING, detail.Country);
             var preUri = "";
             if (!string.IsNullOrWhiteSpace(detail.URL) && !string.IsNullOrWhiteSpace(detail.Country) && !string.IsNullOrWhiteSpace(detail.Device))
             {
-
                 var sessionId = rdm.Next().ToString();
-                var proxy = new WebProxy($"session-{sessionId}.zproxy.lum-superproxy.io:22225");
-
-                var proxyCredential = new NetworkCredential($"lum-customer-{ClientSettings.UserName}-zone-{ClientSettings.Zone}-country-{detail.Country}-session-{sessionId}", ClientSettings.Password);
+                var proxy = new WebProxy($"pr.oxylabs.io:7777");
+                var login = $"customer-{ClientSettings.UserName}-cc-{detail.Country}-sessid-{sessionId}";
+                var proxyCredential = new NetworkCredential(login, ClientSettings.Password);
                 var uriString = detail.URL;
 
                 var resultStr = "";
-
-
                 var userAgent = UserAgentHelper.GetUserAgentByDevice(detail.Device);
                 var resultList = new List<string>();
                 var count = 0;
@@ -198,7 +182,7 @@ namespace SeoClicker.Utils
                         {
 
                             Uri myUri = new Uri(preUri);
-                            var protocal = "";
+                            string protocal;
                             if (preUri.StartsWith("https"))
                             {
                                 protocal = "https";
@@ -220,7 +204,6 @@ namespace SeoClicker.Utils
                         }
                         catch
                         {
-                            resultStr += $"Url: {preUri} -- Load time : {timer.Elapsed.Milliseconds} miliseconds{Environment.NewLine}";
                             break;
                         }
                         webRequest.Proxy = proxy;
@@ -232,14 +215,13 @@ namespace SeoClicker.Utils
                         webRequest.ContentType = "text/html; charset=UTF8";
                         webRequest.UserAgent = userAgent;
                         webRequest.ConnectionGroupName = sessionId;
-
-                        HttpWebResponse webResponse = null;
                         try
                         {
-                           // info.Url = uriString;
+                            SetTaskInfo(currentTaskId, url: uriString);
 
                             timer.Start();
-                           
+
+                            HttpWebResponse webResponse;
                             using (webResponse = (HttpWebResponse)webRequest.GetResponseAsync().Result)
                             {
 
@@ -248,7 +230,6 @@ namespace SeoClicker.Utils
                                 totalLoadTime += timer.Elapsed.Milliseconds;
 
                                 Logs += $"Sent request to {uriString} successfully.{Environment.NewLine}";
-                                //resultStr += $"Url: {info.Url} -- Load time : {timer.Elapsed.Milliseconds} miliseconds{Environment.NewLine}";
 
                                 var statusCode = (int)webResponse.StatusCode;
                                 if (statusCode > 300 && statusCode < 399)
@@ -306,7 +287,6 @@ namespace SeoClicker.Utils
                             {
                                 Interlocked.Increment(ref successCount);
                                 DataHelper.SaveResult(resultStr, sessionId);
-
                                 ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
 
                             }
@@ -314,16 +294,8 @@ namespace SeoClicker.Utils
                         }
                         catch (Exception ex)
                         {
-                            if (webResponse == null)
-                            {
-                                Interlocked.Increment(ref successCount);
-                            }
-                            else
-                            {
-                                Interlocked.Increment(ref failCount);
-                            }
 
-
+                            Interlocked.Increment(ref failCount);
                             uriString = "";
                             Logs += $"Sent request to {uriString} failed. reason: {ex.Message}{Environment.NewLine}";
                             ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
@@ -346,8 +318,8 @@ namespace SeoClicker.Utils
 
 
         }
-        #region observable part
 
+        #region observable part
         public AsyncObservableCollection<ClickerThreadInfo> ThreadInfos
         {
             get
@@ -445,7 +417,34 @@ namespace SeoClicker.Utils
             return result;
 
         }
+        private async Task FetchData()
+        {
 
+            var data = await DataHelper.FetchDataFromApi(ClientSettings.ApiDataUri, ClientSettings.Take);
+            if (data != null)
+            {
+                foreach (var item in data)
+                {
+                    try
+                    {
+                        DataHelper.WriteDataToFile(item);
+                    }
+                    catch
+                    { }
+
+                }
+
+                DataHelper.DeleteResultsFolder();
+                Logs = "";
+            }
+            else
+            {
+                Logs += $"{Environment.NewLine}{Constants.TaskStatus.NODATA}";
+
+            }
+
+
+        }
     }
 
 

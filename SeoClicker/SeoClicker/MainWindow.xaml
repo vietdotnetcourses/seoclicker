@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         xmlns:vm="clr-namespace:SeoClicker.ViewModels"
         mc:Ignorable="d"
-        Title="Seo Clicker" MaxHeight="570" MaxWidth="580" MinWidth="580" MinHeight="570">
+        Title="Seo Clicker" MaxHeight="500" MaxWidth="580" MinWidth="580" MinHeight="500">
     <Window.Resources>
         <vm:MainWindowViewModel x:Key="VmMainWindowViewModel" />
         <Style x:Key="lvh" TargetType="{x:Type GridViewColumnHeader}">
@@ -86,12 +86,12 @@
                     <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal" Grid.Row="1"  Margin="5,0,0,0">
                         <TextBlock Text="{Binding RequestWorker.ResultMessage}"/>
                     </StackPanel>
-                    <GroupBox Margin="5" Header="Log" Height="287">
+                    <GroupBox Margin="5" Header="Log" Height="210">
 
-                        <TextBox  Width="550" Height="250" Text="{Binding RequestWorker.Logs, Mode=OneWay}" 
+                        <TextBox  Width="550" Height="190" Text="{Binding RequestWorker.Logs, Mode=OneWay}" 
                                   TextWrapping="Wrap"  
                                   HorizontalScrollBarVisibility="Visible" 
-                                  VerticalScrollBarVisibility="Visible"/>
+                                  VerticalScrollBarVisibility="Visible" UndoLimit="0"/>
                     </GroupBox>
                 </StackPanel>
             </TabItem>
@@ -106,40 +106,38 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <!--Column 1 & 2-->
-                            <TextBlock Margin="3" Text="Zone" Grid.Row="0" Grid.Column="0"/>
+                            <!--<TextBlock Margin="3" Text="Zone" Grid.Row="0" Grid.Column="0"/>
                             <TextBox Grid.Column="1" Grid.Row="0"
                          Text="{Binding ProxySettings.ProxyZone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
                          NotifyOnValidationError=True, ValidatesOnDataErrors=True,
                          ValidatesOnExceptions=True}"
-                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3" />
+                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3" />-->
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="User name" />
                             <TextBox Grid.Column="1" Grid.Row="1"
                          Text="{Binding ProxySettings.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
                          NotifyOnValidationError=True, ValidatesOnDataErrors=True,
                          ValidatesOnExceptions=True}"
-                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3" />
+                         Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />
 
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Password" Margin="3" />
                             <TextBox Grid.Column="1" Grid.Row="2"
                          Text="{Binding ProxySettings.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
                          NotifyOnValidationError=True, ValidatesOnDataErrors=True,
                          ValidatesOnExceptions=True}"
-                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3" />
+                         Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />
 
-                            <TextBlock Grid.Row="3" Grid.Column="0" Margin="3" Text="Port" />
+                            <!--<TextBlock Grid.Row="3" Grid.Column="0" Margin="3" Text="Port" />
                             <TextBox Grid.Column="1" Grid.Row="3" IsEnabled="False"
                          Text="{Binding ProxySettings.Port, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
                          NotifyOnValidationError=True, ValidatesOnDataErrors=True,
                          ValidatesOnExceptions=True}"
-                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3" 
-                        />
+                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3"
+                        />-->
                             <!--End-->
 
                             <!--Column 3 & 4-->

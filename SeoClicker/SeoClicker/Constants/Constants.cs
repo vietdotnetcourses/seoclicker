@@ -19,4 +19,13 @@ namespace SeoClicker.Constants
     {
         public const string REQUEST_STRING = "curl --proxy zproxy.lum-superproxy.io:{0} --proxy-user lum-customer-{1}-zone-static-country-{2}:{3} \"{4}\"";
     }
+
+    public static class TaskStatus
+    {
+        public const string STARTING = "starting";
+        public const string STARTED = "started";
+        public const string RUNNING = "running";
+        public const string NODATA = "no data";
+        public const string CANCELLED = "cancelled";
+    }
 }

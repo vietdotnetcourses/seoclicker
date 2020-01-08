@@ -52,23 +52,23 @@ namespace SeoClicker.ViewModels
                ProxySettings.UserName,
                ProxySettings.Password,
                Timeout.Infinite,
-               TaskSettings.NumberOfThreads > 20 ? 20 : TaskSettings.NumberOfThreads,
+               TaskSettings.NumberOfThreads > 30 ? 30 : TaskSettings.NumberOfThreads,
                DataServerSettings.GetDataApiLink,
                DataServerSettings.UrlCount,
                TaskSettings.LoadCount != 0 ? TaskSettings.LoadCount : 10,
                TaskSettings.LoadTime != 0 ? TaskSettings.LoadTime : 5,
                TaskSettings.ClearResultFiles
             );
-            // try
-            // {
-            RequestWorker.ClientSettings = clientSettings;
-            RequestWorker.ConfigureTask().Start(); ;
+            try
+            {
+                RequestWorker.ClientSettings = clientSettings;
+                RequestWorker.ConfigureTask().Start(); ;
 
-            // }
-            //catch (Exception ex)
-            //{
-            //   RequestWorker.Logs = ex.Message;
-            //}
+            }
+            catch (Exception ex)
+            {
+                RequestWorker.Logs = ex.Message;
+            }
 
         }
         void doStop(string data)
@@ -122,7 +122,6 @@ namespace SeoClicker.ViewModels
             ProxySettings = settings.ProxySettings;
             DataServerSettings = settings.DataServerSettings;
             TaskSettings = settings.TaskSettings;
-
             RequestWorker = new RequestTaskRunner();
             SpinnerImagePath = DataHelper.GetSpinnerImagePath();
 

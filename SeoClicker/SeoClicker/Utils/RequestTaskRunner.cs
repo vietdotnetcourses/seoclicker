@@ -163,6 +163,7 @@ namespace SeoClicker.Utils
                 var resultList = new List<string>();
                 var count = 0;
                 var totalLoadTime = 0;
+                CookieCollection cookies = null;
                 while (!string.IsNullOrEmpty(uriString))
 
                 {
@@ -173,6 +174,10 @@ namespace SeoClicker.Utils
 
                     if (totalLoadTime >= _loadTime)
                     {
+
+                        Interlocked.Increment(ref successCount);
+                        DataHelper.SaveResult(resultStr, sessionId);
+                        ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
                         break;
                     }
 
@@ -204,7 +209,11 @@ namespace SeoClicker.Utils
                         }
                         catch
                         {
+                            Interlocked.Increment(ref successCount);
+                            DataHelper.SaveResult(resultStr, sessionId);
+                            ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
                             break;
+             
                         }
                         webRequest.Proxy = proxy;
                         webRequest.Proxy.Credentials = proxyCredential;
@@ -215,12 +224,23 @@ namespace SeoClicker.Utils
                         webRequest.ContentType = "text/html; charset=UTF8";
                         webRequest.UserAgent = userAgent;
                         webRequest.ConnectionGroupName = sessionId;
+
+                        //add cookies if any
+                        if (cookies != null)
+                        {
+                            if (webRequest.CookieContainer == null)
+                            {
+                                webRequest.CookieContainer = new CookieContainer();
+                            }
+
+                            webRequest.CookieContainer.Add(cookies);
+                        }
+
+
                         try
                         {
                             SetTaskInfo(currentTaskId, url: uriString);
-
                             timer.Start();
-
                             HttpWebResponse webResponse;
                             using (webResponse = (HttpWebResponse)webRequest.GetResponseAsync().Result)
                             {
@@ -228,9 +248,7 @@ namespace SeoClicker.Utils
                                 count++;
                                 timer.Stop();
                                 totalLoadTime += timer.Elapsed.Milliseconds;
-
                                 Logs += $"Sent request to {uriString} successfully.{Environment.NewLine}";
-
                                 var statusCode = (int)webResponse.StatusCode;
                                 if (statusCode > 300 && statusCode < 399)
                                 {
@@ -249,6 +267,8 @@ namespace SeoClicker.Utils
                                 {
                                     Stream receiveStream = webResponse.GetResponseStream();
                                     StreamReader readStream = null;
+
+                                    cookies = webResponse.Cookies;
 
                                     readStream = new StreamReader(receiveStream);
 
@@ -277,6 +297,7 @@ namespace SeoClicker.Utils
 
                                 if (RedirectLinkExtractor.IsEndingDomain(uriString) || IsRepeatedDomain(uriString, resultList, preUri))
                                 {
+                                    Interlocked.Increment(ref successCount);
                                     Logs += $"Sent request to {uriString} successfully.{Environment.NewLine}";
                                     resultStr += $"Url: {uriString} -- Load time : {timer.Elapsed.Milliseconds} miliseconds{Environment.NewLine}";
                                     uriString = "";
@@ -288,7 +309,7 @@ namespace SeoClicker.Utils
                                 Interlocked.Increment(ref successCount);
                                 DataHelper.SaveResult(resultStr, sessionId);
                                 ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
-
+                                break;
                             }
 
                         }
@@ -309,7 +330,7 @@ namespace SeoClicker.Utils
                         Interlocked.Increment(ref successCount);
                         ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
                         uriString = "";
-
+                        break;
                     }
 
                 }

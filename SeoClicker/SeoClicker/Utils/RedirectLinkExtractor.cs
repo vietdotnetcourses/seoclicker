@@ -123,7 +123,10 @@ namespace SeoClicker.Utils
             }
 
 
-
+            if (!IsValidUri(url))
+            {
+                url = "";
+            }
 
 
             return url;
@@ -139,7 +142,7 @@ namespace SeoClicker.Utils
             return File.ReadLines(Path.Combine(Application.StartupPath, "excludedHost.txt")).Any<string>((Func<string, bool>)(x => url.Contains(x)));
         }
 
-        private static bool IsValidDomain(string url)
+        private static bool IsValidUri(string url)
         {
             Uri result;
             if (!Uri.TryCreate(url, UriKind.Absolute, out result))
@@ -148,5 +151,7 @@ namespace SeoClicker.Utils
                 return result.Scheme == Uri.UriSchemeHttps;
             return true;
         }
+
+     
     }
 }

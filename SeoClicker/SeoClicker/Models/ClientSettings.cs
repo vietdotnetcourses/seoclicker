@@ -11,7 +11,7 @@ namespace SeoClicker.Models
     public class ClientSettings
     {
         public ClientSettings(string zone, string username, string pwd,
-            int timeout, int numberofthread, string apidatauri, int take, int loadcount, int loadtime, bool clearresult = false)
+            int timeout, int numberofthread, string apidatauri, int take, int loadcount, int loadtime, string apiKey, bool clearresult = false)
         {
             Zone = zone;
             UserName = username;
@@ -23,6 +23,7 @@ namespace SeoClicker.Models
             LoadCount = loadcount;
             LoadTime = loadtime;
             ClearResult = clearresult;
+            ApiKey = apiKey;
         }
         public string Zone { get; set; }
         public string UserName { get; set; }
@@ -37,6 +38,7 @@ namespace SeoClicker.Models
         public int LoadCount { get; set; }
         public int LoadTime { get; set; }
         public bool ClearResult { get; set; }
+        public string ApiKey { get; set; }
 
     }
 }

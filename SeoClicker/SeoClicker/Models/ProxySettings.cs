@@ -13,7 +13,8 @@ namespace SeoClicker.Models
 
         string _proxyZone;
         string _userName;
-        string _password;     
+        string _password;
+        string _apiKey;
         int _port;
         List<SelectionItem> _route;
         List<SelectionItem> _superProxy;
@@ -120,6 +121,20 @@ namespace SeoClicker.Models
             {
                 _dnsResolution = value;
                 notifyPropertyChanged("DNSResolution");
+            }
+        }
+
+        //this is for SraperAPi
+        public string ApiKey
+        {
+            get 
+            {
+                return _apiKey; 
+            }
+            set
+            {
+                _apiKey = value;
+                notifyPropertyChanged("ApiKey");
             }
         }
         private void notifyPropertyChanged(string propertyName)

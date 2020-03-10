@@ -57,7 +57,9 @@ namespace SeoClicker.ViewModels
                DataServerSettings.UrlCount,
                TaskSettings.LoadCount != 0 ? TaskSettings.LoadCount : 10,
                TaskSettings.LoadTime != 0 ? TaskSettings.LoadTime : 5,
+               ProxySettings.ApiKey,
                TaskSettings.ClearResultFiles
+             
             );
             try
             {

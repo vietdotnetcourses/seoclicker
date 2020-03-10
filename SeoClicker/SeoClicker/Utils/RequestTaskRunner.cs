@@ -153,9 +153,9 @@ namespace SeoClicker.Utils
             if (!string.IsNullOrWhiteSpace(detail.URL) && !string.IsNullOrWhiteSpace(detail.Country) && !string.IsNullOrWhiteSpace(detail.Device))
             {
                 var sessionId = rdm.Next().ToString();
-                var proxy = new WebProxy($"pr.oxylabs.io:7777");
-                var login = $"customer-{ClientSettings.UserName}-cc-{detail.Country}-sessid-{sessionId}";
-                var proxyCredential = new NetworkCredential(login, ClientSettings.Password);
+                //var proxy = new WebProxy($"pr.oxylabs.io:7777");
+                //var login = $"customer-{ClientSettings.UserName}-cc-{detail.Country}-sessid-{sessionId}";
+                //var proxyCredential = new NetworkCredential(login, ClientSettings.Password);
                 var uriString = detail.URL;
 
                 var resultStr = "";
@@ -205,7 +205,7 @@ namespace SeoClicker.Utils
                         HttpWebRequest webRequest;
                         try
                         {
-                            webRequest = (HttpWebRequest)WebRequest.Create(uriString);
+                            webRequest = (HttpWebRequest)WebRequest.Create(BuildScraperApiUrl(uriString, ClientSettings.ApiKey, detail.Country));
                         }
                         catch
                         {
@@ -215,8 +215,8 @@ namespace SeoClicker.Utils
                             break;
              
                         }
-                        webRequest.Proxy = proxy;
-                        webRequest.Proxy.Credentials = proxyCredential;
+                        //webRequest.Proxy = proxy;
+                        //webRequest.Proxy.Credentials = proxyCredential;
                         webRequest.AllowAutoRedirect = false;  // IMPORTANT
                         webRequest.Timeout = ClientSettings.Timeout;
                         webRequest.KeepAlive = true;
@@ -329,7 +329,6 @@ namespace SeoClicker.Utils
                     {
                         Interlocked.Increment(ref successCount);
                         ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
-                        uriString = "";
                         break;
                     }
 
@@ -465,6 +464,11 @@ namespace SeoClicker.Utils
             }
 
 
+        }
+
+        private string BuildScraperApiUrl(string targetUrl, string apiKey, string geo)
+        {
+            return $"http://api.scraperapi.com?api_key={apiKey}&url={targetUrl}&country_code={geo}";
         }
     }
 

@@ -186,12 +186,12 @@
                          ValidatesOnExceptions=True}"                                    
                          Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />
 
-                            <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Load Time" />
+                            <!--<TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Load Time" />
                             <TextBox Grid.Column="1" Grid.Row="2"
                          Text="{Binding TaskSettings.LoadTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
                          NotifyOnValidationError=True, ValidatesOnDataErrors=True,
                          ValidatesOnExceptions=True}"                                    
-                         Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />
+                         Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />-->
                             <!--<TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Clear result file before running" TextWrapping="Wrap" />
                             <CheckBox Grid.Row="2" Grid.Column="1" Margin="5,13,5,5" IsChecked="{Binding TaskSettings.ClearResultFiles}"/>-->
                         </Grid>

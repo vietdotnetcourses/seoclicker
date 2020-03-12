@@ -162,7 +162,7 @@ namespace SeoClicker.Utils
                 var userAgent = UserAgentHelper.GetUserAgentByDevice(detail.Device);
                 var resultList = new List<string>();
                 var count = 0;
-                var totalLoadTime = 0;
+                //var totalLoadTime = 0;
                 CookieCollection cookies = null;
                 while (!string.IsNullOrEmpty(uriString))
 
@@ -172,14 +172,14 @@ namespace SeoClicker.Utils
                         break;
                     }
 
-                    if (totalLoadTime >= _loadTime)
-                    {
+                    //if (totalLoadTime >= _loadTime)
+                    //{
 
-                        Interlocked.Increment(ref successCount);
-                        DataHelper.SaveResult(resultStr, sessionId);
-                        ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
-                        break;
-                    }
+                    //    Interlocked.Increment(ref successCount);
+                    //    DataHelper.SaveResult(resultStr, sessionId);
+                    //    ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
+                    //    break;
+                    //}
 
                     if (uriString.StartsWith("https") || uriString.StartsWith("http") || uriString.StartsWith("/"))
                     {
@@ -247,7 +247,7 @@ namespace SeoClicker.Utils
 
                                 count++;
                                 timer.Stop();
-                                totalLoadTime += timer.Elapsed.Milliseconds;
+                                //totalLoadTime += timer.Elapsed.Milliseconds;
                                 Logs += $"Sent request to {uriString} successfully.{Environment.NewLine}";
                                 var statusCode = (int)webResponse.StatusCode;
                                 if (statusCode > 300 && statusCode < 399)

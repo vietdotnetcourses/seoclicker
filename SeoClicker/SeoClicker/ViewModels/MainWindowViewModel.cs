@@ -11,6 +11,7 @@ namespace SeoClicker.ViewModels
     public class MainWindowViewModel
     {
         public RequestTaskRunner RequestWorker { get; set; }
+        public ManualTestRunner ManualTestRunner { get; set; }
 
         public MainWindowViewModel()
         {
@@ -22,8 +23,10 @@ namespace SeoClicker.ViewModels
         public DelegateCommand<string> DoStart { set; get; }
         public DelegateCommand<string> DoStop { set; get; }
         public DelegateCommand<string> DoClearLogs { get; set; }
+        public DelegateCommand<string> DoManualTest { get; set; }
         public DelegateCommand<string> DoSaveSettings { get; set; }
         public ProxySettings ProxySettings { get; set; }
+        public ManualTestModel ManualTestSetting { get; set; }
         public DataServerSettings DataServerSettings { get; set; }
         public TaskSettings TaskSettings { get; set; }
 
@@ -64,6 +67,38 @@ namespace SeoClicker.ViewModels
                 RequestWorker.ClientSettings = clientSettings;
                 RequestWorker.ConfigureTask().Start(); ;
 
+            }
+            catch (Exception ex)
+            {
+                RequestWorker.Logs = ex.Message;
+            }
+
+        }
+
+        void doManualTest(string data)
+        {
+        
+            var clientSettings = new ClientSettings
+            (
+               ProxySettings.ProxyZone,
+               ProxySettings.UserName,
+               ProxySettings.Password,
+               Timeout.Infinite,
+               TaskSettings.NumberOfThreads > 30 ? 30 : TaskSettings.NumberOfThreads,
+               DataServerSettings.GetDataApiLink,
+               DataServerSettings.UrlCount,
+               TaskSettings.LoadCount != 0 ? TaskSettings.LoadCount : 10,
+               TaskSettings.LoadTime != 0 ? TaskSettings.LoadTime : 5,
+               TaskSettings.ClearResultFiles
+            );
+            var selectedDevice = ManualTestSetting.Devices.FirstOrDefault(x => x.IsSelected)?.Value ?? "ios-12";
+            try
+            {
+                ManualTestRunner.ClientSettings = clientSettings;
+                var manualTestSetting = ManualTestSetting;
+                manualTestSetting.Device = selectedDevice;
+                ManualTestRunner.Setup(clientSettings).MakeRequest(ref manualTestSetting); ;
+                ManualTestSetting = manualTestSetting;
             }
             catch (Exception ex)
             {
@@ -114,6 +149,8 @@ namespace SeoClicker.ViewModels
             DoStop = new DelegateCommand<string>(doStop, data => true);
             DoSaveSettings = new DelegateCommand<string>(doSaveSettings, data => true);
             DoClearLogs = new DelegateCommand<string>(doClearLogs, data => true);
+            DoClearLogs = new DelegateCommand<string>(doClearLogs, data => true);
+            DoManualTest = new DelegateCommand<string>(doManualTest, data => true);
         }
 
         private void setupData()
@@ -124,7 +161,15 @@ namespace SeoClicker.ViewModels
             TaskSettings = settings.TaskSettings;
             RequestWorker = new RequestTaskRunner();
             SpinnerImagePath = DataHelper.GetSpinnerImagePath();
-
+            ManualTestRunner = new ManualTestRunner();
+            ManualTestSetting = new ManualTestModel
+            {
+                Device = "",
+                Geo = "",
+                Log = "",
+                Url = "",
+                Devices = settings.Devices
+            };
         }
     }
 }

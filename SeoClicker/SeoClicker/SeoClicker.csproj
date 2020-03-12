@@ -84,6 +84,7 @@
     <Compile Include="Models\ClickerThread.cs" />
     <Compile Include="Models\ClientSettings.cs" />
     <Compile Include="Models\DataServerSettings.cs" />
+    <Compile Include="Models\ManualTestModel.cs" />
     <Compile Include="Models\ProxySettings.cs" />
     <Compile Include="Models\SelectionItem.cs" />
     <Compile Include="Models\SequenceUrl.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Utils\Designer.cs" />
     <Compile Include="Utils\DispatcherHelper.cs" />
     <Compile Include="Utils\RedirectLinkExtractor.cs" />
+    <Compile Include="Utils\ManualTestRunner.cs" />
     <Compile Include="Utils\RequestTaskRunner.cs" />
     <Compile Include="Utils\MyTaskScheduler.cs" />
     <Compile Include="Helpers\UserAgentHelper.cs" />

@@ -93,6 +93,45 @@
                                   HorizontalScrollBarVisibility="Visible" 
                                   VerticalScrollBarVisibility="Visible" UndoLimit="0"/>
                     </GroupBox>
+                    <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal" Grid.Row="1"  Margin="5,0,0,0" Width="550" HorizontalAlignment="Left">
+                        <Button Width="30" Height="30" IsEnabled="{Binding RequestWorker.IsEnabled}"
+                    Command="{Binding DoStart}"
+                    ToolTip="Start">
+                            <Rectangle Width="10" Height="10">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_play}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button Width="30" Height="30"
+                    Command="{Binding DoStop}"
+                    ToolTip="Stop">
+                            <Rectangle Width="15" Height="15">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_stop}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button Width="30" Height="30" IsEnabled="{Binding RequestWorker.IsEnabled}"
+                    Command="{Binding DoSaveSettings}"
+                    ToolTip="Save settings">
+                            <Rectangle Width="10" Height="10">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_disk}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button Width="30" Height="30" IsEnabled="{Binding RequestWorker.IsEnabled}"
+                    Command="{Binding DoClearLogs}"
+                    ToolTip="Clear logs">
+                            <Rectangle Width="10" Height="10">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_page_minus}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Image gif:ImageBehavior.AnimatedSource="{Binding SpinnerImagePath}" Width="30" Height="30" Margin="400,0,0,0" HorizontalAlignment="Right" Visibility="{Binding RequestWorker.SpinnerVisibility}"/>
+                    </StackPanel>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Settings">
@@ -110,12 +149,12 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <!--Column 1 & 2-->
-                            <!--<TextBlock Margin="3" Text="Zone" Grid.Row="0" Grid.Column="0"/>
+                            <TextBlock Margin="3" Text="Zone" Grid.Row="0" Grid.Column="0"/>
                             <TextBox Grid.Column="1" Grid.Row="0"
                          Text="{Binding ProxySettings.ProxyZone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
                          NotifyOnValidationError=True, ValidatesOnDataErrors=True,
                          ValidatesOnExceptions=True}"
-                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3" />-->
+                         Margin="3" Width="120" HorizontalAlignment="Left" TabIndex="3" />
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="User name" />
                             <TextBox Grid.Column="1" Grid.Row="1"
@@ -237,12 +276,115 @@
                          Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />
                         </Grid>
                     </GroupBox>
-
+                    <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal" Grid.Row="1"  Margin="5,0,0,0" Width="550" HorizontalAlignment="Left">
+                        <Button Width="30" Height="30" IsEnabled="{Binding RequestWorker.IsEnabled}"
+                    Command="{Binding DoStart}"
+                    ToolTip="Start">
+                            <Rectangle Width="10" Height="10">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_play}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button Width="30" Height="30"
+                    Command="{Binding DoStop}"
+                    ToolTip="Stop">
+                            <Rectangle Width="15" Height="15">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_stop}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button Width="30" Height="30" IsEnabled="{Binding RequestWorker.IsEnabled}"
+                    Command="{Binding DoSaveSettings}"
+                    ToolTip="Save settings">
+                            <Rectangle Width="10" Height="10">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_disk}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button Width="30" Height="30" IsEnabled="{Binding RequestWorker.IsEnabled}"
+                    Command="{Binding DoClearLogs}"
+                    ToolTip="Clear logs">
+                            <Rectangle Width="10" Height="10">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_page_minus}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Image gif:ImageBehavior.AnimatedSource="{Binding SpinnerImagePath}" Width="30" Height="30" Margin="400,0,0,0" HorizontalAlignment="Right" Visibility="{Binding RequestWorker.SpinnerVisibility}"/>
+                    </StackPanel>
                 </StackPanel>
 
 
             </TabItem>
+            <TabItem Header="Tester">
+                <StackPanel IsEnabled="{Binding RequestWorker.IsEnabled}">
+                    <GroupBox Margin="5" Header="Proxy">
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Url" />
+                            <TextBox Grid.Column="1" Grid.Row="0"
+                         Text="{Binding ManualTestSetting.Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                         NotifyOnValidationError=True, ValidatesOnDataErrors=True,
+                         ValidatesOnExceptions=True}"
+                         Margin="3" Width="320" HorizontalAlignment="Left" TabIndex="3" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Geo" Margin="3" />
+                            <TextBox Grid.Column="1" Grid.Row="1"
+                         Text="{Binding ManualTestSetting.Geo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                         NotifyOnValidationError=True, ValidatesOnDataErrors=True,
+                         ValidatesOnExceptions=True}"
+                         Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Device" Margin="3" />
+
+                            <ComboBox  Grid.Column="1" Grid.Row="2" 
+                                       HorizontalAlignment="Left"
+                                       Margin="3"
+                                       ItemsSource="{Binding ManualTestSetting.Devices}"
+                                       SelectedItem="{Binding Path=Value, Mode=TwoWay}"
+                                       DisplayMemberPath="Text"
+                            Width="150">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+                            <Button Width="30" Height="30" IsEnabled="{Binding RequestWorker.IsEnabled}"
+                    Command="{Binding DoManualTest}" Grid.Row="3" Grid.Column="0"
+                    ToolTip="Test">
+                                <Rectangle Width="10" Height="10">
+                                    <Rectangle.Fill>
+                                        <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_play}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Button>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Margin="5" Header="Log" Height="250">
+
+                        <TextBox  Width="550" Height="230" Text="{Binding ManualTestSetting.Log, Mode=OneWay}" 
+                                  TextWrapping="Wrap"  
+                                  HorizontalScrollBarVisibility="Visible" 
+                                  VerticalScrollBarVisibility="Visible" UndoLimit="0"/>
+                    </GroupBox>
+                </StackPanel>
+
+            </TabItem>
         </TabControl>
 
         <GridSplitter
@@ -254,44 +396,5 @@
             Panel.ZIndex="1"
             Height="3" />
 
-        <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal" Grid.Row="1"  Margin="5,0,0,0" Width="550" HorizontalAlignment="Left">
-            <Button Width="30" Height="30" IsEnabled="{Binding RequestWorker.IsEnabled}"
-                    Command="{Binding DoStart}"
-                    ToolTip="Start">
-                <Rectangle Width="10" Height="10">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_play}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
-            <Button Width="30" Height="30"
-                    Command="{Binding DoStop}"
-                    ToolTip="Stop">
-                <Rectangle Width="15" Height="15">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_stop}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
-            <Button Width="30" Height="30" IsEnabled="{Binding RequestWorker.IsEnabled}"
-                    Command="{Binding DoSaveSettings}"
-                    ToolTip="Save settings">
-                <Rectangle Width="10" Height="10">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_disk}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
-            <Button Width="30" Height="30" IsEnabled="{Binding RequestWorker.IsEnabled}"
-                    Command="{Binding DoClearLogs}"
-                    ToolTip="Clear logs">
-                <Rectangle Width="10" Height="10">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill"	Visual="{StaticResource appbar_page_minus}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
-            <Image gif:ImageBehavior.AnimatedSource="{Binding SpinnerImagePath}" Width="30" Height="30" Margin="400,0,0,0" HorizontalAlignment="Right" Visibility="{Binding RequestWorker.SpinnerVisibility}"/>
-        </StackPanel>
     </Grid>
 </Window>

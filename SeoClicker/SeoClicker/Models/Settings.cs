@@ -11,5 +11,6 @@ namespace SeoClicker.Models
         public DataServerSettings DataServerSettings { get; set; }
         public ProxySettings ProxySettings { get; set; }
         public TaskSettings TaskSettings { get; set; }
+        public List<SelectionItem> Devices { get; set; }
     }
 }

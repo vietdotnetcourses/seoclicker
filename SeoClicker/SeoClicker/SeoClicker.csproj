@@ -225,6 +225,9 @@
   <ItemGroup>
     <Resource Include="bin\Debug\Images\seoClicker.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="bin\Debug\endingDomain.txt" />
+    <Resource Include="bin\Debug\excludedHost.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

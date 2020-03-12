@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Net;
+using System.Windows;
 
 
 namespace SeoClicker
@@ -11,6 +12,8 @@ namespace SeoClicker
         public MainWindow()
         {
             InitializeComponent();
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         }
 
        

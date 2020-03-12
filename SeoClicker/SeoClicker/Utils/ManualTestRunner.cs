@@ -99,10 +99,11 @@ namespace SeoClicker.Utils
                             break;
 
                         }
+                        
                         webRequest.Proxy = proxy;
                         webRequest.Proxy.Credentials = proxyCredential;
                         webRequest.AllowAutoRedirect = false;  // IMPORTANT
-                        webRequest.Timeout = ClientSettings.Timeout;
+                        webRequest.Timeout = ClientSettings.LoadTime > 0? ClientSettings.LoadTime : 15;
                         webRequest.KeepAlive = true;
                         webRequest.Method = "GET";
                         webRequest.ContentType = "text/html; charset=UTF8";
@@ -187,7 +188,7 @@ namespace SeoClicker.Utils
 
                             if (string.IsNullOrWhiteSpace(uriString))
                             {
-                                testmodel.Log = "Stopped";
+                                testmodel.Log += "Stopped";
                                 break;
                             }
 
@@ -201,7 +202,7 @@ namespace SeoClicker.Utils
                     }
                     else
                     {
-                        testmodel.Log = "Stopped";
+                        testmodel.Log += "Stopped";
                         uriString = "";
                     }
 

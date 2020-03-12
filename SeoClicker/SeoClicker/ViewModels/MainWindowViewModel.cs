@@ -118,7 +118,8 @@ namespace SeoClicker.ViewModels
             {
                 DataServerSettings = DataServerSettings,
                 ProxySettings = ProxySettings,
-                TaskSettings = TaskSettings
+                TaskSettings = TaskSettings,
+                Devices = ManualTestSetting.Devices
             };
             SettingsHelper.SaveSettings(settings);
         }

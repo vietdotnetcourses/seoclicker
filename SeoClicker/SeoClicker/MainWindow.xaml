@@ -276,7 +276,7 @@
                          Margin="3" Width="150" HorizontalAlignment="Left" TabIndex="3" />
                         </Grid>
                     </GroupBox>
-                    <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal" Grid.Row="1"  Margin="5,0,0,0" Width="550" HorizontalAlignment="Left">
+                    <!--<StackPanel VerticalAlignment="Stretch" Orientation="Horizontal" Grid.Row="1"  Margin="5,0,0,0" Width="550" HorizontalAlignment="Left">
                         <Button Width="30" Height="30" IsEnabled="{Binding RequestWorker.IsEnabled}"
                     Command="{Binding DoStart}"
                     ToolTip="Start">
@@ -314,7 +314,7 @@
                             </Rectangle>
                         </Button>
                         <Image gif:ImageBehavior.AnimatedSource="{Binding SpinnerImagePath}" Width="30" Height="30" Margin="400,0,0,0" HorizontalAlignment="Right" Visibility="{Binding RequestWorker.SpinnerVisibility}"/>
-                    </StackPanel>
+                    </StackPanel>-->
                 </StackPanel>
 
 

@@ -153,9 +153,14 @@ namespace SeoClicker.Utils
             if (!string.IsNullOrWhiteSpace(detail.URL) && !string.IsNullOrWhiteSpace(detail.Country) && !string.IsNullOrWhiteSpace(detail.Device))
             {
                 var sessionId = rdm.Next().ToString();
-                var proxy = new WebProxy($"pr.oxylabs.io:7777");
-                var login = $"customer-{ClientSettings.UserName}-cc-{detail.Country}-sessid-{sessionId}";
-                var proxyCredential = new NetworkCredential(login, ClientSettings.Password);
+                //OxyLabs
+                //var proxy = new WebProxy($"pr.oxylabs.io:7777");
+                //var login = $"customer-{ClientSettings.UserName}-cc-{detail.Country}-sessid-{sessionId}";
+                //var proxyCredential = new NetworkCredential(login, ClientSettings.Password);
+
+                //Luminati
+                var proxy = new WebProxy($"session-{sessionId}.zproxy.lum-superproxy.io:22225");
+                var proxyCredential = new NetworkCredential($"lum-customer-{ClientSettings.UserName}-zone-{ClientSettings.Zone}-country-{detail.Country}-session-{sessionId}", ClientSettings.Password);
                 var uriString = detail.URL;
 
                 var resultStr = "";

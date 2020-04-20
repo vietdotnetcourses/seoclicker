@@ -181,7 +181,7 @@ namespace SeoClicker.Utils
                     {
 
                         Interlocked.Increment(ref successCount);
-                        DataHelper.SaveResult(resultStr, sessionId);
+                       // DataHelper.SaveResult(resultStr, sessionId);
                         ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
                         break;
                     }
@@ -215,7 +215,7 @@ namespace SeoClicker.Utils
                         catch
                         {
                             Interlocked.Increment(ref successCount);
-                            DataHelper.SaveResult(resultStr, sessionId);
+                           // DataHelper.SaveResult(resultStr, sessionId);
                             ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
                             break;
              
@@ -312,7 +312,7 @@ namespace SeoClicker.Utils
                             if (string.IsNullOrWhiteSpace(uriString))
                             {
                                 Interlocked.Increment(ref successCount);
-                                DataHelper.SaveResult(resultStr, sessionId);
+                                //DataHelper.SaveResult(resultStr, sessionId);
                                 ResultMessage = $"Succeeded: {successCount}  Failed: {failCount}";
                                 break;
                             }
